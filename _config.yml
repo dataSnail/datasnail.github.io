@@ -9,4 +9,4 @@ description: This is a simple website.
 paginate: 5
 paginate_path: "page:num"
 markdown: kramdown
-banner: wo
+banner: master...
