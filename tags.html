@@ -1,0 +1,51 @@
+---
+title: Tags
+layout: default
+---
+<!-- Main Content -->
+<div class="row" style="margin-bottom:30px">
+  <div class="home col-md-12">
+    <div class="post-contents">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 标签云 -->
+            <div id='tag_cloud' class="tags">
+                {% for tag in site.tags %}
+                <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] | downcase | replace:" ","-" }}</a>
+                {% endfor %}
+            </div>
+
+            <!--<blockquote class="tag-comments">
+                标签命名规范：
+                    <li>行业观察、职位、公司优先使用中文</li>
+                    <li>外国产品、术语优先使用英文</li>
+            </blockquote>-->
+
+            <!-- 标签列表 -->
+            {% for tag in site.tags %}
+            <div class="one-tag-list">
+                <span  id="{{ tag[0] }}">
+                   <h3 ><i class="fa fa-tag listing-seperator"></i> {{ tag[0] | downcase | replace:" ","-"  }}</h3>
+                </span>
+                {% for post in tag[1] %}
+                 <div class="post-preview">
+                    <a href="{{ post.url | prepend: site.baseurl }}">
+                        <h4 >
+                            {{ post.title }}
+                        </h4>
+                        {% if post.subtitle %}
+                        <h4 class="post-subtitle">
+                            {{ post.subtitle }}
+                        </h4>
+                        {% endif %}
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+</div>
+</div>

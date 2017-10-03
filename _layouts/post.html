@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <article class="post post-contents" style="margin-bottom:0px;" itemscope itemtype="http://schema.org/BlogPosting">
+            <header class="post-header">
+                <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+                <p class="post-meta">
+                    <i class = 'fa fa-calendar' >&nbsp;&nbsp;</i>
+                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y年%m月%d日" }}</time>
+                    {% if page.author %}&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name">
+                            <i class = 'fa fa-user'>&nbsp;&nbsp;</i>
+                            {{ page.author }}
+                        </span>
+                    </span>
+                    {% endif %}{% if page.tags %}&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name"><i class = 'fa fa-tags'>&nbsp;&nbsp;</i>
+                            {% for tag in page.tags  %}
+                                <span class="post-meta" >{{ tag }}</span>
+                            {% endfor %}
+                        </span>
+                    </span>
+                    {% endif %}
+                </p>
+            </header>
+
+            <div class="post-content" style="margin:15px;" itemprop="articleBody">
+                 {% if page.intro %}<blockquote><p>摘要：{{page.intro}}</p></blockquote><br/>{% endif %}
+                {{ content }}
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+

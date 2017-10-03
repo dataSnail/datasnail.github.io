@@ -1,0 +1,12 @@
+gems: [jekyll-paginate]
+encoding: UTF-8
+title: Datasnail Blog
+name: DataSnail's BLOG
+motto: Talk is cheap, show me the code!
+email: datasnail@163.com
+github: datasnail.github.com
+description: This is a simple website.
+paginate: 5
+paginate_path: "page:num"
+markdown: kramdown
+banner: wo
