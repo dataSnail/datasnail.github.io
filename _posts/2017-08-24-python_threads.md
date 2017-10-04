@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Language
 title: python笔记（多线程）
 author: datasnail
 show: index

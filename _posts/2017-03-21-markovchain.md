@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 关于马尔科夫的一些话
 author: datasnail
 comments: true

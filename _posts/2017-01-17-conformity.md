@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: Confluence：Conformity Influence in Large Social Networks
 author: datasnail
 comments: true

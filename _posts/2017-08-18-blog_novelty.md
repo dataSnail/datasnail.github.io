@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: 微博的新颖度
 author: datasnail
 comments: true

@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 社区发现
 author: datasnail
 show: index

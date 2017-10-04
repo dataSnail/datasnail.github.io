@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Enlish
 title: 英文词
 author: datasnail
 comments: true

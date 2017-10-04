@@ -32,7 +32,7 @@ header: Posts By Tag
               <h2 class="title-border" id="{{ tag[0] }}-ref">{{ tag[0] }}</h2><hr>
               <div>
                 {% assign pages_list = tag[1] %}
-                {% include pages_list %}
+                {% include LessOrMore/pages_list %}
               </div><hr>
             {% endfor %}
           </div>

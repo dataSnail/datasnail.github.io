@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Engineering
 title: mySql相关记录
 author: datasnail
 comments: true

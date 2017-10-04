@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 伪代码规范
 author: datasnail
 comments: true

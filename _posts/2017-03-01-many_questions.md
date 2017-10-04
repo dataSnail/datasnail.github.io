@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 一些问题
 author: datasnail
 comments: true

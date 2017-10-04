@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 启发式算法（Heuristic Algorithm）
 author: datasnail
 show: index

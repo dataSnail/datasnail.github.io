@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 关于会议的小记录
 author: datasnail
 show: index

@@ -11,9 +11,10 @@
       </ul>
       -->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ site.baseurl }}/index.html">首页</a></li>
-        <li><a href="{{ site.baseurl }}/tags.html">文章分类</a></li>
-        <li><a href="{{ site.baseurl }}/#">关于</a></li>
+        <li><a href="{{ '/' | prepend: site.baseurl }}">Index</a></li>
+        <li><a href="{{ '/categories/' | site.baseurl }}">Categories</a></li>
+        <li><a href="{{ '/tag/' | site.baseurl }}">tags</a></li>
+        <li><a href="{{ site.baseurl }}/#">About</a></li>
       </ul>
     </nav>
   </div>

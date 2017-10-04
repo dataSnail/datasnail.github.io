@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Engineering
 title: hadoop、spark、Scala搭建
 author: datasnail
 comments: true

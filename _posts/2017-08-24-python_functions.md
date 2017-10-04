@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Language
 title: python笔记（一些函数）
 author: datasnail
 show: index

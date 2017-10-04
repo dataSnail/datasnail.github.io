@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Fundamental
 title: 社会计算中的一些名词
 comments: true
 author: datasnail

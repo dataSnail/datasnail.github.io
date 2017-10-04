@@ -2,7 +2,7 @@
   <div class="container lh30">
     {% if page.categories != null %}
         <a href="{{ '/categories/' | prepend: site.baseurl }}#{{ page.categories }}-ref">{{page.categories}}</a>    /
-        <a href="{{ '/tag/' | prepend: site.baseurl }}#{{ page.tag }}-ref">{{page.tag}}</a>
+        <a href="{{ '/tag/' | prepend: site.baseurl }}#{{ page.tags }}-ref">{{page.tags}}</a>
     {% else %}
         {{ site.banner }}
     {% endif %}

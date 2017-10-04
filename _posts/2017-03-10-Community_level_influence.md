@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: CSI：Community Level Social Influence（随笔记）
 author: datasnail
 comments: true

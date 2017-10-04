@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: 填煤系列
 author: datasnail
 show: index

@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: 关于影响力最大化问题的小记
 author: datasnail
 comments: true

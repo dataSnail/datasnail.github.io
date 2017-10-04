@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: Papers
 title: 在线社交网络影响力分析（随笔记）
 author: datasnail
 comments: true
