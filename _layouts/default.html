@@ -5,7 +5,9 @@
     {% include nav-header.html %}
 
     {% include docs_header.html %}
-
+    {% if page.title %}
+      {% include banner.html %}
+    {% endif %}
     <div class="page-content">
       <div class="container" style="padding-left:0;padding-right:0;">
         {{ content }}

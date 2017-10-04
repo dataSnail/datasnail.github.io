@@ -10,3 +10,4 @@ paginate: 5
 paginate_path: "page:num"
 markdown: kramdown
 banner: master...
+highlighter: rouge
