@@ -26,3 +26,4 @@ tags:
 11. 一致性哈希算法
 12. http://estebanmoro.org/2012/11/temporal-networks-with-igraph-and-r-with-20-lines-of-code/
 13. Granger causality 空地奶牛？
+14. group influence 在wikipedia中被重定向到social influence.
