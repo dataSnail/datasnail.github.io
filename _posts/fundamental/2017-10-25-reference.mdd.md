@@ -3,7 +3,7 @@ layout: post
 categories: Fundamental
 title: 参考文献
 author: datasnail
-show: index
+show: backup
 comments: true
 intro: 参考文献
 tags:
