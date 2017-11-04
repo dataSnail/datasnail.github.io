@@ -27,3 +27,6 @@ tags:
 12. http://estebanmoro.org/2012/11/temporal-networks-with-igraph-and-r-with-20-lines-of-code/
 13. Granger causality 空地奶牛？
 14. group influence 在wikipedia中被重定向到social influence.
+15. 心流理论：当这些人在从事他们的工作时，全身关注投入工作，经常忘记时间以及对周围环境的感知，这些人参与他们个别的活动都是出于共同的雷区，这些乐趣是来源于活动的过程，而且外在的报酬的是极少或者不存在的，这种全神贯注所产生的心流体验。（csikszentmihalyi)
+16. 期望确认理论（ECM-ISC）。
+17. 
