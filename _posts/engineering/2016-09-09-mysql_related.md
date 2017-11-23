@@ -70,7 +70,11 @@ mysqldump -hhostname -uusername -ppassword -R databasename | gzip > backupfile.s
 ```
 mysql -u root -p [dbname] < backup.sql
 ```
+还原压缩的MySQL数据库
 
+```
+gunzip < backupfile.sql.gz | mysql -uusername -ppassword databasename
+```
 
 ### [Q4] 查看数据库大小
 
