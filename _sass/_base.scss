@@ -102,7 +102,7 @@ a {
 
     &:hover {
         //color: $brand-color; //buttons will override this
-        color: #e8e8e8;
+        color: #000b43;
         text-decoration: none;
     }
 }
@@ -204,7 +204,7 @@ a {
  */
 blockquote {
     color: $grey-color;
-    border-left: 4px solid $grey-color-light;
+    border-left: 4px solid #7a7a7a;
     padding-left: $spacing-unit / 2;
     font-size: 18px;
     letter-spacing: -1px;
