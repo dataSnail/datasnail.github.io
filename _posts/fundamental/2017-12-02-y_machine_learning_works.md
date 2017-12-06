@@ -110,8 +110,8 @@ Hoeffding讲取样出来的样本大部分的时候是和罐子里是一样的�
 ![](/postimg/y_machine_learning_works/probabilities_many_data.jpg)  
 图11. 很多假设在样本资料上的表现
 {:.center}  
-此处的M就是 ，有几个罐子或者假设空间大小，以上结果叫做联合上界（union bound）。所以我们还是可以通过增加数据资料的大小来减少bad data的概率，换句话说，增加样本防止过拟合。  
-至此， 我们可以保证机器学习是可以做得到的吧。现在还是设想：假设空间是有限的，如果假设空间是无限的呢？答案也是可以的。后来再解释。
+此处的M就是有几个罐子或者假设空间大小，以上结果叫做联合上界（union bound）。所以我们还是可以通过增加数据资料的大小来减少bad data的概率，换句话说，增加样本防止过拟合。  
+至此，总算可以保证机器学习是可以做得到的吧？其实还不是很严谨，因为目前是设想：假设空间是有限的，如果假设空间是无限的呢？答案也是可以的。[后来再解释](../04/training_and_testing.html)。
 
 {:.center}
 ![](/postimg/y_machine_learning_works/questions_end.jpg)  
