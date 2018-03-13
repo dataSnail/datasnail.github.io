@@ -21,9 +21,13 @@ tags:
 ![](/postimg/training_and_testing/M_2questions.jpg)  
 图1. 假设空间M的大小与两个问题的关系 
 {:.center}
+--12.07  
+从上图容易知道，当M很小的时候，根据hoeffding不等式，坏事情发生的概率就可以控制在很小的范围内，但是此时的假设空间也很小，可以选择的假设就很少，可能得不到一个$E_{in}$很小的假设，也就选不到一个$E_{in}$很小的假设；但是当M很大的时候，虽然对于假设的选择变多了，但是坏事情发生的概率也高了。所以选择适当的M是很重要的，如果M无限大，肯定也不好。无限大的M怎么办，能不能把M换成m[一个有限的上界]，从而证明呢？  
 
-可以看到m重要。  
-无限大的M怎么办，能不能把M换成m，从而证明呢？  
+{:.center}
+![](/postimg/training_and_testing/M_change.jpg)  
+图2. M是否 
+{:.center}
 
 growth function
 

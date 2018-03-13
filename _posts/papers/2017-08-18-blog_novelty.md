@@ -7,7 +7,7 @@ comments: true
 show: index
 intro: 看了一篇文章，介绍微博的新颖度
 tags:
-- 论文笔记+1
+- 论文阅读
 ---
 
 

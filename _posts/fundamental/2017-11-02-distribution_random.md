@@ -62,7 +62,15 @@ $
 P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda} ,k=0,1,...
 $
 
-参数$\lambda$是单位时间（或单位面积）内随机事件的平均发生率
+参数$\lambda$是单位时间（或单位面积）内随机事件的平均发生率。  
+文献[4]用泊松分布建模**转发推文事件**，累积分布函数如下：   
+$$
+f(x;\lambda) = \begin{cases} \ 1-e^{-\lambda x} & \text{ }{ x \ge 0} \\\\
+0 & \text{ } { x \lt 0} \\\\
+\end{cases}
+$$  
+$\frac{1}{\lambda}$是间隔时间（用户平均等待时间）。
+
 #### **4、指数分布**
 概率密度函数：
 
@@ -148,8 +156,7 @@ plt.show()
 
 ### **参考：**
 
-[1]. https://baike.baidu.com/item/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/954451
-
-[2]. https://zh.wikipedia.org/wiki/%E9%80%A3%E7%BA%8C%E5%9E%8B%E5%9D%87%E5%8B%BB%E5%88%86%E5%B8%83
-
-[3]. http://www.ruanyifeng.com/blog/2015/06/poisson-distribution.html
+[1]. https://baike.baidu.com/item/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/954451  
+[2]. https://zh.wikipedia.org/wiki/%E9%80%A3%E7%BA%8C%E5%9E%8B%E5%9D%87%E5%8B%BB%E5%88%86%E5%B8%83  
+[3]. http://www.ruanyifeng.com/blog/2015/06/poisson-distribution.html  
+[4]. Lee, Kyumin, et al. "Who will retweet this?: Automatically identifying and engaging strangers on twitter to spread information." Proceedings of the 19th international conference on Intelligent User Interfaces. ACM, 2014.

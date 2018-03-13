@@ -7,7 +7,7 @@ show: index
 comments: true
 intro: 从三个角度（个体、群体、社会影响力）分析人们受到的影响。
 tags:
-- 论文+1
+- 论文阅读
 ---
 
 #### 关于作者

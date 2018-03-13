@@ -202,14 +202,14 @@
 .post-link {
     font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
     text-decoration:none;
-    color: #828282;
+    color: #000000;
     display: block;
     font-size: 24px;
 }
 .post-link:visited {
     font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
     text-decoration:none;
-    color: #828282;
+    color: #00000;
 }
 .post-link:hover {
     color: #2674BA;
@@ -228,7 +228,7 @@
 .post-title {
     font-size: 28px;
     letter-spacing: -1px;
-    line-height: 1;
+    line-height: 1.5;
     font-family:Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
     @include media-query($on-laptop) {
         font-size: 36px;
