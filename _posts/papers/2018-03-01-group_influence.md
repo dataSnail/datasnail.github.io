@@ -11,8 +11,14 @@ tags:
 - 论文阅读
 ---
 
+{:.center}
+![](/postimg/social_inlfuence_locality/social_influence_locality_for_modeling_retweeting_behavior.png)  
+{:.center} 
+
+---
+
 #### **一、概要**
-这篇文章是从社交影响力找到的，是清华大学张静的一篇博士论文，从里面的引用找到了在2013年发在AAAI下IJCAI（CCF_A）的这篇文章，名为《Social Influence Locality for Modeling Retweeting Behavior》。  
+这篇文章是从社交影响力找到的，是清华大学张静的一篇博士论文，从里面的引用找到了在2013年发在AAAI下**IJCAI（CCF_A）**的这篇文章，名为《Social Influence Locality for Modeling Retweeting Behavior》。 相关主页、数据集和代码在这[https://www.aminer.cn/influencelocality](https://www.aminer.cn/influencelocality)。   
 文中提出**social influence locality**，而在其博士论文中应该等同于“群体影响力”了，从会议论文的内容看，也应该算是一种群体影响力。文中把social influence locality实例成两种衡量函数pairwise influence和structure Influence，并把这类影响力运用到转发行为预测上，取得了较好的效果。  
 对social influence locality的定义如下图：   
 
