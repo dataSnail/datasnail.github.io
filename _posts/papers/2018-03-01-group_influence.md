@@ -66,13 +66,13 @@ $X_v$是特征的向量，描述了用户v的特征属性。
 
 #### **三、建模influence locality**  
 主要考虑pairwise Influence和structure influence两种影响力。  
-**pairwise influence**：影响力可能存在于直接连接的两个用户，也可能存在于两个不直接连接的用户。为了量化此类影响力，我们转化这个问题为，通过**重启的随机游走**（random walk with restart，RWR）衡量图中两个节点的的相关性[Lovasz, 1993][Sun et al., 2005]。在用户的$\tau-ego$网络中执行RWR，为每个激活邻居$v_i$计算随机游走概率$p_{v_i}$。随机游走概率解释为激活邻居的影响力最终如何通过网络连接到达的用户v。例如，在图1中，用户B只能通过一条路径到达v，而F有很多不同的路径，通过E和其他两个节点连接到v。图4展示了用户转发微博概率在中心网络中所有激活邻居的，平均随机游走概率条件下（a），在累积随机游走概率条件下（b）。从(a)(b)两张图中，可以看到机遇随机游走的pairwise influence对于预测转发行为是一个很好的因素。  
+**pairwise influence**：影响力可能存在于直接连接的两个用户，也可能存在于两个不直接连接的用户。为了量化此类影响力，我们转化这个问题为，通过**重启的随机游走**（random walk with restart，RWR）衡量图中两个节点的的相关性[Lovasz, 1993][Sun et al., 2005]。在用户的$\tau-ego$网络中执行RWR，为每个激活邻居$v_i$计算随机游走概率$p_{v_i}$。随机游走概率解释为激活邻居的影响力最终如何通过网络连接到达的用户v。例如，在图2中，用户B只能通过一条路径到达v，而F有很多不同的路径，通过E和其他两个节点连接到v。图4展示了用户转发微博概率在中心网络中所有激活邻居的，平均随机游走概率条件下（a），在累积随机游走概率条件下（b）。从(a)(b)两张图中，可以看到机遇随机游走的pairwise influence对于预测转发行为是一个很好的因素。  
 
 **structure influence**：考虑influence locality如何跟激活邻居的内部结构相关联。[Ugander et al., 2012]指出结构多样性可以被用作预测用户参与度的正比因素（positive predictor）。那么结构多样性能影响转发行为么？如何定义统一的函数来衡量这种作用？通过实验，图3，用户转发可能与环（激活邻居用户做组成的环）数量成负相关，这与[Ugander et al., 2012]的研究相反。 出现这种现象可能是因为转发具有的目的性。[Boyd et al., 2010]发现微博中转发的一个重要目的就是影响别人。所以，用户可能就很快失去转发的兴趣了，当他发现许多social circle已经知道这条信息了。 文章中考虑环数量的时候，计算的是跟用户有双向关注关系的用户所组成的环，文中给出这么选择的理由是仅单向边对于观点交互无意义。[Huberman et al., 2009]中也在实验中证明在稀疏和简单网络中的真正朋友（actual friends）更能驱动用户使用微博。  
 
 $$Q(S_v,G_v^{\tau}) = w * g(S_v,G_v^{\tau})+(1-w) * f(S_v,G_v^{\tau})$$
 
-$g(S_v,G_v^{\tau})+(1-w)$是pairwise influence，$f(S_v,G_v^{\tau})$是structure influence。在实验部分，文章把influence locality应用到个体的转发行为预测中，并给出了$g$和$f$的多种定义，见图6。  
+$g(S_v,G_v^{\tau})$是pairwise influence，$f(S_v,G_v^{\tau})$是structure influence。在实验部分，文章把influence locality应用到个体的转发行为预测中，并给出了$g$和$f$的多种定义，见图6。  
 
 {:.center}
 ![](/postimg/social_inlfuence_locality/different_function.png)  
@@ -80,7 +80,7 @@ $g(S_v,G_v^{\tau})+(1-w)$是pairwise influence，$f(S_v,G_v^{\tau})$是structure
 {:.center}  
 
 #### **四、实验**  
-文章在实验中，有考虑了用户的其他6个特征[性别、认证转台、粉丝数量、parasocial following relationships**?**、互惠关系（reciprocal following relationships）和历史微博]，并结合逻辑回归方法构建了两个算法LRC-Q（利用influence locality 函数），LRC-B（只用基本特征），LRC-BQ（都用），结果如图7。
+文章在实验中，有考虑了用户的其他6个特征[性别、认证状态、粉丝数量、parasocial following relationships**?**、互惠关系（reciprocal following relationships）和历史微博]，并结合逻辑回归方法构建了两个算法LRC-Q（利用influence locality 函数），LRC-B（只用基本特征），LRC-BQ（都用），结果如图7。
 
 {:.center}
 ![](/postimg/social_inlfuence_locality/experiment_result.png)  
