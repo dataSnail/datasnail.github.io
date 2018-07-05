@@ -10,7 +10,8 @@ tags:
 - algorithm
 ---
 
-图是个好东西。 --- 菲克·张作霖
+世间的一切对象都可化为节点；世间一切关系都可化为节点间的一条线；从而组成了如梦幻泡影的图。将来的环球必定是图的世界。
+
 ### 一、图的表示
 图有有向图和无向图，表示方法一般有邻接表、邻接矩阵等方法，无向图和有向图都可以用这两种方法表示。
 
@@ -138,12 +139,12 @@ DFS-Visit(s):
 
 ```
 
-#### **2.5 强连通分支：**
-定义1： 如果一个有向图中任意一丁点都有一条通向其他任一顶点的路径，那么这个有向图称为**强连通图**（strongly connected graph）  
-定义2： 有向图G，其**隐含的无向图**$G'$是指把G中的每条边的方向都去掉后所得到的无向图。  
-定义3： 如果一个有向图G所隐含的无向图$G'$是个连通图，那么有向图G称为**弱连通图**（weakly connected graph）  
-定义4： 如果一个有向图的子图是个强连通图，则成为**强连通子图**（strongly connected subgraph）  
-定义5： 如果一个有向图的强连通子图已最大，即不能在加入其他任何一个顶点而仍然强连通，那么这个子图称为**强连通分支**（strongly connected component）  
+#### **<span id ='stronglyconnectedcomponent'>2.5 强连通分支：</span>**
+定义1： 如果一个有向图中任意一顶点都有一条通向其他任一顶点的路径，那么这个<span style = 'color:red'>**有向图**</span>称为**强连通图**（strongly connected graph）  
+定义2： <span style = 'color:red'>**有向图**</span>G，其**隐含的无向图**$G'$是指把G中的每条边的方向都去掉后所得到的无向图。  
+定义3： 如果一个<span style = 'color:red'>**有向图**</span>G所隐含的无向图$G'$是个连通图，那么有向图G称为**弱连通图**（weakly connected graph）  
+定义4： 如果一个<span style = 'color:red'>**有向图**</span>的子图是个强连通图，则成为**强连通子图**（strongly connected subgraph）  
+定义5： 如果一个<span style = 'color:red'>**有向图**</span>的强连通子图已最大，即不能在加入其他任何一个顶点而仍然强连通，那么这个子图称为**强连通分支**（strongly connected component）  
 **这里强连通分支包含于强连通子图内。**  
 定义6： **有向图的强连通分支问题**就是把一个有向图的顶点划分为不相交的若干个强连通分支。  
 

@@ -10,8 +10,6 @@ tags:
 - assistant
 ---
 
-总结才能进步。 --- 菲克·埃尔穆
-
 ### 一、机器学习 
 #### 1、机器学习基础
 #### 2、线性回归
@@ -27,7 +25,9 @@ tags:
 #### 2、分治算法
 #### 3、[贪心算法](/fundamental/2018/07/01/algorithms_01.html)
 #### 4、动态规划
-#### 5、图（[图基本概念和搜索算法](/fundamental/2018/07/01/algorithms_graph.html)）（[网络流](/fundamental/2018/07/03/algorithms_graph_flow.html)）
+#### 5、图（[图基本概念和搜索算法](/fundamental/2018/07/01/algorithms_graph.html)）（[网络流](/fundamental/2018/07/03/algorithms_graph_flow.html)）（[强连通分量、双连通分量](/fundamental/2018/07/05/algorithms_connected_component.html)）
 #### 6、NP完全问题
 ### 四、社会计算
-#### 1、幂律分布
+#### 1、基本概念（[社会计算基本名词](/fundamental/2016/10/23/social_computing_notions.html)）
+#### 2、幂律分布
+#### 3、社区发现
