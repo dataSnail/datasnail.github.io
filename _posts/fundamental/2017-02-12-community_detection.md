@@ -7,7 +7,7 @@ show: index
 comments: true
 paperTime:
 tags:
-- 基础知识
+- social computing
 ---
 
 关键词： 社区划分

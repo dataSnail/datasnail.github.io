@@ -6,8 +6,7 @@ author: datasnail
 comments: true
 show: index
 tags:
-- markov
-- 基础知识
+- machine learning
 ---
 
 

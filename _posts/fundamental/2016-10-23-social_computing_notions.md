@@ -6,7 +6,7 @@ comments: true
 author: datasnail
 show: index
 tags:
-- Social Computing
+- social computing
 ---
 
 社会计算中相关的一些概念，本文主要概念主要来源于文献<sup>[2]</sup>，整理如下笔记：

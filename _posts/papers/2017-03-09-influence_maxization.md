@@ -7,7 +7,7 @@ comments: true
 show: index
 paperTime:
 tags:
-- 技术学习
+- social computing
 ---
 
 

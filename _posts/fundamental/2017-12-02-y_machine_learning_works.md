@@ -8,7 +8,7 @@ show: index
 intro: 台湾大学机器学习课程，为什么说机器学习是可行的？有何理论依据呢？记录自己的理解，帮助日后复习。
 paperTime:
 tags:
-- 基础知识
+- machine learning
 ---
 
 
