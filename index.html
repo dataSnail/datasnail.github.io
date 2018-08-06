@@ -7,7 +7,8 @@ layout: default
     {% for post in paginator.posts %}
     {% if post.show == 'index'%}
     <div class="post-contents">
-      <h2>
+      <header>
+      <h2 class="entry-title">
         <a class="post-link" href="{{ post.url | prepend: site.baseurl }}"><b>{{ post.title }}</b></a>
       </h2>
       <span class="post-meta"><i class="fa fa-calendar">&nbsp;&nbsp;</i>{{ post.date | date: "%Y年%m月%d日" }}</span>
@@ -15,8 +16,9 @@ layout: default
       {% for tag in post.tags  %}
       <span class="post-meta" ><i class="fa fa-tag">&nbsp;</i>{{ tag }}&nbsp;&nbsp;</span>
       {% endfor %}
+      </header>
 
-      <div class="post-content truncate" itemprop="articleBody" style="max-height:220px;margin-top:20px;">
+      <div class="post-content truncate" itemprop="articleBody" style="max-height:300px;margin-top:20px;">
 	{{ post.content }}
       </div>
       <div style="height:50px;">
@@ -141,7 +143,7 @@ layout: default
       {% for tag in site.tags %}
       {% assign t = tag | first %}
       {% assign posts = tag | last %}
-      <a href = "{{ site.baseurl }}/tags#{{t}}"><span class="label label-default">{{t | downcase | replace:" ","-" }} ( {{ posts | size }} )</span></a>
+      <a href = "{{ site.baseurl }}/tags#{{t}}-ref"><span class="label label-default">{{t | downcase | replace:" ","-" }} ( {{ posts | size }} )</span></a>
       {% endfor %}
     </div>
     <br />

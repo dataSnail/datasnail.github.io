@@ -11,8 +11,8 @@ tags:
 ---
 
 ### 一、机器学习 
-#### 1、机器学习基础（[为什么机器学习是可行的？](/fundamental/2017/12/02/y_machine_learning_works.html)）
-#### 2、线性回归
+#### 1、机器学习基础（[为什么机器学习是可行的？](/fundamental/2017/12/02/y_machine_learning_works.html)）(模型选择)
+#### 2、线性分类器
 #### 3、决策树
 #### 4、支持向量机
 #### 5、[集成学习](/fundamental/2018/06/27/machine_learning_01.html)
