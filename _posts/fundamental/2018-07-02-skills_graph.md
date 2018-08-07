@@ -17,7 +17,7 @@ tags:
 #### 4、支持向量机
 #### 5、[集成学习](/fundamental/2018/06/27/machine_learning_01.html)
 #### 6、EM算法
-#### 7、概率图模型([贝叶斯及贝叶斯网络](/fundamental/2017/03/28/bayesian.html))、（[关于马尔科夫](/fundamental/2017/03/21/markovchain.html)）
+#### 7、概率图模型([贝叶斯及贝叶斯网络](/fundamental/2017/03/28/bayesian.html))、（[关于马尔科夫](/fundamental/2017/03/21/markovchain.html)）(马尔科夫系列（四篇）)
 #### 8、[特征选择](/fundamental/2017/11/25/feature_engineering.html)
 ### 二、数据挖掘
 #### 1、频繁项挖掘
