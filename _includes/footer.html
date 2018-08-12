@@ -43,12 +43,22 @@
   </div>
 
 </footer>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+      "HTML-CSS": {
+              linebreaks: { automatic: true, width: "94%container" },
+              imageFont: null
+      },
+      tex2jax: {
+          inlineMath: [['$','$'], ['\\(','\\)']]
+      },
+      mml2jax: {
+          preview: 'none'
+      }
     });
   </script>
-  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <script src="{{ '/js/jQuery-2.1.4.min.js' | prepend: site.baseurl }}"></script>
   <script src="{{ '/js/function.min.js' | prepend: site.baseurl }}"></script>
   <script src="{{ '/js/lessismore.js' | prepend: site.baseurl }}"></script>
