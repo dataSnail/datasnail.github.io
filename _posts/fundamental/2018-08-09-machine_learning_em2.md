@@ -1,11 +1,11 @@
 ---
 layout: post
 categories: fundamental
-title: EM算法（二）--算法简介
+title: EM算法(二)-算法简介
 author: datasnail
 show: index
 comments: true
-intro: EM大法。源于李航老师《统计学习方法》，希望借助此系列博文，加了部分解释，能让我较好的再理解下EM算法。
+intro: EM大法。源于李航老师《统计学习方法》，加了部分解释和推导细节，希望借助此系列博文，能让我较好的再理解下EM算法。
 tags:
 - machine learning
 ---
