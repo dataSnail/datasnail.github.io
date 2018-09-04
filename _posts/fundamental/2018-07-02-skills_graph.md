@@ -18,7 +18,8 @@ tags:
 #### 5、[集成学习](/fundamental/2018/06/27/machine_learning_01.html)
 #### 6、EM算法([EM算法(一)-问题引出](/fundamental/2018/07/06/machine_learning_em.html))([EM算法(二)-算法简介](/fundamental/2018/08/09/machine_learning_em2.html))
 #### 7、概率图模型([贝叶斯及贝叶斯网络](/fundamental/2017/03/28/bayesian.html))、([隐马尔可夫模型(一)](/fundamental/2017/03/21/markovchain.html))
-#### 8、[特征选择](/fundamental/2017/11/25/feature_engineering.html)
+#### 8、[特征选择](/fundamental/2017/11/25/feature_engineering.html)(PCA)
+#### 9、神经网络
 ### 二、数据挖掘
 #### 1、挖掘频繁模式、关联和相关性
 #### 2、分类
