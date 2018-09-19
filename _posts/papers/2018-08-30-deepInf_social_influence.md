@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Language
+categories: Papers
 title: DeepInf:Social Influence Prediction with Deep Learning论文笔记
 author: datasnail
 show: index
