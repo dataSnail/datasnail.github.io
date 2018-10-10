@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: fundamental
-title: EM算法(一)-问题引出
+title: EM算法浅析(一)-问题引出
 author: datasnail
 show: index
 comments: true

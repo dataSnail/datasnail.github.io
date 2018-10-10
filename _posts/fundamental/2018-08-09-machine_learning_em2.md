@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: fundamental
-title: EM算法(二)-算法简介
+title: EM算法浅析(二)-算法简介
 author: datasnail
 show: index
 comments: true
