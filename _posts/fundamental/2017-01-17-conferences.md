@@ -1,7 +1,7 @@
 ---
 layout: post
 categories: Fundamental
-title: 关于会议的小记录
+title: 计算机CCF会议推荐、会议介绍
 author: datasnail
 show: index
 comments: true

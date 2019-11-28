@@ -33,17 +33,18 @@ tags:
 ![](/postimg/social_inlfuence_locality/tau_ego_network.png)   
 图2. 中心网络示意图
 {:.center}  
-  
+
 论文中定义的$\tau-ego network$，可以看到$\tau \ge 1$，就是用户的$\tau$度好友，文中在此也没有对参数$\tau$做细致的研究，个人愚见对用户的感知群体（该用户周围的能影响到用户的n度好友集合）做一个细致的探讨，应该能更加细致的描述该用户受到的影响力大小，即在此进行**感知群体发现**。  
 论文指出三处有意思的结果：
 1. 证明social influence locality的存在。
 2. 尽管用户的转发行为正比于用户活跃邻居的数量，但是文章发现转发行为跟该用户邻居形成圈的数量**负相关**，例如，当用户邻居超过10个，邻居圈从1个到2个，用户转发的概率会降低10%，见图3。ps:邻居形成的圈如图2所示，VCHD、VEF都是组成的邻居圈。
-3. pairwise influence跟*普通*user不同（原文：Pairwise influence differs from users），pairwise influence每上升0.05，转发可能增长大约10%，见图4。
+3. 不同用户的pairwise influence表现效果不一样（原文：Pairwise influence differs from users），一般来说，pairwise influence每上升0.05，转发可能增长大约10%，见图4。
 
 {:.center}
 ![](/postimg/social_inlfuence_locality/structure_influence.png)   ![](/postimg/social_inlfuence_locality/pairwise_influence.png)  
 {:.center}  
-数据集：新浪微博，170万用户40亿条边，平均没人200关注者。爬取方法：首先选择100随机用户，抓取关注者，应该是广度抓取。  
+数据集：新浪微博，170万用户40亿条边，平均每人有200关注者。爬取方法：首先选择100随机用户，抓取关注者，应该是广度抓取。  
+
 #### **二、采样测试证明social Influence locality的存在性**   
 检测个体的转发行为是否具有影响力，这是一个因果推断问题[Pearl, 2009]。此类问题的经典方法是设计随机采样实验。主要思想是把用户分成两组：treatment group和control group。在treatment group中的用户具有“激活邻居”，而control组中没有。但是这样设置不合理，如果control group中用户没有“激活邻居”，那么用户看到这条微博的可能就很小了，更不可能转发。所以将仅有一个激活邻居的用户分配到对照组，而把两个或两个以上激活邻居的用户放到treatment group。  
 **原文抛出了一个问题：**这样实验中存在选择偏差，即使实验组中的用户并没有两个或两个以上的邻居，他的转发概率也有可能高于对照组。并且文献[Arala et al., 2009]中在产品购买行为的影响力分析中，对这类选择偏差问题也有研究。  
