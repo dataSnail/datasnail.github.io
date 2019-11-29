@@ -3,7 +3,7 @@ layout: post
 categories: Papers
 title: 填煤系列
 author: datasnail
-show: index
+show: backup
 comments: true
 intro: 从三个角度（个体、群体、社会影响力）分析人们受到的影响。
 tags:
