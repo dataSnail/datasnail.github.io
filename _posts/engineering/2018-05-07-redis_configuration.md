@@ -4,7 +4,7 @@ categories: Engineering
 title: Redis使用Tips
 author: datasnail
 comments: true
-show: index
+show: backup
 intro: Redis的相关配置和使用Tips。
 paperTime:
 tags:
