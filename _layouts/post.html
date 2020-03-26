@@ -60,9 +60,9 @@ layout: default
         <div class="row">
             <div class="col-lg-12">
                 <article class="single-blg-post">
-                    <a href="#" class="post-thumbnail">
+                    <!--<a href="#" class="post-thumbnail">
                         <img src="{{'/assets/images/all-img/post1.jpg' | prepend: site.baseurl}}" alt="">
-                    </a>
+                    </a>-->
                     <div class="entry-content">
                         <header class="entry-header">
                             <h2 class="entry-title">
@@ -79,15 +79,12 @@ layout: default
 
                         <footer class="entry-footer">
                         <span class="cat-links">Posted in
-                            <a href="#" rel="category">Markup</a>
+                            <a href="#" rel="category">{{page.categories}}</a>
                         </span>
                             <span class="tags-links">Tagged
-                            <a href="#" rel="tag">alignment</a>,
-                            <a href="#" rel="tag">captions</a>,
-                            <a href="#" rel="tag">content</a>,
-                            <a href="#" rel="tag">css</a>,
-                            <a href="#" rel="tag">image</a>,
-                            <a href="#" rel="tag">markup</a>
+                            {% for tag in page.tags%}
+                            <a href="#" rel="tag">{{tag}}</a>,
+                            {%endfor%}
                         </span>
                         </footer>
                     </div><!-- .entry content -->
@@ -101,7 +98,7 @@ layout: default
                             <div id="div-comment-4" class="comment-body">
                                 <footer class="comment-meta">
                                     <div class="comment-author vcard">
-                                        <img  src="../assets/images/all-img/cmnt1.jpg" class="avatar" alt="comment user">
+                                        <img  src="/assets/images/all-img/cmnt1.jpg" class="avatar" alt="comment user">
                                         <b class="fn"><a href="http://tommcfarlin.com" rel="external nofollow" class="url">Tom McFarlin</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
 
                                     <div class="comment-metadata">
@@ -124,7 +121,7 @@ layout: default
                                     <div  class="comment-body">
                                         <footer class="comment-meta">
                                             <div class="comment-author vcard">
-                                                <img  src="../assets/images/all-img/cmnt3.jpg" class="avatar" alt="comment user">
+                                                <img  src="/assets/images/all-img/cmnt3.jpg" class="avatar" alt="comment user">
                                                 <b class="fn"><a href="http://tommcfarlin.com" rel="external nofollow" class="url">Mahedi Amin</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
 
                                             <div class="comment-metadata">
@@ -149,7 +146,7 @@ layout: default
                             <div id="div-comment-3" class="comment-body">
                                 <footer class="comment-meta">
                                     <div class="comment-author vcard">
-                                        <img alt="" src="../assets/images/all-img/cmnt2.jpg" class="avatar  photo">
+                                        <img alt="" src="/assets/images/all-img/cmnt2.jpg" class="avatar  photo">
                                         <b class="fn"><a href="http://chrisam.es" rel="external nofollow" class="url">Chris Ames</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
 
                                     <div class="comment-metadata">
@@ -240,10 +237,15 @@ layout: default
 <script src="{{'/assets/js/plugins.js' | prepend: site.baseurl }}"></script>
 <!-- app js -->
 <script src="{{'/assets/js/app.js' | prepend: site.baseurl }}"></script>
-
+<!-- MathJax.js-->
+ <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 <!-- ==================End Js Link===================== -->
-
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
 
 
 </body>
