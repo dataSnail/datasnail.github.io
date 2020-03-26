@@ -1,0 +1,23 @@
+I"<<h3 id="001information-diffusion-and-external-influence-in-networks"><strong>☛001、Information Diffusion and External Influence in Networks</strong></h3>
+<h4 id="1source--authors"><strong>1、Source &amp; Authors</strong></h4>
+<p>2012 KDD CCF A类 <br />
+<a href="http://i.stanford.edu/~samyers/">Seth Myers </a> student of Jure Leskovec <br />
+<a href="https://cs.stanford.edu/people/cgzhu/">Chenguang Zhu</a>  stanford, AI lab <br />
+<a href="https://cs.stanford.edu/people/jure/">Jure Leskovec</a>  stanford university, mining and modeling large scale social network</p>
+<h4 id="2main-idea-or-translation"><strong>2、Main idea or Translation</strong></h4>
+<p>信息到达一个人有两种方式，一种是通过社交网络中的链接，另一种是通过网络外的信息源头影响，比如一些其他的主流媒体。现在大部分模型假设信息仅通过网络中节点到节点之间的边进行传播的，而最近的大量的社交媒体数据使得我们能风详细的分析这一过程。<br />
+我们提出一个模型，分辨哪种信息能通过连接或者通过外部信息源的影响到达一个节点的。接下来，我们开发一种模型参数适配技术，来建模出现URL的Twitter网络。 使用Twitter一个月的轨迹数据，我们研究了信息如何达到网络中的一个节点。 我们量化了各个时间的外部影响力，并描述这些外部影响如何影响这些信息在网络中被采纳（出现在网络中）。 我们发现信息一般都是“跳”进网络， 这只能被解释为网络外部微观察到的影响。我们发现网络中有71%信息可以被认为是网络内的传播，而剩下的29%要归结为发生在网络外部的事件或者由网络外部因素导致在网络内部传播的。</p>
+<h4 id="3some-thoughs"><strong>3、some thoughs</strong></h4>
+<p>这是从清华张静博士毕业论文中看到的一篇引用论文，归类为群体影响个体。看完摘要感觉是把外界作为一个群体，来影响个体。</p>
+
+<h3 id="002structural-diversity-in-social-contagion"><strong>☛002、Structural diversity in social contagion</strong></h3>
+<h4 id="1source--authors-1"><strong>1、Source &amp; Authors</strong></h4>
+<p>PNAS 2012 （美国科学院院刊）顶级SCI，但据说是美国科学院院士推荐灌水。 
+<a href="https://web.stanford.edu/~jugander/">Johan Ugander</a> stanford assistant professor， teaching <a href="http://stanford.edu/~jugander/mse334/">Topics in Soical Data</a><br />
+<a href="http://www.cs.cornell.edu/~lars/">Lars Backstrom</a> cornell student of Jon Kleinberg<br />
+Cameron Marlow facebook前数据科学团队负责人<br />
+<a href="http://www.cs.cornell.edu/home/kleinber/">Jon Kleinberg </a> Department of information science，Department of computer science</p>
+<h4 id="2main-idea-or-translation-1"><strong>2、Main idea or Translation</strong></h4>
+<p>contagion的概念已经从流行病中的原始意思转变为网络中一系列的传播了，特别是用来表示时尚，政治观点，新技术的采用和财政决策等。传统的社会感染（social contagion）模型是基于物理类比和生物感染（biological contagion），个体被影响的概率随着他的“联系邻居”数量而单调递增，“联系邻居”是受影响个体和他交互的个体的数量。尽管这种“contact neighborhood hypothesis”已经成为现在所有模型的本质支持依据， 但是这很难评估，因为在大规模蔓延传播过程中，很难获得个人网络中邻居的详细数据。</p>
+<h4 id="3some-thoughs-1"><strong>3、some thoughs</strong></h4>
+:ET

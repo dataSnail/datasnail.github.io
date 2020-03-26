@@ -1,0 +1,141 @@
+I"
+,<h3 id="q1-解决mysql远程登录">[Q1] 解决mysql远程登录</h3>
+
+<h4 id="一确认服务器端口号开放">一、确认服务器端口号开放</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ubuntu</span><span class="o">@</span><span class="n">ubuntu</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">netstat</span> <span class="o">-</span><span class="n">an</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">3306</span>
+<span class="n">tcp0</span> <span class="mi">0</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span><span class="mi">3306</span>  <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">:</span><span class="o">*</span>   <span class="k">LISTEN</span>
+</code></pre></div></div>
+<p>此处3306端口只监听本地的(127.0.0.1)连接，修改/etc/mysql/my.cnf中的bind-address，注释掉或者改成指定的IP</p>
+
+<h4 id="二授权远程连接用户">二、授权远程连接用户</h4>
+
+<p>1、登录：</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysql</span> <span class="o">-</span><span class="n">uroot</span> <span class="o">-</span><span class="n">pxxxx</span>
+</code></pre></div></div>
+<p>2、授权</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">grant</span> <span class="k">all</span> <span class="n">privilege</span> <span class="k">on</span> <span class="p">[</span><span class="k">database</span><span class="p">].[</span><span class="k">table</span><span class="p">]</span> <span class="k">to</span> <span class="p">[</span><span class="k">user</span><span class="p">]</span><span class="o">@</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="n">identified</span> <span class="k">by</span> <span class="p">[</span><span class="n">password</span><span class="p">]</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="k">grant</span> <span class="k">all</span> <span class="k">on</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">to</span> <span class="n">user_name</span><span class="o">@</span><span class="s1">'%'</span> <span class="n">identified</span> <span class="k">by</span> <span class="s1">'user_password'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>database：授权的数据库名，所有的数据库用匹配符<code class="highlighter-rouge">*</code><br />
+table:授权的表名，所有的表用匹配符<code class="highlighter-rouge">*</code><br />
+user:授权的用户名<br />
+ip:授权的ip地址，例如<code class="highlighter-rouge">'xxx.xxx.xxx.xxx'</code><br />
+password:授权用户名的密码，例如<code class="highlighter-rouge">'xxxxxx'</code><br />
+3、刷新授权或者mysql重启</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flush</span> <span class="n">privilege</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">mysql</span> <span class="k">restart</span>
+</code></pre></div></div>
+
+<h3 id="q2mysql-命令导入csv">[Q2]mysql 命令导入csv</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test_info</span>
+<span class="k">into</span> <span class="n">outfile</span> <span class="s1">'/tmp/test.csv'</span>
+<span class="n">fields</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">','</span> <span class="n">optionally</span> <span class="n">enclosed</span> <span class="k">by</span> <span class="s1">'"'</span> <span class="n">escaped</span> <span class="k">by</span> <span class="s1">'"'</span>
+<span class="n">lines</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">'</span><span class="se">\r\n</span><span class="s1">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="q3mysql备份数据库压缩">[Q3]mysql备份数据库压缩</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysqldump</span> <span class="o">-</span><span class="n">hhostname</span> <span class="o">-</span><span class="n">uusername</span> <span class="o">-</span><span class="n">ppassword</span> <span class="n">databasename</span> <span class="o">|</span> <span class="n">gzip</span> <span class="o">&gt;</span> <span class="n">backupfile</span><span class="p">.</span><span class="k">sql</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div></div>
+<p>注意：这种只会备份sql库里的表结构和数据，不会备份写过的存储过程和函数，如果要备份存储过程和函数要加上参数 -R。</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mysqldump</span> <span class="o">-</span><span class="n">hhostname</span> <span class="o">-</span><span class="n">uusername</span> <span class="o">-</span><span class="n">ppassword</span> <span class="o">-</span><span class="n">R</span> <span class="n">databasename</span> <span class="o">|</span> <span class="n">gzip</span> <span class="o">&gt;</span> <span class="n">backupfile</span><span class="p">.</span><span class="k">sql</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div></div>
+<p>具体参数和其他选项可参照<a href="http://dev.mysql.com/doc/refman/5.7/en/mysqldump.html">官网</a>详述。</p>
+
+<p>数据还原：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -u root -p [dbname] &lt; backup.sql
+</code></pre></div></div>
+<p>还原压缩的MySQL数据库</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip &lt; backupfile.sql.gz | mysql -uusername -ppassword databasename
+</code></pre></div></div>
+
+<h3 id="q4-查看数据库大小">[Q4] 查看数据库大小</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span> <span class="n">information_schema</span>
+<span class="k">select</span> <span class="n">concat</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="k">sum</span><span class="p">(</span><span class="n">DATA_LENGTH</span><span class="o">/</span><span class="mi">1024</span><span class="o">/</span><span class="mi">1024</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span><span class="s1">'MB'</span><span class="p">)</span> <span class="k">as</span> <span class="k">data</span>  <span class="k">from</span> <span class="n">TABLES</span> <span class="k">where</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">'database_name'</span> <span class="k">and</span> <span class="k">table_name</span> <span class="o">=</span> <span class="s1">'table_name'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span><span class="c1">-----------+</span>
+<span class="o">|</span> <span class="k">data</span>      <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+</span>
+<span class="o">|</span> <span class="mi">5340</span><span class="p">.</span><span class="mi">73</span><span class="n">MB</span> <span class="o">|</span>
+<span class="o">+</span><span class="c1">-----------+</span>
+<span class="mi">1</span> <span class="k">row</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">64</span> <span class="n">sec</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="q4-select-into-和-insert-into">[Q4] select into 和 insert into</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">Table2</span><span class="p">(</span><span class="n">field1</span><span class="p">,</span><span class="n">field2</span><span class="p">,...)</span> <span class="k">SELECT</span> <span class="n">value1</span><span class="p">,</span><span class="n">value2</span><span class="p">,...</span> <span class="k">FROM</span> <span class="n">Table1</span>
+<span class="k">SELECT</span> <span class="n">vale1</span><span class="p">,</span> <span class="n">value2</span> <span class="k">INTO</span> <span class="n">Table2</span> <span class="k">FROM</span> <span class="n">Table1</span>
+</code></pre></div></div>
+
+<h3 id="q4-mysql移库">[Q4] mysql移库</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.停止数据库服务：
+
+使用/etc/init.d/mysql stop 或者 stop mysql
+
+2. 在目标位置（/data)创建数据库文件的目录(如/mysqldb)，并复制（如果不再使用默认的位置，则可以直接mv原先数据库文件到新目录下）原先的数据库文件目录到该目录下：
+
+cd  /data
+
+mkdir mysqldb
+
+cp -r /var/lib/mysql  /data/mysqldb/
+
+经过一段时间的等待后，在/data/mysqldb/下面就有了原先默认的mysql数据库文件目录的拷贝“/mysql”
+
+3.修改my.cnf文件
+
+# vim /etc/mysql/my.cnf
+
+将datadir = /var/lib/mysql 改为 datadir = /data/mysqldb/mysql
+
+另外由于当前my.cnf 中的socket = /var/run/mysqld/mysqld.sock（而并非像网上所说的sock = /var/lib/mysql/mysql.sock），即socket的位置并不在数据库文件所在的位置，因此可以不做类似网上其他网页所说的，要使用以下的命令做一个mysql.sock 链接：
+
+ln -s  /data/mysqldb/mysql/mysql.sock  /var/lib/mysql/mysql.sock (需要从/home/data/mysql下复制一份过来)
+
+4. 修改数据库的权限：
+
+# chown -R mysql:mysql /data/mysqldb/mysql/　  ← 改变数据库文件目录的归属为mysql
+
+# chmod 700 /data/mysqldb/mysql/whois/　 ← 改变数据库目录whois的属性为700
+
+# chmod 660 /data/mysqldb/mysql/whois/*　 ← 改变数据库中数据表的属性为660
+
+5. 修改文件usr.sbin.mysqld
+
+# vim /etc/apparmor.d/usr.sbin.mysqld
+
+把
+
+/var/lib/mysql r,
+
+/var/lib/mysql/** rwk,
+
+改成
+
+/data/mysqldb/mysql/  r,
+
+/data/mysqldb/mysql/** rwk,
+
+注意：没有该步骤的话，将导致数据库服务无法重启，好像在重启，但是一直卡住无反应。
+
+6.启动mysql服务器
+
+/etc/init.d/apparmor restart
+
+/etc/init.d/mysql restart  （或者使用 restart mysql）
+
+搞定！
+
+
+</code></pre></div></div>
+:ET

@@ -1,0 +1,138 @@
+I"�-<h3 id="一概率分布"><strong>一、概率分布</strong></h3>
+<h4 id="1均匀分布离散型均匀分布和连续型均匀分布"><strong>1、均匀分布(离散型均匀分布和连续型均匀分布)</strong></h4>
+<p>相同长度间隔的部分概率等可能。均匀分布式由两个参数a,b定义，是数轴上的最小值和最大值。</p>
+
+<p>如果连续性随机变量$X$具有如下的概率密度函数，则称$X$服从$[a,b]$上的均匀分布（uniform distribution，记作 $X \sim U(a,b)$</p>
+
+<p>概率密度函数：</p>
+
+<p> 
+<script type="math/tex">% <![CDATA[
+f(x) = \begin{cases} \frac{1}{b-a} & for\text{ }a\le{ x \le b} \\\\
+0 & \text{elsewhere} \\\\
+\end{cases} %]]></script></p>
+
+<p>累计分布函数：</p>
+
+<p> 
+<script type="math/tex">% <![CDATA[
+F(x) = \begin{cases} 0 & for\text{ }x \lt a \\\\
+\frac{x-a}{b-a} & for\text{ }a\le{ x \le b} \\\\
+1 & for\text{ }x \gt b \\\\
+\end{cases} %]]></script></p>
+
+<h4 id="2正态分布"><strong>2、正态分布</strong></h4>
+<p>正态分布式生活中常见的分布。表示为$N(\mu, \sigma^2)$</p>
+
+<p>概率密度函数：</p>
+
+<p>$
+f(x) = \frac{1}{\sqrt{2\pi} \sigma}exp(-\frac{(x-\mu)^2}{2\sigma^2})
+$</p>
+
+<p>其中$\sigma$是标准差，而$\mu$是均值。函数图像以均值为对称轴，随着标准差越大越扁。</p>
+
+<p class="center center"><img src="/postimg/gaussian_instance5.png" alt="uniform_isntance" /></p>
+
+<h4 id="3泊松分布"><strong>3、泊松分布</strong></h4>
+<p>泊松分布是一种常见的<strong>离散概率分布</strong>，比较适合描述单位时间内，随机事件具体发生次数的概率。[3]<br />
+若$X$服从参数为$\lambda$的泊松分布，记为$X\sim \pi (\lambda )$，或记为$ X \sim P(\lambda)$</p>
+
+<p>概率密度函数：</p>
+
+<p>$
+P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda} ,k=0,1,…
+$</p>
+
+<p>参数$\lambda$是单位时间（或单位面积）内随机事件的平均发生率。<br />
+文献[4]用泊松分布建模<strong>转发推文事件</strong>，累积分布函数如下： <br />
+<script type="math/tex">% <![CDATA[
+f(x;\lambda) = \begin{cases} \ 1-e^{-\lambda x} & \text{ }{ x \ge 0} \\\\
+0 & \text{ } { x \lt 0} \\\\
+\end{cases} %]]></script><br />
+$\frac{1}{\lambda}$是间隔时间（用户平均等待时间）。</p>
+
+<h4 id="4指数分布"><strong>4、指数分布</strong></h4>
+<p>概率密度函数：</p>
+
+<p>$
+P(X=k) = \frac{1}{\theta}e^{\frac{-x}{\theta}} ,x&gt;0
+$</p>
+
+<p>其中$\theta &gt;0$为常数，则称$X$服从参数$\theta$的指数分布。</p>
+
+<p>指数函数有一个重要的特性：无记忆性，即如果一个随机变量呈指数分布，则有如下结果：</p>
+
+<p>当$s,t\gt 0$时，有$P(T&gt;s+t|T&gt;t)=P(T&gt;s)$</p>
+<h4 id="5二点分布伯努利试验"><strong>5、二点分布（伯努利试验）</strong></h4>
+<p>若随机变量X取两个值0，1，且有概率分布P(X=1)=p,P(X=0)=q=1-p,则称X服从二点分布。</p>
+<h4 id="6二项分布"><strong>6、二项分布</strong></h4>
+<p>若随机变量X的可能取值为0，1，2，…，n，取到这些值的概率为$P(X=k) = C_n^k p^k(1-p)^{n-k} (p \gt 0,k=0,1,2,…,n)$，则称X服从二项分布，记为$X \sim B(n,p)$.</p>
+
+<p>二项分布就是在相同的条件下，独立重复进行n次bernoulli试验,n=1时，就是二点分布。</p>
+
+<h3 id="二随机数生成"><strong>二、随机数生成</strong></h3>
+<p>以下代码可能导入的包：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">animation</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="n">stats</span>
+</code></pre></div></div>
+
+<p>使用程序生成一个随机数，有很多方法。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#生成一个从1到100的整数
+</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1">#生成一个从0到1的随机double数
+</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1">#按照均匀分布，生成一个从1到100的double数,参数a=1,b=100
+</span></code></pre></div></div>
+
+<h4 id="1均匀分布"><strong>1、均匀分布</strong></h4>
+<p>可以直接用uniform()生成若干数，即符合均匀分布：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random_result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">number_size</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">number_size</span><span class="p">):</span>
+    <span class="n">random_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span> 
+<span class="c1"># random.uniform(1,100)
+#draw
+</span><span class="n">num_bins</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#直方块数量
+</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">random_result</span><span class="p">,</span><span class="n">num_bins</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#函数图像
+</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">],[</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.01</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">#显示
+</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>肯定是number_size设置的越多，最后得到的分布月趋向于平均，这就是所谓蒙特卡洛采样吧。</p>
+
+<p class="center center"><img src="/postimg/uniform_instance.png" alt="uniform_isntance" /></p>
+
+<h4 id="2正态分布-1"><strong>2、正态分布</strong></h4>
+<p>利用np包的<code class="highlighter-rouge">random.randn(d0, d1, ..., dn)</code>函数：</p>
+<blockquote>
+  <p>For random samples from $N(\mu, \sigma^2)$, use: <br />
+sigma * np.random.randn(…) + mu</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">np.random.randn()</code> 返回一个符合$N(0, 1)$的样本。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">random_data</span> <span class="o">=</span> <span class="mi">100</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="c1">#直方图
+</span><span class="n">num_bins</span> <span class="o">=</span> <span class="mi">50</span> <span class="c1">#直方块数量
+</span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span><span class="n">num_bins</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">#函数曲线
+</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">99.5</span><span class="p">,</span><span class="mf">100.5</span><span class="p">,</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="nb">pow</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="mf">100.</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mf">0.01</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">#显示
+</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p class="center center"><img src="/postimg/gaussian_instance.png" alt="uniform_isntance" /></p>
+
+<h3 id="参考"><strong>参考：</strong></h3>
+
+<p>[1]. https://baike.baidu.com/item/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83/954451<br />
+[2]. https://zh.wikipedia.org/wiki/%E9%80%A3%E7%BA%8C%E5%9E%8B%E5%9D%87%E5%8B%BB%E5%88%86%E5%B8%83<br />
+[3]. http://www.ruanyifeng.com/blog/2015/06/poisson-distribution.html<br />
+[4]. Lee, Kyumin, et al. “Who will retweet this?: Automatically identifying and engaging strangers on twitter to spread information.” Proceedings of the 19th international conference on Intelligent User Interfaces. ACM, 2014.</p>
+:ET

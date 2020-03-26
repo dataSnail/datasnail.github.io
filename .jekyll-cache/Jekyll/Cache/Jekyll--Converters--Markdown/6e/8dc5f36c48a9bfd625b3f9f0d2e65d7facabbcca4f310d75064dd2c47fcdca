@@ -1,0 +1,84 @@
+I"�+<p>本节的代码在不说明的情况下，都要在文件头部导入以下包，否则…后果也不严重，就是不能运行罢了。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+</code></pre></div></div>
+<h3 id="一-groupby函数">一、 <code class="highlighter-rouge">groupby()</code>函数</h3>
+<h4 id="1-groupby的结果"><strong>1、 groupby的结果</strong></h4>
+<p>对DataFrame进行分组操作时，可以按照一列进行分组，也可以按照多列进行分组，得到的结果都是<code class="highlighter-rouge">DataFrameGroupBy</code>对象，有code为证：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'age'</span><span class="p">)</span><span class="c1">#按照单个列进行分组
+</span><span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">])</span><span class="c1">#按照单个列进行分组
+</span><span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">,</span><span class="s">'gender'</span><span class="p">])</span><span class="c1">#按照多列进行分组
+#&lt;pandas.core.groupby.DataFrameGroupBy object at 0x0000000007942E10&gt;
+</span></code></pre></div></div>
+<p>那<code class="highlighter-rouge">DataFrameGroupBy</code>是一个中间分组变量，其中包括很多组，每个组都是一个元组（tuple）：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df_inst_groups</span><span class="p">]</span> <span class="c1">#输出groups中的组
+</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df_inst_groups</span><span class="p">]</span> <span class="c1">#[tuple, ···, tuple, tuple, tuple]
+</span></code></pre></div></div>
+
+<h4 id="2-分析groupby的参数"><strong>2、 分析<code class="highlighter-rouge">groupby()</code>的参数</strong></h4>
+<p>参数说明见<a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html" title="groupby() 函数参数说明">官方文档</a>，看英文我也没看懂，有一个好方法就是查字典、并且写一篇博文记录下来，对，就是我现在做的。
+首先，看下这个函数到底能接受什么？</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DataFrame</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">squeeze</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div></div>
+<p>可以看到，接受好多……，那么不要怕，仔细看一下，先看第一个：</p>
+<blockquote>
+  <p>by的值可以是字典型 、函数、字符串或者可迭代的对象【mapping, function, str, or iterable】
+这是决定那个用来分组，（by=啥啊，就是group by 啥啊，用啥分组啊）。</p>
+</blockquote>
+
+<p><strong>①</strong> 如果参数值为<strong>字符串</strong>即<strong>列名</strong>，或者<strong>list（可迭代对象）</strong>，就是按照这一列进行groupby。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">'age'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'age'</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s">'age'</span><span class="p">,</span><span class="s">'gender'</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>②</strong> 如果参数值为<strong>函数(function)</strong>，就是用这个函数处理<strong>索引列（index）</strong>的每个元素，然后groupby，也可以用<code class="highlighter-rouge">set_index()</code>重新设置索引。
+例如我写了一个很没有用的对5进行取模的函数mod_5，把他作为by的值：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mod_5</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">num</span><span class="o">%</span><span class="mi">5</span>
+<span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">mod_5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1">#对索引（index）列进行操作，然后groupby，也可以用set_index重新设置索引。
+</span></code></pre></div></div>
+<p>//TODO
+<strong>③</strong> 如果是<strong>字典型</strong>或者是<strong>Series类型</strong>被传入，那么字典或者Series的值用来决定groupby的组。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_inst</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">{</span><span class="n">xxx</span><span class="p">})</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1">#
+</span></code></pre></div></div>
+<p>//TODO
+<strong>④</strong> 如果是<strong>ndarray类型</strong>被传入。</p>
+
+<blockquote>
+  <p>axis参数</p>
+</blockquote>
+
+<blockquote>
+  <p>level参数，int类型，默认是0。或者是sequence，默认None。如果axis是多索引（MultiIndex or hierarchical）的，会按照此参数指定层级的索引（index）分组。</p>
+</blockquote>
+
+<blockquote>
+  <p>as_index参数，boolean类型，默认是True。汇总结果 ，返回带group标签的对象作为索引（index）。仅对输入为DataFrame有效。as_index=False时，就返回一个有效的SQL风格的groupby的输出。</p>
+</blockquote>
+
+<blockquote>
+  <p>sort参数，boolean类型，默认是True。对group的键（keys）进行排序。</p>
+</blockquote>
+
+<blockquote>
+  <p>group_keys参数，当调用apply()函数时，增加此参数作用到索引（index）上，辨识pieces。</p>
+</blockquote>
+
+<blockquote>
+  <p>squeeze参数，boolean类型，默认是True。如果可能的话，减少返回类型的维数。返回一个一致的类型。</p>
+</blockquote>
+
+<h4 id="3-获取其他列的均值计数和"><strong>3、 获取其他列的均值、计数、和</strong></h4>
+<p>按照某列进行求平均值，其他操作不一一重复进行展示，<code class="highlighter-rouge">groupby</code>函数参照上面的参数设置。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">,</span><span class="s">'gender'</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但是，经过实践，非groupby的列，如果<strong>不是数字类型</strong>的，则不会进行求平均操作（这一列在结果中会缺失）。</p>
+
+<p>上面的例子都是按照某一列或者多个列进行分组，然后求其他组的<strong>均值</strong>，当然均值函数可以换成其他函数，例如<code class="highlighter-rouge">count()</code>、<code class="highlighter-rouge">size()</code>来计数分组的个数。<strong>但是<code class="highlighter-rouge">count()</code>和<code class="highlighter-rouge">size()</code>存在不同点：</strong><code class="highlighter-rouge">size()</code>计数时包含<code class="highlighter-rouge">NaN</code>值，而<code class="highlighter-rouge">count()</code>不包含。而且<code class="highlighter-rouge">count()</code>返回的是<code class="highlighter-rouge">DataFrame</code>，而<code class="highlighter-rouge">size()</code>返回的是<code class="highlighter-rouge">Series</code>。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">groupby</span><span class="p">([</span><span class="s">'gender'</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+<span class="n">groupby</span><span class="p">([</span><span class="s">'age'</span><span class="p">,</span><span class="s">'gender'</span><span class="p">])</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div></div>
+:ET

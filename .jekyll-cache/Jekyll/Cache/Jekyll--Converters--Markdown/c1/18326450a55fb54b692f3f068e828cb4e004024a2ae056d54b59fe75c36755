@@ -1,0 +1,30 @@
+I"-<p>所谓的连通分量、强连通分量、强连通分支等概念令人迷惑不解，通过此文的整理，希望能了解透彻。</p>
+<h3 id="一概念">一、概念</h3>
+<p>连通图：</p>
+
+<p>其中<strong>强连通图、弱连通图、强连通子图、强连通分支</strong><a href="/fundamental/2018/07/01/algorithms_graph.html#stronglyconnectedcomponent">（<em>概念在此</em>）</a>都是针对<span style="color:red"><strong>有向图</strong></span>来说的。</p>
+
+<p>而双连通和强连通其实是一个概念在两种图的反映。双连通分量（biconnected component,bcc）又分<strong>点-双连通分量</strong>和<strong>边-双连通分量</strong>。<br />
+<strong>点-双连通</strong>是指在<span style="color:red"><strong>无向图</strong></span>中，两点之间至少有两条路径，而且路径中的节点应该不同（除了首尾节点）。<br />
+<strong>边-双连通分量</strong>是指在一个无向图中两点之间至少有两条路径，而且路径中的边要不同。<br />
+求双连通分量可用<a href="https://en.wikipedia.org/wiki/Biconnected_component">Tarjan算法</a>。</p>
+
+<p>这里又牵扯两个概念，一个叫“<strong>割顶</strong>”，一个叫“<strong>桥</strong>”。<br />
+“<strong>割顶</strong>”（cut vertex）也可以叫“<strong>割点</strong>”或者“<strong>关键点</strong>”（articulation vertex）是指从图中去除此点，图就会分离成更多部分。举个栗子，图1中，节点4，5，6都为割点，因为如果从图中除去这当中任何一个节点，图中的component都会比原来多：</p>
+
+<p class="center"><img src="/postimg/connected_component/cut_vertex.png" alt="" width="500" /></p>
+
+<p class="center">图1. 割点的举例</p>
+
+<p>同样，桥也有类似的定义，在图中去掉这种边，图就会分离成更多的部分。如下图标红色的边都为图中的桥。</p>
+
+<p class="center"><img src="/postimg/connected_component/bridge.png" alt="" width="230" /></p>
+
+<p class="center">图2. 桥的举例</p>
+
+<p><strong>诱导子图(induced subgraph)：</strong>也叫导出子图，<a href="https://en.wikipedia.org/wiki/Induced_subgraph">wiki解释</a>，$G’=(V’, E’)，V’\subset V$，$E’= { (u, v)|u, v \in V’，(u, v) \in E } $，$G’$为$G$的诱导子图。对于某个诱导子图中的顶点，只要是在原图G中有边，那么在诱导子图中也要有边。   <br />
+<strong>生成子图(spanning graph)</strong>,或者叫<strong>支撑子图</strong>，是指一个无向连通图G，它的联通子图如果包含G中<strong>所有的顶点</strong>，则称为图G的一个spnning graph。</p>
+
+<h3 id="三参考文献">三、参考文献</h3>
+<p>[1] 沈孝钧. 计算机算法基础 : Essentials of computer algorithms[M]. 机械工业出版社, 2014.</p>
+:ET

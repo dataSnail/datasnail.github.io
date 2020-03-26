@@ -1,0 +1,91 @@
+I"�6<p>pandas DataFrame的增删查改总结系列文章：</p>
+<ul>
+  <li><a href="/language/2018/07/08/pandas01.html">pandas DaFrame的创建方法</a></li>
+  <li><a href="/language/2018/10/08/pandas03.html">pandas DataFrame的查询方法</a></li>
+  <li><a href="/language/2018/09/25/pandas02.html">pandas DataFrame行或列的删除方法</a></li>
+  <li><a href="/language/2018/10/09/pandas04.html">pandas DataFrame的修改方法</a></li>
+</ul>
+
+<p>在pandas里，DataFrame是最经常用的数据结构，这里总结生成和添加数据的方法：</p>
+<ul>
+  <li>①、把其他格式的数据整理到DataFrame中；</li>
+  <li>②在已有的DataFrame中插入N列或者N行。</li>
+</ul>
+
+<h4 id="1-字典类型读取到dataframedict-to-dataframe"><strong>1. 字典类型读取到DataFrame</strong>（dict to DataFrame）</h4>
+<p>假如我们在做实验的时候得到的数据是dict类型，为了方便之后的数据统计和计算，我们想把它转换为DataFrame，存在很多写法，这里简单介绍常用的几种：<br />
+<strong>方法一：</strong>直接使用<code class="highlighter-rouge">pd.DataFrame(data=test_dict)</code>即可,括号中的<code class="highlighter-rouge">data=</code>写不写都可以，具体如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span><span class="s">'name'</span><span class="p">:[</span><span class="s">'Alice'</span><span class="p">,</span><span class="s">'Bob'</span><span class="p">,</span><span class="s">'Cindy'</span><span class="p">,</span><span class="s">'Eric'</span><span class="p">,</span><span class="s">'Helen'</span><span class="p">,</span><span class="s">'Grace '</span><span class="p">],</span><span class="s">'math'</span><span class="p">:[</span><span class="mi">90</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">93</span><span class="p">],</span><span class="s">'english'</span><span class="p">:[</span><span class="mi">89</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">90</span><span class="p">]}</span>
+<span class="c1">#[1].直接写入参数test_dict
+</span><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
+<span class="c1">#[2].字典型赋值
+</span><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test_dict</span><span class="p">)</span>
+</code></pre></div></div>
+<p>那么，我们就得到了一个DataFrame，如下：</p>
+
+<p class="center center"><img src="/postimg/python/dataframe/dict2dataframe.png" alt="" /></p>
+
+<p>应该就是这个样子了。<br />
+<strong>方法二：</strong>使用<code class="highlighter-rouge">from_dict</code>方法：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>结果是一样的，不再重复贴图。<br />
+<strong>其他方法：</strong>如果你的dict变量很小，例如<code class="highlighter-rouge">{'id':1,'name':'Alice'}</code>,你想直接写到括号里：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'id'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">'name'</span><span class="p">:</span><span class="s">'Alice'</span><span class="p">})</span> <span class="c1"># wrong style
+</span></code></pre></div></div>
+<p>这样是不行的，会报错<code class="highlighter-rouge">ValueError: If using all scalar values, you must pass an index</code>,是因为如果你提供的是一个标量，必须还得提供一个索引Index，所以你可以这么写：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'id'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">'name'</span><span class="p">:</span><span class="s">'Alice'</span><span class="p">},</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+</code></pre></div></div>
+<p>后面的可以写多个<code class="highlighter-rouge">pd.Index(range(3)</code>，就会生成三行一样的，是因为前面的dict型变量只有一组值，如果有多个，后面的Index必须跟前面的数据组数一致，否则会报错：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'id'</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="s">'name'</span><span class="p">:[</span><span class="s">'Alice'</span><span class="p">,</span><span class="s">'Bob'</span><span class="p">]},</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>  <span class="c1">#must be 2 in range function.
+</span></code></pre></div></div>
+<p>关于选择列，有些时候我们只需要选择dict中部分的键当做DataFrame的列，那么我们可以使用columns参数，例如我们只选择’id’，’name’列：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test_dict</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'id'</span><span class="p">,</span><span class="s">'name'</span><span class="p">])</span> <span class="c1">#only choose 'id' and 'name' columns
+</span></code></pre></div></div>
+
+<p>这里就不在多写了，后续变更颜色添加内容。</p>
+<h4 id="2-csv文件构建dataframecsv-to-dataframe"><strong>2. csv文件构建DataFrame（csv to DataFrame）</strong></h4>
+<p>我们实验的时候数据一般比较大，而csv文件是文本格式的数据，占用更少的存储，所以一般数据来源是csv文件，从csv文件中如何构建DataFrame呢？ txt文件一般也能用这种方法。 <br />
+方法一：最常用的应该就是<code class="highlighter-rouge">pd.read_csv('filename.csv')</code>了，用	<code class="highlighter-rouge">sep</code>指定数据的分割方式，默认的是<code class="highlighter-rouge">','</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./xxx.csv'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>如果csv中没有表头，就要加入<code class="highlighter-rouge">head</code>参数</p>
+
+<h4 id="3-在已有的dataframe中增加n列或者n行"><strong><span style="color:red">3. 在已有的DataFrame中，增加N列或者N行</span></strong></h4>
+<p>加入我们已经有了一个DataFrame，如下图:</p>
+
+<p class="center center"><img src="/postimg/python/dataframe/dict2dataframe_exist.png" alt="" /></p>
+<h4 id="31-添加列"><strong>3.1 添加列</strong></h4>
+<p><strong>3.1.1 insert方法</strong><br />
+此时我们又有一门新的课physics，我们需要为每个人添加这门课的分数，按照Index的顺序，我们可以使用insert方法，如下：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">91</span><span class="p">]</span>
+<span class="n">test_dict_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'pyhsics'</span><span class="p">,</span><span class="n">new_columns</span><span class="p">)</span>
+<span class="c1">#test_dict_df.insert(2,'pyhsics',new_columns,allow_duplicates=True)
+</span></code></pre></div></div>
+
+<p>此时，就得到了添加好的DataFrame，需要注意的是DataFrame默认不允许添加重复的列，但是在insert函数中有参数<code class="highlighter-rouge">allow_duplicates=True</code>，设置为True后，就可以添加重复的列了，列名也是重复的：</p>
+
+<p class="center center"><img src="/postimg/python/dataframe/dict2dataframe_exist_new.png" alt="" /></p>
+
+<p><strong>3.1.1 loc方法</strong><br />
+也可以使用loc方法，其实是一种改的动作，使用<code class="highlighter-rouge">loc</code>方法定位所有的行，指定列名，例如<code class="highlighter-rouge">loc[:,'english']</code>，然后对于每一行增添一个值，结果就出现了一个新的列。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'english'</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="mi">89</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">94</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">94</span><span class="p">]</span>
+</code></pre></div></div>
+<p>这种修改方法如果指定的列名相同，那么新的数据就会覆盖掉原来的数据，而不会给你任何提示，所以个人建议还是使用insert比较好。</p>
+<h4 id="32-添加行loc方法"><strong>3.2 添加行(loc方法)</strong></h4>
+<p>此时我们又来了一位新的同学Iric，需要在DataFrame中添加这个同学的信息，我们可以使用<code class="highlighter-rouge">loc</code>方法：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_line</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="s">'Iric'</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span>
+<span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">=</span> <span class="n">new_line</span>
+</code></pre></div></div>
+<p><span style="color:red">但是十分注意的是，这样实际是<strong>改</strong>的操作，如果loc[index]中的index已经存在，则新的值会覆盖之前的值。</span></p>
+
+<p>当然也可以把这些新的数据构建为一个新的DataFrame，然后两个DataFrame拼起来。可以用append方法，不过不太会用，提供一种方法：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">new_line</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'id'</span><span class="p">,</span><span class="s">'name'</span><span class="p">,</span><span class="s">'physics'</span><span class="p">]))</span>
+</code></pre></div></div>
+<p>本想一口气把CURD全写完，没想到写到这里就好累。。。其他后续新开篇章在写吧。<br />
+相关代码：<a href="https://github.com/dataSnail/blogCode/blob/master/python_curd/python_curd_create.ipynb">github</a></p>
+:ET

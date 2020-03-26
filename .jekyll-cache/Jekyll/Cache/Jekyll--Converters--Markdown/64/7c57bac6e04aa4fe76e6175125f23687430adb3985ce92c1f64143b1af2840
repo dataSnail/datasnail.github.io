@@ -1,0 +1,11 @@
+I"�<p>与<a href="http://www.datasnail.cn/papers/2017/12/29/deepwalk_paper.html" title="deepwalk论文笔记">deepwalk文章</a>相关。<br />
+在网上下载了源码，在ubuntu上运行，跑了一个Karate俱乐部的例子。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">deepwalk</span> <span class="o">--</span><span class="nb">input</span> <span class="n">example_graphs</span><span class="o">/</span><span class="n">karate</span><span class="o">.</span><span class="n">adjlist</span> <span class="o">--</span><span class="n">output</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">kar</span><span class="o">.</span><span class="n">embeddings</span> <span class="o">--</span><span class="n">representation</span><span class="o">-</span><span class="n">size</span> <span class="mi">2</span> <span class="o">--</span><span class="n">walk</span><span class="o">-</span><span class="n">length</span> <span class="mi">20</span>  <span class="o">--</span><span class="n">window</span><span class="o">-</span><span class="n">size</span> <span class="mi">2</span> <span class="o">--</span><span class="n">number</span><span class="o">-</span><span class="n">walks</span> <span class="mi">400</span>
+</code></pre></div></div>
+
+<p>–representation-size 表征向量长度；默认值64<br />
+–window-size  在skipgram里，考虑节点前后多少个邻居节点；默认值5 <br />
+–number-walks 进行多少次游走；默认值10 <br />
+–walk-length 随机游走生成语料时，随机游走长度（句子长度）；默认值40</p>
+:ET

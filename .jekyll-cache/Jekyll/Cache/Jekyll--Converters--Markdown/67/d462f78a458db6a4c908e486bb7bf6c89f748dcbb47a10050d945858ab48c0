@@ -1,0 +1,112 @@
+I"�<p>关键词： 社区<span style="color:red">间</span>影响力，马尔科夫链，影响力最大化</p>
+
+<p>会议（年份）：CLOUDCOM-ASIA 2013 (举办地点：福州)</p>
+
+<p>相关作者：福州大学</p>
+
+<p>数据集（具体数据集的介绍见原文）：America College Football dataset[13],P2P-Gnutella08 dataset[27],NetHEPT dataset[7],NetPHY dataset[7],Email-Enron[28-29]</p>
+
+<h4 id="一文章摘要"><strong>一、文章摘要</strong></h4>
+
+<p><strong>本篇文章指出：关于影响力的研究主要限制在用户层（user-level），社区（community）层次的影响力很少涉及。</strong>提出了一个新模型来分析和评估社区层次的影响力，帮助决策者深入理解不同社区的影响力的差距。同时也提出了一个简单的考虑社区影响力来传播影响的<strong>启发式节点选择策略</strong>。</p>
+
+<p>最后，通过社交网络数据的影响力传播实验证明了提出的社区影响力分析模型的合理性。</p>
+
+<h4 id="二文献相关"><strong>二、文献相关</strong></h4>
+
+<p><strong>用户层面（user-level）影响力（相关文章）：</strong></p>
+
+<ol>
+  <li>中心性（centrality）在社交网络中衡量受到了多少关注度是十分有效的<sup>[9]</sup></li>
+  <li>节点的中心性(node-based centrality)<sup>[10]</sup></li>
+  <li>度中心性（degree-centrality)、接近中心性（closeness centrality）<sup>[1][2][11]</sup></li>
+  <li>介数中心性（betweenness centrality）<sup>[12]</sup></li>
+  <li>结合入度、转发、提及（推文中@）利用Twitter数据研究了用户随时间和话题变化的影响力<sup>[3]</sup></li>
+  <li>唐杰提出了话题亲和传播（topical affinity propagation，TAP）建模话题层次的社会影响力<sup>[4]</sup></li>
+</ol>
+
+<p><strong>应用方面（相关文章）</strong>：</p>
+
+<ol>
+  <li>病毒营销（viral marketing）中的影响最大化，文献[5]形式化影响力最大化问题为排名问题，利用了马尔科夫随机场模型，后来在文献[6]中提出了高效的模型学习算法。文献[7]提出度折启发式算法提高影响力的传播，得到比传统的度和基于中心性的启发式方法更好的影响力传播效果。</li>
+</ol>
+
+<p>在研究社区影响力方面，文中指出<strong>现有的社区发现算法使得研究群体或者社区层次的影响力有了可能</strong>。</p>
+
+<p><strong>最相关的文献：</strong></p>
+
+<p>[8]调研了在线讨论社区（online discussion fora），提出了社区间的影响力分析框架，但是Belak关于社区层次的影响力没有密集的研究（intensive study）。</p>
+
+<p>文章中指明，社区影响力是随时间变化的，而且社区影响力（CI）只依赖与其他社区在当前的状态，CI独立于社区之前的状态。这是马尔科夫链的性质的组成部分，故此文提出基于马尔科夫链的模型进行社区影响力的分析。</p>
+
+<p>关于马尔科夫链的介绍，请看此处：（2017001-21-markov-chain.html)</p>
+
+<h4 id="三模型方法思路"><strong>三、模型方法思路</strong></h4>
+
+<p>文中提出的模型（Community Influence Analysis Model Markov Chain Model，CIAM-MCM）
+此模型分五个步骤：</p>
+
+<ol>
+  <li>划分节点所属的社区，所用的社区划分算法来自文献[20];</li>
+  <li>分析节点之间的相互影响；</li>
+  <li>获得社区之间的相互影响；</li>
+  <li>获得不同社区的影响力；</li>
+  <li>校验得到的社区影响力；</li>
+</ol>
+
+<p>此处社区划分可以基于①社区发现算法；②已知的实际社区组织结构；</p>
+
+<p><strong>文中定义：</strong></p>
+
+<ul>
+  <li><strong>定义一：（membership matrix）$M$</strong>：$M_{ij}=1$，如果节点i属于社区$V_j$;</li>
+  <li><strong>定义二：（$\tau$-ego network)</strong>：可以理解为拥有$\tau$深度的邻居，$\tau=1$时，就是某节点的直接邻居；</li>
+  <li><strong>定义三：（user mutual impact matrix）$UMI$</strong>： $UMI_{ij} = \frac{|N(i)∩N(j)|}{|N(i)|}$,可以理解为类似Jaccard系数的计算方法，分母的衡量略微不同；</li>
+  <li><strong>定义四：（user community impact matrix）$UCI$</strong>： $UCI = UMI * M$;</li>
+  <li><strong>定义五：（community mutual impact matrix）</strong>： $CMI = M^T * UCI$,其中$ CMI_{ij}$就代表在第$i$个社区对第$j$个社区的总影响力；</li>
+</ul>
+
+<p><strong>社区间影响力建模：</strong></p>
+
+<p>由社区间的相互影响矩阵$CMI$获得马尔科夫链的转移矩阵$P$：$P$矩阵是关于$n$个社区之间的影响关系，其中$P_{ij}=\frac{CMI_{ji}}{CMI_j}$,即$P_{ij}$代表社区$i$受到社区$j$的影响，用社区$j$影响社区$i$的值比上社区$j$对所有社区影响之和，$CMI_j=\sum_{i=1}^{n} CMI_{ji}$；</p>
+
+<p><strong>最后的$CI = lim_{t \rightarrow ∞}P^{(t)} * CI^0$，得到社区之间的相互影响力。</strong></p>
+
+<p>因为转移矩阵每一项都是正的，所以是不可约和非周期性的。</p>
+
+<p><strong>CIAM-MCM的验证</strong></p>
+
+<p>为了验证CIAM-MCM获得的社区影响力的合理性，设计了一个简单的启发式节点选择算法，在独立级联模型中进行模拟实验。</p>
+
+<p>节点选择策略：</p>
+
+<p>step 1. 归一化Community影响力， 作为选择节点时，选择社区的概率；<br />
+step 2. 通过step 1计算的社区概率，选择一个社区，然后在社区中选择一个度较大的节点<br />
+step 3. 重复以上步骤，避免选择重复的节点</p>
+
+<h4 id="四实验方面"><strong>四、实验方面</strong></h4>
+
+<p><strong>实验结果分析</strong></p>
+
+<p>实验模拟影响力传播证明提出的社区影响力分析模型（CIAM-MCM）的合理性。（数据集见文章开头）</p>
+
+<ul>
+  <li>
+    <p><strong>分析社区影响力分布</strong>
+文中用的社区影响力的分布图（横坐标：Community label，纵坐标：社区影响力值）<span style="color:red">个人感觉2-8定律用幂律分布图展示更为合理</span></p>
+  </li>
+  <li>
+    <p><strong>分析社区影响力合理性</strong>
+比较文中提出的CI-Model和其他经典的影响力最大化算法（度折算法、度启发式算法），在独立级联（IC）模型下的影响力传播效果。</p>
+  </li>
+</ul>
+
+<p>文章的实验部分不是很充实。但是我也<strong>提不出</strong>建议…</p>
+
+<p>【后记】</p>
+
+<ul>
+  <li>社区影响力的分布分析证明了在CIAM-MCM模型下，分析的社区影响力大小也遵循2-8定律，此为合理性之一；</li>
+  <li><span style="color:red">在独立级联模型下，提出了一个简单的节点选择的启发式算法，得到的种子节点传播的影响力效果要比传统的种子节点选择算法要好，能证明影响力的衡量合理么？</span></li>
+</ul>
+:ET

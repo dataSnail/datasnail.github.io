@@ -1,0 +1,78 @@
+I"�,<p>pandas DataFrame的增删查改总结系列文章：</p>
+<ul>
+  <li><a href="/language/2018/07/08/pandas01.html">pandas DaFrame的创建方法</a></li>
+  <li><a href="/language/2018/10/08/pandas03.html">pandas DataFrame的查询方法</a></li>
+  <li><a href="/language/2018/09/25/pandas02.html">pandas DataFrame行或列的删除方法</a></li>
+  <li><a href="/language/2018/10/09/pandas04.html">pandas DataFrame的修改方法</a></li>
+</ul>
+
+<p>对于DataFrame的修改操作其实有很多，不单单是某个部分的值的修改，还有一些索引的修改、列名的修改，类型修改等等。我们仅选取部分进行介绍。</p>
+<h3 id="一值的修改"><strong>一、值的修改</strong></h3>
+<p>DataFrame的修改方法，其实前面介绍loc方法的时候介绍了一些。</p>
+<h4 id="1-loc方法修改"><strong>1、 loc方法修改</strong></h4>
+<p>loc方法实际上是定位某个位置的数据的，但是定位完以后就可以对此位置的数据进行修改，使用此方法可以对DataFrame进行的修改如下：</p>
+<ol>
+  <li>对某行、某N行进行修改；</li>
+  <li>对某列、某N列进行修改；</li>
+  <li>对横坐标为某行或某N行，纵坐标为某列或者某N列的数据进行修改；</li>
+</ol>
+
+<p>可以看出基本用loc方法我们对DataFrame可以进行任意修改了。</p>
+<h4 id="11-对某行某n行进行修改"><strong>1.1 对某行、某N行进行修改</strong></h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 对第1行进行修改
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,(</span><span class="s">'english'</span><span class="p">,</span><span class="s">'id'</span><span class="p">,</span><span class="s">'math'</span><span class="p">,</span><span class="s">'name'</span><span class="p">)]</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">'Alice_m'</span><span class="p">]</span>
+<span class="c1"># 对第0行到第1行进行修改
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,(</span><span class="s">'english'</span><span class="p">,</span><span class="s">'id'</span><span class="p">,</span><span class="s">'math'</span><span class="p">,</span><span class="s">'name'</span><span class="p">)]</span><span class="o">=</span><span class="p">[[</span><span class="mi">90</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">'Alice_m'</span><span class="p">],[</span><span class="mi">70</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">'Bob'</span><span class="p">]]</span>
+<span class="c1"># 对第0行和第2行进行修改
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">,(</span><span class="s">'english'</span><span class="p">,</span><span class="s">'id'</span><span class="p">,</span><span class="s">'math'</span><span class="p">,</span><span class="s">'name'</span><span class="p">)]</span><span class="o">=</span><span class="p">[[</span><span class="mi">90</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">'Alice_m'</span><span class="p">],[</span><span class="mi">70</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">'Bob'</span><span class="p">]]</span>
+</code></pre></div></div>
+<p>可以看出具体的方法就是用loc方法，对某行或者某N行进行定位，然后赋予合适的格式的值就可以了。</p>
+
+<h4 id="12-对某列某n列进行修改"><strong>1.2 对某列、某N列进行修改</strong></h4>
+<p>学会了使用loc方法对行的修改，那触类旁通，对列的修改也很简单了。<span style="color:red">对列修改也就是修改此列的所有行。</span></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 对第english列进行修改
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="s">'english'</span><span class="p">)]</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">59</span><span class="p">]</span> <span class="c1">#test_dict_df.loc[:,'english']=[90,80,70,90,90,59]
+# 对第english列和id列进行修改，注意赋值的写法
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,(</span><span class="s">'english'</span><span class="p">,</span><span class="s">'id'</span><span class="p">)]</span><span class="o">=</span><span class="p">[[</span><span class="mi">90</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">80</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">80</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">80</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">80</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">80</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<h4 id="13-对某个区域的值进行修改"><strong>1.3 对某个区域的值进行修改</strong></h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 对第1、2行的english列和 id列进行修改
+</span><span class="n">test_dict_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,(</span><span class="s">'english'</span><span class="p">,</span><span class="s">'id'</span><span class="p">)]</span><span class="o">=</span><span class="p">[[</span><span class="mi">38</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">23</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</code></pre></div></div>
+<h4 id="14总结"><strong>1.4总结</strong></h4>
+<p>可以看到loc方法就是，只要你能选到某个或者某个区域的值，然后就可以对此部分的值进行修改。但是要注意赋值部分的组织方式。</p>
+
+<h4 id="2-ilocatiat方法修改"><strong>2、 iloc、at、iat方法修改</strong></h4>
+<p>类比于上面的方式，其实只要能选择，都是可以修改的。选择方法可以看<a href="/language/2018/10/08/pandas03.html">pandas DataFrame的查询(选择)篇</a>。</p>
+
+<h3 id="二列名的修改"><strong>二、列名的修改</strong></h3>
+<h4 id="1直接全部更改"><strong>1、直接全部更改</strong></h4>
+<p>这种方法是对DataFrame的列名进行重新赋值，比较暴力直接。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'english_new'</span><span class="p">,</span><span class="s">'id_new'</span><span class="p">,</span><span class="s">'math_new'</span><span class="p">,</span><span class="s">'name_new'</span><span class="p">]</span>
+</code></pre></div></div>
+<h4 id="2使用rename方法"><strong>2、使用rename方法</strong></h4>
+<p>这种方法是比较推荐的，通过rename方法，注意参数inplace=True的时候，才能真正的在原来的DataFrame上进行修改。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">'english_new'</span><span class="p">:</span><span class="s">'english'</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="三索引的修改"><strong>三、索引的修改</strong></h3>
+<h4 id="1修改索引名称"><strong>1、修改索引名称</strong></h4>
+<p>上面的rename方法，如果不写<code class="highlighter-rouge">columns=xx</code>就默认修改索引了 。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span><span class="s">'english1'</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+<h4 id="2重置索引"><strong>2、重置索引</strong></h4>
+<p>通过reset_index()方法我们可以重置索引，drop参数为True时，直接丢弃原来的索引，否则原来的索引新生成一列名为’index’的列：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+<h4 id="2设置其他列为索引"><strong>2、设置其他列为索引</strong></h4>
+<p>当然我们也可以用其他列为索引，通过set_index()方法：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dict_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">'id_new'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="四总结"><strong>四、总结</strong></h3>
+<p>可以看到，所谓的修改首先要能选择修改的位置，即定位，然后对确定好的位置进行重新赋值，所以我们学会了如何选择数据，也就基本能修改此处的数据。</p>
+
+<p>源代码：<a href="https://github.com/dataSnail/blogCode/blob/master/python_curd/python_curd_modify.ipynb">github</a></p>
+:ET

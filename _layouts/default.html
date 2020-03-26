@@ -1,18 +1,1 @@
-<!DOCTYPE html>
-<html>
-  {% include head.html %}
-  <body class = "index">
-    {% include nav-header.html %}
-
-    {% include docs_header.html %}
-    {% if page.title %}
-      {% include banner.html %}
-    {% endif %}
-    <div class="page-content">
-      <div class="container" style="padding-left:0;padding-right:0;">
-        {{ content }}
-      </div>
-    </div>
-    {% include footer.html %}
-  </body>
-</html>
+{{ content }}

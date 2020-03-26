@@ -1,0 +1,63 @@
+I":%<p class="center center"><img src="/postimg/social_influence_role/social_influence_role.png" alt="" /></p>
+
+<p>整天给自己挖坑，也填不上，真·愁。此篇文章是2014年AAAI(CCF_A)的一篇文章。</p>
+<h4 id="一摘要"><strong>一、摘要</strong></h4>
+<p>conformity influence 是一个人受其他人影响的一种倾向。这篇文章研究了角色的不同，如何导致用户的一致性倾向（conformity tendency）改变。所以基于社会心理学中的<strong>一致性理论</strong>，文章首次提出了一个统一的函数衡量一致性影响力，并提出一个概率图模型—-角色一致性模型（Role Conformity Model，RCM），建模用户之间的角色感知的一致性影响力，并应用于个体行为预测中。</p>
+
+<h4 id="二简介"><strong>二、简介</strong></h4>
+<p>文章也是从社会心理学基础出发，列举了1935年的Sherif的似动实验[Sherif 1935]，1955年的Asch实验[Asch 1955]和后来的部分研究说明了一致性影响力在生活中普遍存在。而随着社交网络的飞速发展，衡量一致性影响力在市场营销、影响最大化等方面越发变得必要。Li等人研究了Conformity和Influence之间的相互作用[Li,Bhowmick, and Sun 2011;2013]。唐杰等人也提出了一个因子图模型，把一致性的作用考虑进去，来预测个体行为。<strong>但是这两者都着重建模一致性影响力在个体层次中的作用。</strong><br />
+所以，这篇文章研究了是否有可能去总结各种“角色”，去精确的概况描述个体的一致性趋势和他在网络中的结构特征之间的关联关系。这跟现在研究的social contagion[Kempe,Kleinberg,and Tardos 2003;Gruhl et al. 2004]是不同的。作者提出建模基于角色的个体一致性倾向的模型，具有以下问题需要解决：</p>
+<ol>
+  <li>如何形式化社会心理学中的一致性理论？</li>
+  <li>如何把角色结合到形式化的公式中去，来建模个体行为？</li>
+  <li>基于角色的一致性如何运用于现实应用中？</li>
+</ol>
+
+<p>PS：以上几个问题也是在做社会计算中，想把社会心理学的知识结合到具体计算和应用场景中都会遇到的问题。抽象的来看就是，①如何把语言、定性的理论变成定量的公式；②如何把具体的概念转化成量化公式，并结合到一起，对最终结果起作用；③建模出来具体的量化公式，如何应用？。我之前在想这方面的时候也想过这些问题，更抽象的说，<strong>在问题中如何把社会心理学结合到社会计算中，并在两个学科中都能得到支持和合理的解释，这是重点</strong>。要想发顶尖的文章，必须在某一个领域有尖端创新，而我们要做的就是熟知社会心理学理论，运用于社会计算中，在计算机领域的模型中进行创新，是可走的唯一道路。如果想在社会心理学中挖掘新的现象或者新的理论（当然，通过数据得出一些反常现象是可以分析的，但对于文章只是一点bonus），对于我们这种门外汉来说更加困难。这点在研究过程中难免会走偏，以至于抓错重点，在社会心理学的领域知识中走不出来。<br />
+<strong>结果</strong>：形式化一致性理论[Bernheim 1994]，调整提出的统一函数，通过当证明用户在做出行为时，存在纳什均衡。进一步把此函数结合近面向应用的概率模型RCM。最终文章得出了一些有意思的现象：<strong>用户具有高度数、低聚类系数的更容易跟别人达成一致。</strong>可能是用户具有的高度数使得用户具有更多的合作者，而低聚类系数使得该用户周围的多样性更高，从而用户更加开放（open-mind）而更容易接受别的新想法。相反，较少的合作者使得用户，思维和想法有限（limit mind），从而更不愿接受新想法。<br />
+由一致性理论，每个人在群体中都有个性，即使是个人主义也会屈从（succumb），特别是为了流行度，所以会隐藏他的选择服从于群体规范，从而表现出来群体层次的一致性（但是如果单从这方面去考虑群体行为是片面的）。这是因为人们可能会有地位上的寻求，会考虑到其他人对自己在社交网络上的行为如何感受，从而对自己行为有一个考虑（<strong>理性行为理论，Theory of Reasoned Action，TRA</strong>）。这里用$y_i=0$或$y_i =1$表示用户有行为(1)还是没有行为(0)。文章把用户行为建模为两个方面，一方面来源于用户自身偏好（individual’s intrinsic)在未受其邻居影响时和趋同性（Conformity），公式如下：</p>
+
+<script type="math/tex; mode=display">f(y_i)=(1-\lambda_i)d(y_i,\hat y_i)+\lambda_i\sum_{j \in N(i)} d(y_i,y_j)) ············（1）</script>
+
+<p>这里$\hat y_i$表示用户内在的优先选择，$\lambda_i$表示用户$v_i$的 一致性趋势，$d(.,.)$表示同或操作，即两个行为相同则值为1，否则为0。<br />
+接下来文章<em>归纳证明了纳什均衡在存在，没仔细看明白</em>。</p>
+
+<h4 id="三rcm模型"><strong>三、RCM模型</strong></h4>
+<p>把总的时间分为离散的时间片(1,2,…,T)，并设置两个隐藏变量，<strong>用户的角色(role)</strong>和<strong>特定行为的主题(topic)</strong>。首先给出以下三个定义：</p>
+<ol>
+  <li>个体属性： $x_{i,t,h}$代表用户$v_i$在时间窗口$t$内维度为$h$的属性向量，包含聚类系数或者度之类的特征。</li>
+  <li>角色分布： $\rho_{i,t} \in R^R$代表用户$v_i$在时间窗口$t$内在个角色的概率分布，$\rho^r_{i,t}$代表用户$v_i$在时间窗口$t$内在角色$r$的概率，其中$\sum^R_{r=1}\rho^r_{i,t}=1$。</li>
+  <li>主题分布： $\theta_i \in R^K$代表用户$v_i$选择各个主题的概率分布，$\theta^z_i$代表用户$v_i$选择主题$z$的概率，其中$\sum^R_{z=1}\theta^z_i=1$。</li>
+</ol>
+
+<p>RCM的主要思想就是用户角色分布不仅取决于用户个体属性，也取决于用户行为。用用户的属性决定角色的分布，并把角色分布并作为用户行为采样过程的先验。模型包含两部分：</p>
+<ol>
+  <li>产生个体属性。从角色多项式分布中先选择一个角色r，然后根据角色r，从正太分布中为用户的属性选择值。</li>
+  <li>产生所有的行为。首先扩展公式（1）结合角色和话题，把行为扩展为多个行为$W={w}$而不是仅仅是二值化。</li>
+</ol>
+
+<script type="math/tex; mode=display">\gamma^w_{i,r} = [(1-\lambda_r) \sum^K_{z=1} \theta^z_i \phi^w_z + \lambda_r \frac{1}{|N_i|} \sum_{j \in N_i} \sum^K_{z=1} \theta^z_j \phi^w_z]  ··········（2）</script>
+
+<p>$\phi^w_z$是一个非负值，代表在话题z下有w行为的概率。这里$\lambda_r$跟公式（1）的$\lambda_i$相似，为所有的角色r，用统一的$\lambda_r$，以便减少参数的个数。不同用户在角色r中的邻居节点不一样，所以文中根据邻居节点数量，归一化了用户从邻居获得的增益。这里跟公式（1）不一样的地方就是第二部分加了$ \frac{1}{|N_i|}$，但是这不影响，如果把$\lambda_i$取值为$\lambda_i= \frac{\lambda_r}{|N_i|-(|N_i|-1)\lambda_r}$，两个公式的权重参数就一致了。可以看出公式（2）更具一般化，对于公式2还有另一种解释，可以把它看作是产生行为w的似然，通过抛一个符合$Bern(\lambda_r)$分布的硬币<strong>$s$</strong>。如果s=1，w就取决于个体内在的主题分布，从公式$P(w|i)=\sum_z \theta^z_j \phi^w_z$得出。否则w就被邻居的话题分布影响，从公式$P(w|N_i)=\sum_{j \in N_i} \sum_z \theta^z_j \phi^w_z/|N_i|$。<br />
+模型的整个过程可以总结如下，模型如图1：</p>
+
+<p class="center center"><img src="/postimg/social_influence_role/rcm_summarize.png" alt="" /></p>
+
+<p class="center center"><img src="/postimg/social_influence_role/rcm.png" alt="" /><br />
+图1 RCM模型</p>
+
+<p>应用举例和模型学习://TODO</p>
+
+<h4 id="四实验-todo"><strong>四、实验</strong> //TODO</h4>
+<p>数据集是学者合作网络。</p>
+
+<p>对比的BaseLine是：TF-IDF、PLSA、CIM算法。</p>
+<h4 id="五参考文献"><strong>五、参考文献</strong></h4>
+<p><strong>[Sherif 1935]</strong> Sherif, M. 1935. A study of some social factors in perception. Archives of Psychology 187.<br />
+<strong>[Asch 1955]</strong> Asch, S. 1955. Opinions and social pressure.  <br />
+<strong>[Li,Bhowmick, and Sun 2011]</strong> Li, H.; Bhowmick, S. S.; and Sun, A. 2011. Casino: Towards conformity-aware social influence analysis in online social networks. In CIKM’11, 1007–1012 <br />
+<strong>[Li,Bhowmick, and Sun 2013]</strong> Li, H.; Bhowmick, S. S.; and Sun, A. 2013. Cinema: conformity-aware greedy algorithm for influence maximization in online social networks. In EDBT’13, 323–334.<br />
+<strong>[Kempe,Kleinberg,and Tardos 2003]</strong> Kempe, D.; Kleinberg, J.; and Tardos, E. 2003. Maximizing the spread of influence through a social network. In KDD’03, 137–146.<br />
+<strong>[Gruhl et al. 2004]</strong> Gruhl, D.; Guha, R.; Liben-Nowell, D.; and Tomkins, A. 2004. Information diffusion through blogspace. In WWW’04, 491–501.<br />
+<strong>[Bernheim 1994]</strong> Bernheim, B. D. 1994. A theory of conformity. Journal of Political Economy 1027(5):841–877.</p>
+:ET

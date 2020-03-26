@@ -1,0 +1,215 @@
+I"�M<h3 id="一python基本类型"><strong>一、python基本类型</strong></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>分类</th>
+      <th>python类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>可变类型</td>
+      <td>列表，字典</td>
+    </tr>
+    <tr>
+      <td>不可变类型</td>
+      <td>数字、字符串、元组</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>可变类型就是对象的地址本身不变（可以用<code class="highlighter-rouge">id()</code>来确认对象是否变化），可以增加、减少元素。不可变类型就是，增加、减少元素之后，新的对象就不是原来的对象，即id就变了。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#列表在元素变化前后，id是一样的
+</span><span class="n">cLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">print</span> <span class="nb">id</span><span class="p">(</span><span class="n">cLs</span><span class="p">)</span> <span class="c1">#69288200 每次运行会不一样
+</span><span class="n">cLs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">cLs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">print</span> <span class="nb">id</span><span class="p">(</span><span class="n">cLs</span><span class="p">)</span> <span class="c1">#69288200 每次运行会不一样
+</span>
+<span class="c1">#字符串
+</span><span class="n">sStr</span> <span class="o">=</span> <span class="s">'python'</span>
+<span class="k">print</span> <span class="nb">id</span><span class="p">(</span><span class="n">sStr</span><span class="p">)</span> <span class="c1">#38090552
+</span><span class="n">sStr</span> <span class="o">+=</span> <span class="s">'1'</span>
+<span class="k">print</span> <span class="nb">id</span><span class="p">(</span><span class="n">sStr</span><span class="p">)</span> <span class="c1"># 68213976
+</span></code></pre></div></div>
+
+<h4 id="1python数字"><strong>1、python数字</strong></h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">anInt</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1">#整数赋值
+</span><span class="n">aComplex</span> <span class="o">=</span> <span class="mf">3.4</span><span class="o">+</span><span class="mf">4.21J</span> <span class="c1">#复数赋值，虚数部分有j或者J
+</span><span class="n">aComplex</span><span class="o">.</span><span class="n">real</span> <span class="c1">#实数部分
+</span><span class="n">aComplex</span><span class="o">.</span><span class="n">imag</span> <span class="c1">#虚数部分
+</span><span class="n">aComplex</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span> <span class="c1">#复数的共轭复数
+</span>
+<span class="n">ahex</span> <span class="o">=</span> <span class="mh">0xff</span> <span class="c1">#十六进制数字
+</span><span class="n">aoct</span> <span class="o">=</span> <span class="mi">0255</span> <span class="c1">#八进制
+</span>
+<span class="c1">#数字比较
+</span><span class="mf">5.2</span> <span class="o">==</span> <span class="mf">5.2</span> <span class="c1">#True
+</span><span class="mi">3</span> <span class="o">&lt;</span> <span class="mi">6</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="c1">#same as (3&lt;6) and (6&lt;9) True
+</span><span class="mi">33</span> <span class="o">&lt;</span> <span class="mi">22</span> <span class="o">==</span> <span class="mi">22</span> <span class="c1">#True
+</span><span class="mf">0.</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">90</span> <span class="o">&lt;</span> <span class="mf">55e2</span> <span class="o">!=</span> <span class="mi">3</span>  <span class="o">&lt;</span> <span class="mi">122</span> <span class="c1">#False because 0. &gt; -90
+</span>
+<span class="c1">#数字四则运算
+</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="c1">#0
+</span><span class="mi">1</span><span class="o">/</span><span class="mf">2.0</span> <span class="c1">#0.5
+</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="c1">#0.5
+</span>
+<span class="c1">#地板除
+</span><span class="mf">1.0</span><span class="o">//</span><span class="mf">2.0</span> <span class="c1">#0.0
+</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="c1">#-1
+</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">11.0</span><span class="o">//</span><span class="mf">2.0</span><span class="p">)</span> <span class="c1">#5.0 should import math
+</span>
+<span class="c1">#幂运算
+</span><span class="o">-</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="c1">#-9 **优先级高于左侧-
+</span>
+<span class="mf">4.0</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span> <span class="c1">#0.25 **优先级低于右侧-
+</span><span class="mi">4</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span> <span class="c1">#python核心编程中说会引发negative power异常，我在python2.7中并不会出错
+</span>
+<span class="c1">#进制转换
+</span><span class="nb">hex</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="c1">#0xff 转换到16进制
+</span><span class="nb">oct</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="c1">#0377
+#ASCII转换
+</span><span class="nb">ord</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span> <span class="c1">#97
+</span><span class="nb">chr</span><span class="p">(</span><span class="mi">97</span><span class="p">)</span> <span class="c1">#'a'
+</span>
+<span class="c1">#布尔
+</span><span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#False 
+</span><span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#True
+</span></code></pre></div></div>
+
+<h4 id="2字符串列表元组"><strong>2、字符串、列表、元组</strong></h4>
+<h4 id="a-字符串">a) 字符串</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#字符串、切片操作
+</span><span class="n">s</span> <span class="o">=</span> <span class="s">'hello python!'</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#'h'
+</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#ello 包含前界不包含后界
+</span><span class="n">s</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span> <span class="c1">#python!
+</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#13 python字符串不通过'\0'结束，数几个就是几个
+</span><span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">13</span><span class="p">]</span> <span class="c1">#!
+#s[13] #error!!
+</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#! 从后往前取
+</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#on
+</span><span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#hello python
+</span><span class="n">s</span><span class="p">[:]</span> <span class="c1">#hello python!
+</span>
+<span class="c1">#成员操作符
+</span><span class="s">'python'</span> <span class="ow">in</span> <span class="n">s</span> <span class="c1">#True
+</span><span class="s">'python'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">s</span> <span class="c1">#False
+#函数
+</span><span class="nb">reversed</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#返回s的倒叙的迭代器
+</span><span class="nb">cmp</span><span class="p">(</span><span class="s">'1'</span><span class="p">,</span><span class="s">'2'</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#y 返回ascii码最大的字符
+</span><span class="nb">min</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#' '
+</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1">#(0, 'h') (1, 'e')... 参数是可遍历的变量，
+</span><span class="n">s</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="s">'123'</span><span class="p">,</span><span class="s">'abc'</span>
+<span class="nb">zip</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1">#[('1', 'a'), ('2', 'b'), ('3', 'c')]
+</span>
+<span class="s">r'\n'</span> <span class="c1"># '\\n' 返回原始字符串，不转译
+</span><span class="s">u'hello'</span> <span class="c1">#unicode
+</span>
+<span class="s">'*'</span> <span class="o">*</span> <span class="mi">20</span> <span class="c1">#'********************'
+</span></code></pre></div></div>
+<p>关于python中string的操作更多请见<a href="https://docs.python.org/2/library/string.html" title="string operation">官方文档</a>。</p>
+
+<h4 id="b列表">b)列表</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">123</span><span class="p">,</span><span class="s">'abc'</span><span class="p">,</span><span class="mf">3.222</span><span class="p">,[</span><span class="s">'in'</span><span class="p">,</span><span class="mi">34</span><span class="p">]]</span>
+<span class="n">bLs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="s">'some'</span><span class="p">]</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="s">'foo'</span><span class="p">)</span> <span class="c1">#['f','o','o']
+</span>
+<span class="c1">#访问,类似字符串
+</span><span class="n">aLs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">aLs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#['in', 34]
+</span><span class="n">aLs</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#34
+</span>
+<span class="c1">#更新
+</span><span class="n">aLs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'modify'</span> <span class="c1"># aLs changed to ['modify', 'abc', 3.222, ['in', 34]]
+</span>
+<span class="c1">#列表也有 in、not in 操作
+</span>
+<span class="c1">#连接操作
+</span><span class="n">cLs</span> <span class="o">=</span> <span class="n">aLs</span><span class="o">+</span><span class="n">bLs</span> <span class="c1">#create a new list cLs, and cLs is ['modify', 'abc', 3.222, ['in', 34], None, 'some']
+</span>
+<span class="n">aLs</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">bLs</span><span class="p">)</span> <span class="c1">#bLs is extended to aLs, aLs is ['modify', 'abc', 3.222, ['in', 34], None, 'some']
+</span>
+<span class="n">bLs</span> <span class="o">*</span> <span class="mi">2</span> <span class="c1">#[None, 'some', None, 'some']
+</span>
+<span class="c1">#內建函数
+</span><span class="nb">sorted</span><span class="p">(</span><span class="n">aLs</span><span class="p">)</span> <span class="c1">#排序，返回排序的 新的 list
+</span><span class="nb">reversed</span><span class="p">(</span><span class="n">aLs</span><span class="p">)</span> <span class="c1">#反转，返回迭代器
+</span><span class="nb">enumerate</span><span class="p">()</span>
+<span class="nb">zip</span><span class="p">()</span>
+<span class="n">intLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">34</span><span class="p">]</span>
+<span class="nb">sum</span><span class="p">(</span><span class="n">intLs</span><span class="p">)</span> <span class="c1">#37 if intLs is [1,2,34,[1,3]]则报错，int 加 list
+</span><span class="nb">sum</span><span class="p">(</span><span class="n">intLs</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#40
+</span>
+<span class="c1">#嵌套的list就相当于多维数组
+</span>
+<span class="c1">#tuple()函数会把list转换为tuple
+</span><span class="n">bTp</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">bLs</span><span class="p">)</span> <span class="c1">#bTp is (None,'some')
+</span>
+<span class="c1">#返回bTp中元素id
+</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bTp</span><span class="p">]</span> <span class="c1">#[505523288L, 104760504L]
+</span></code></pre></div></div>
+<p>与列表有关的更多內建函数见<a href="https://docs.python.org/2/tutorial/datastructures.html?highlight=list" title="list operation">官方文档</a>。我们可以利用列表的许多操作，把列表变为stack(<a href="https://docs.python.org/2/tutorial/datastructures.html?highlight=stack#using-lists-as-stacks" title="using-lists-as-stacks">官方文档</a>)(使用<code class="highlighter-rouge">append()</code>、<code class="highlighter-rouge">pop()</code>)或者是queue(<a href="https://docs.python.org/2/tutorial/datastructures.html?highlight=stack#using-lists-as-queues" title="using-lists-as-queues">官方文档</a>) （<code class="highlighter-rouge">from collections import deque</code>）</p>
+<h4 id="c元组">c)元组</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#创建使用圆括号
+</span><span class="n">aTuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">111</span><span class="p">,</span><span class="s">'bbb'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="s">'s'</span><span class="p">])</span>
+<span class="n">bTuple</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,</span><span class="mi">23</span><span class="p">)</span>
+
+<span class="c1">#访问跟list一样
+#更新元组，元组是不可变类型，不能改变或者更新，只能构造新的元组
+</span><span class="n">cTuple</span> <span class="o">=</span> <span class="n">aTuple</span><span class="o">+</span><span class="n">bTuple</span> <span class="c1">#cTuple is (111, 'bbb', [1, 's'], 'abc', 23)
+</span></code></pre></div></div>
+<p>元组除了不能更新，其他的大部分操作跟list都是一样的，如果要改变可以把Tuple变为list，然后再进行改变操作。
+函数返回的多对象（不包含有符号封装的）都是元组：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">func1</span><span class="p">():</span>
+	<span class="o">...</span>
+	<span class="k">return</span> <span class="n">obj1</span><span class="p">,</span><span class="n">obj2</span><span class="p">,</span><span class="n">obj3</span>
+</code></pre></div></div>
+<p>把一个字符串转换为元组，通常在末尾加一个逗号，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="s">'qmmm'</span><span class="p">)</span> <span class="c1"># not tuple
+</span><span class="p">(</span><span class="s">'qmmm'</span><span class="p">,)</span> <span class="c1"># this is tuple
+</span></code></pre></div></div>
+<h4 id="d列表与元组的比较">d)列表与元组的比较</h4>
+<p>//TODO</p>
+
+<h4 id="e深拷贝和浅拷贝">e)深拷贝和浅拷贝</h4>
+<p>//TODO</p>
+
+<h4 id="f其他介绍">f)其他介绍</h4>
+<blockquote>
+  <p>标准类型： 数字、Interger、Boolean、Long integer、Floating point real number、Complex number、 String、 List、 Tuple、 Dictionary</p>
+</blockquote>
+
+<blockquote>
+  <p>内建类型： 类型、Null对象、文件、 集合/固定集合、 函数/方法、 模块、 类</p>
+</blockquote>
+
+<p>通过<code class="highlighter-rouge">type()</code>函数能查看特定对象的类型信息。</p>
+
+<blockquote>
+  <p>内部类型： 代码、 帧、 跟踪记录、 切片、 省略、 Xrange</p>
+</blockquote>
+
+<p><strong>代码对象</strong>： 是编译过的python源代码片段，是可执行的对象。通过调用內建函数<code class="highlighter-rouge">compile()</code>可以得到代码对象。</p>
+
+<p><strong>帧对象</strong>： 表示Python的执行栈帧。帧对象包含Python解释器在运行所需要知道的所有信息。</p>
+
+<p><strong>跟踪记录对象</strong>： 当异常发生时，一个包含针对异常的栈跟踪信息的跟踪记录对象被创建。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Traceback</span> <span class="p">(</span><span class="n">innermost</span> <span class="n">last</span><span class="p">)</span>
+   <span class="n">File</span> <span class="s">"&lt;stdin&gt;"</span> <span class="p">,</span> <span class="n">line</span> <span class="n">N</span><span class="err">?</span><span class="p">,</span> <span class="ow">in</span> <span class="err">???</span>
+<span class="nb">NameError</span><span class="p">:</span> <span class="n">error</span> <span class="n">reason</span>
+</code></pre></div></div>
+
+<p><strong>切片对象</strong>： 使用Python扩展的切片语法时，就会创建切片对象。</p>
+
+<p><strong>省略对象</strong>： 用于扩展切片语法中，起记号作用。这个对象在切片语法中表示省略号。</p>
+
+<p><strong>XRange对象</strong>： 类似內建函数range()，用于需要节省内存使用或range()无法完成的超大数据集合场合。</p>
+:ET

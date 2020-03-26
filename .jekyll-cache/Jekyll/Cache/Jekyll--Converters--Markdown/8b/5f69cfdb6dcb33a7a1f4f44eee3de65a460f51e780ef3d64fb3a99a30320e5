@@ -1,0 +1,155 @@
+I"Q%<p>关键词： 社区影响力，矩阵分解</p>
+
+<p>会议（年份）： CIKM’2016</p>
+
+<p>相关作者：</p>
+
+<p>数据集：meetup(Chicago,Los Angeles,New York)</p>
+
+<h4 id="一文章摘要"><strong>一、文章摘要</strong></h4>
+
+<p>文章首先指出一种社会现象：<strong>用户通常有社会群组（social group）的偏好，加入一些兴趣群体参加某些活动（Event）；</strong>所以考虑社会群组的影响力来提高活动的推荐效果是非常必要的。<span style="color:red">现有的研究一般考虑用户个人偏好，忽略社会群组的影响力；</span>文章提出<strong>new Bayesian latent factor model,SogBmf(贝叶斯潜在因素模型）</strong>结合社会群组的影响力和用户自身偏好来完成活动推荐。并用真实数据集（Meetup）验证模型的有效性。</p>
+
+<p>用于像基于事件的社交网络（meetup），社会群组指的是自组织的包含很多有共同兴趣的用户。</p>
+
+<h4 id="二文献相关"><strong>二、文献相关</strong></h4>
+
+<ol>
+  <li>event推荐系统[2,6,10]</li>
+  <li>[5]提出基于组偏好的贝叶斯个性化排名的推荐方法（group preference-based Bayesian personalized ranking），然而，组的组成依靠在特定项（item）中给出正向反馈的用户之间交互和合作关系获得的。</li>
+  <li>[3]提出上下文感知的方法（context-aware approach),<em>从社会群组中获得信息来规范化用户和时间潜在因素矩阵</em>(<strong>具体要看原文</strong>)。</li>
+</ol>
+
+<p><strong>组相关的事件推荐系统面临的挑战：</strong><br />
+1）如何正确的量化群组的影响力；（<strong>如何量化</strong>）<br />
+2）如何strategically嵌入社会群组影响力来获得精确的活动排名分数；（<strong>如何使用</strong>）</p>
+
+<p><strong>文章如何应对以上挑战：</strong><br />
+1）提出SogBmf模型；<br />
+2）对于活动推荐，提出矩阵分解的框架，整合社会群组影响力和用户偏好，并利用梯度下降的方法学习参数。<br /></p>
+
+<p>用户集合$ S = \lbrace  u_1,u_2,…,u_n \rbrace $,活动集合 $I=\lbrace v_1,v_2,…,v_n \rbrace$,组合成的矩阵$R \in {\lbrace 0,1\rbrace}^{n*m}$,如果 $u_i$参加了活动$v_j$,则$R_{ij}$=1，则问题就是预测未来时间段的$R$矩阵(即未来时间段，用户是否参与了Event);</p>
+
+<p>在EBSN中，存在三种关系：<br /></p>
+<ol>
+  <li>用户-组关系，用户<strong>加入/不加入</strong>组；<br /></li>
+  <li>组-活动关系，组<strong>举办/不举办</strong>活动；<br /></li>
+  <li>用户-活动关系，用户<strong>参加/不参加</strong>活动；<br />
+目标是嵌入社会群组影响力到矩阵分解的框架中<sup>[4]</sup>,从而实验活动推荐。</li>
+</ol>
+
+<h4 id="三方法论"><strong>三、方法论</strong></h4>
+
+<p><strong>1、推荐混合评分</strong>：
+把用户-活动交互/评分矩阵，分解为社会群组影响力评分矩阵和个体偏好评分矩阵。</p>
+
+<ul>
+  <li>定义一：<strong>用户-群组偏好矩阵</strong>$F \in {\mathbb{R}}^{g*n}$,每个$F_{ij}$表示$j$th 用户对第$i$个组的偏好度。$F_{ij} \gt 0$代表用户加入了某个组。</li>
+  <li>定义二:<strong>组-活动矩阵</strong>$C \in {\lbrace 0,1 \rbrace}^{g\ast m}$,$C_{ij} = 1$代表第$i$组举办了第$j$个活动；</li>
+  <li>定义三：<strong>潜在因素矩阵</strong>，用户潜在因素矩阵$U \in {\mathbb{R}}^{k\ast n}$,用户i由潜在因素向量$U_i \in R^k$决定。活动潜在因素矩阵表示为 $V \in {\mathbb{R}}^{k\ast m}$ ,活动j由潜在因素向量$V_j \in R^k$描述。</li>
+</ul>
+
+<p>评分：$r(u_i,u_j)=r_{sg}(u_i,u_j)\bigoplus r_{ip}(u_i,u_j)$ <br />
+在此，$r_{sg}$是社会群组影响力评分，$r_{ip}$是个人偏好评分，$r_i \bigoplus r_2 = \alpha r_1+(1-\alpha)r_2$,其中$\alpha$是权重参数。<br />
+<span style="color:red"><strong>社会群组影响力评分</strong>（Social group influence rating）: $r_{sg}(u_i,u_j)=F_i^TC_j$，即用户对群组的偏好与用户对群组举办活动的乘积。</span><br />
+<strong>个体偏好评分</strong>（Indicidual preference rating）: $r_{ip}(u_i,u_j)=U_i^TV_j$，即用户自身偏好与活动描述的矩阵乘积<br />
+所以，活动推荐的问题需要求解F,U,V，混合评分计算如下：<br />
+$R=\alpha F^TC+(1-\alpha)U^TV$</p>
+
+<p><strong>2、建模SogBmf模型</strong>：
+对于观察实体R的带有高斯噪音的条件分布如下：<br /></p>
+
+<p>$P(R\mid F,U,V,\sigma_R^2)=\prod_{i=1}^{n}\prod_{j=1}^{m}{\lbrack \mathcal{N}(R_{ij}\mid\alpha F_i^TC_j+(1-\alpha)U_i^TV_j,\sigma_R^2)\rbrack}^{I_{ij}} $<br /></p>
+
+<p>其中$I_{ij}$是指示函数，如果用户$u_i$参加活动$v_j$,则$I_{ij}=1$;
+文献[6]中指出，用户对于活动的评分一般都是隐式反馈的，所以贝叶斯个性化排名（BPR）能有效的解决隐式反馈推荐问题[8],用$P_u^I$表示用户正向反馈的实体集合，用$N_u^I$表示用户负向反馈的实体集合，基于文献[8]的优化准则上式可以表示如下，其中$R_&gt;$表示在$P_u^I$中的评分比$N_u^I$高的活动：<br /></p>
+
+<p>$P(R_&gt;\mid F,U,V)=\prod_{(u_i,v_j,v_k)\in(S,P_u^I,N_u^I)}P(r(u_i,v_j)&gt;r(u_i,v_k)\mid F,U,V)$<br /></p>
+
+<p>我们用用户参加组的Jaccard系数来表示用户之间的组偏好关系，用用户参加活动的Jaccard系数来表示用户兴趣的相似度。<span style="color:red">并假设观测空间的相似度与潜在空间的相似度一致。</span><br /></p>
+<ol>
+  <li>相似用户在用户潜在空间U中，有相同的活动偏好，而且可以从兴趣相似矩阵Q中获得；<br /></li>
+  <li>相似用户在社会群组偏好的潜在空间F，有紧密的社会关系，而且可以从社交关系矩阵H中获得；<br />
+所以后验概率分布可以形式化如下：<br /></li>
+</ol>
+
+<p>$P(F,U,V\mid R_&gt;,C,Q,H,\Omega)$<br /></p>
+
+<p>$=\frac{P(R_&gt;,C,Q,H\mid F,U,V,\Omega)P(F,U,V\mid \Omega)}{P(R_&gt;,C,Q,H,\Omega)}$<br /></p>
+
+<p>$\propto P(R_&gt;\mid F,U,V)P(Q\mid U,\Omega)P(H\mid F,\Omega)P(F\mid \Omega)P(U\mid \Omega)P(V\mid \Omega)$<br /></p>
+
+<p>$=\prod_{(u_i,v_j,v_k)\in(S,P_u^I,N_u^I)}P(r(u_i,v_j)&gt;r(u_i,v_k)\mid F,U,V)$<br /></p>
+
+<p>$\prod_{s,t}\mathcal{N}(Q_{st}\mid U_s^TU_t,\sigma_Q^2)\prod_{p,q}\mathcal{N}(H_{pq}\mid F_p^TF_q,\sigma_H^2)$<br /></p>
+
+<p>$\prod_{x}\mathcal{N}(F_{x}\mid 0,\sigma_F^2)\prod_{y}\mathcal{N}(U_{y}\mid 0,\sigma_U^2)\prod_{z}\mathcal{N}(V_{z}\mid 0,\sigma_V^2)$<br /></p>
+
+<p>$\Omega$表示0均值的<span style="color : green">球型高斯先验</span>，放置在潜在因素向量和观察矩阵中。<br />
+基于BPR优化准则[8]，$P(r(u_i,v_j)&gt;r(u_i,v_k)|F,U,V)=l(r(u_i,v_j)-r(u_i,v_k))$，逻辑函数$l(x)=\frac{1}{1+e^{-x}}$
+最大化逻辑后验分布$lnP(F,U,V\mid R_&gt;,C,Q,H,\Omega)$,能转换为求解F,U,V的带混合二次正则化项的最小化函数：<br /></p>
+
+<p>$min_{F,U,V}\mathcal{O}=\sum_{(u_i,v_j,v_k)\in(S,P_u^I,N_u^I)}ln(1+e^{r(u_i,v_j)-r(u_i,v_k)})$<br /><br />
+$+\lambda_Q{||Q-U^TU||}_F^2+\lambda_H{||H-F^TF||}_F^2$<br /><br />
+$+\lambda_F{||F||}_F^2+\lambda_U{||U||}_F^2+\lambda_V{||V||}_F^2$<br /><br />
+<strong>３、参数学习</strong>：</p>
+
+<p>//TODO 没仔细看</p>
+
+<h4 id="四实验"><strong>四、实验</strong></h4>
+
+<p><strong>1、数据统计</strong></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Chicago</th>
+      <th>Los Angeles</th>
+      <th>New York</th>
+      <th>New York</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>#users</td>
+      <td>59504</td>
+      <td>89201</td>
+      <td>205592</td>
+    </tr>
+    <tr>
+      <td>#events</td>
+      <td>86988</td>
+      <td>167254</td>
+      <td>234160</td>
+    </tr>
+    <tr>
+      <td>#groups</td>
+      <td>8007</td>
+      <td>14657</td>
+      <td>21155</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>2、训练集和测试集</strong><br />
+对于每个用户随机选取$P_u^I$的7份历史数据作为训练集、剩下的3份作为测试集，然后从训练集随机选择每个用户的一个历史活动构建验证数据（validation data），文献[5]也用了同样的方法。
+重复上述步骤5次，得到了5个训练数据和测试数据来进行训练和测试。</p>
+
+<p><strong>3、评价标准（Metrics）</strong><br />
+AUC</p>
+
+<p>NDCG(Normalized Discounted Cumulative Gain):叫做归一化的折扣累积增益，基于推荐实体的分级相关性衡量推荐系统的性能，范围是$[0.0,1.0]$，1.0代表实体理想的排名结果；这项指标通常用在信息恢复和衡量web搜索引擎的性能上。<br /><br />
+$DCG_k=\sum_{i=1}^k\frac{2^{rel_i}-1}{\log_2{\left(i+1\right)}}$<br /><br />
+$nDCG_k=\frac{DCG_k}{IDCG_k}$</p>
+
+<p><strong>4、对比算法（benchmark method）</strong></p>
+
+<p>PMF<sup>[4]</sup>：概率矩阵分解的推荐算法<br />
+BPR-MF<sup>[8]</sup>：处理在活动推荐中隐式反馈的推荐模型<br />
+GBPR<sup>[5]</sup>：基于群组偏好表示用户之间的交互和合作关系的活动推荐<br /></p>
+
+<p><strong>5、实验结果</strong></p>
+
+<p>1、SogBmf和GBPR的表现要比PMF和BPR-MF好，证明了加入群组信息可以提高活动推荐的结果（performance）；<br />
+2、SogBmf结果比GBPR好，是因为在GBPR中，社会群组（social groups）是虚拟的，而在EBSN中的组是自助之的，由分享相同兴趣的用户组成，证明了社会群组影响力在活动推荐时有更大的作用。</p>
+:ET

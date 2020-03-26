@@ -2,168 +2,541 @@
 title: 梦习米谈
 layout: default
 ---
-<div class="row">
-  <div class="home col-md-9">
-    {% for post in paginator.posts %}
-    {% if post.show == 'index'%}
-    <div class="post-contents">
-      <header>
-      <h2 class="entry-title">
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}"><b>{{ post.title }}</b></a>
-      </h2>
-      <span class="post-meta"><i class="fa fa-calendar">&nbsp;&nbsp;</i>{{ post.date | date: "%Y年%m月%d日" }}</span>
-      <span class="post-meta" style="margin-left:50px;margin-right:50px;"><i class="fa fa-user">&nbsp;&nbsp;</i>{{post.author}}<a style="color:#828282" href="{{ post.url | prepend: site.baseurl }}#disqus_thread"></a></span>
-      {% for tag in post.tags  %}
-      <span class="post-meta" ><i class="fa fa-tag">&nbsp;</i>{{ tag }}&nbsp;&nbsp;</span>
-      {% endfor %}
-      </header>
+<!DOCTYPE html>
+<html lang="en">
 
-      <div class="post-content truncate" itemprop="articleBody" style="max-height:300px;margin-top:20px;">
-	{{ post.content }}
-      </div>
-      <div style="height:50px;">
-	<a href="{{ post.url | prepend: site.baseurl }}" class="button readmore-button">阅读全文</a>
-      <!--<div class="svg-wrapper">
-      <svg height="40" width="100" xmlns="http://www.w3.org/2000/svg">
-        <rect id="shape" height="40" width="150" />
-        <div id="text">
-          <a href=""><span class="spot"></span>阅读全文</a>
-        </div>
-      </svg>
-    </div>-->
-      </div>
-    </div>
-    <br />
-    {%endif %}
-    {% endfor %}
-      <!-- 分页链接 -->
-              <ul class="pagination">
-                <li>
-                  <a href="/">
-                    <span>Previous</span>
-                  </a>
-                </li>
-                <li>
-                  {% if paginator.page == 1 %}
-                  <span>&laquo;</span>
-                  {% else %}
-                  {% if paginator.previous_page == 1 %}
-                  <a href="/">
-                    {% else %}
-                    <a href="/page{{ paginator.previous_page }}">
-                      {% endif %}
-                      <span>&laquo;</span>
-                    </a>
-                    {% endif %}
-                </li>
-                <li>
-                {% assign page_str = '' %}
-                {% assign curr_page_num = paginator.page %}
-                {% assign prev_page_count = 0 %}
-                {% if curr_page_num > 1 %}
-                {% assign end = curr_page_num | minus:1 %}
-                {% if curr_page_num < 3 or curr_page_num == 3 %}
-                {% assign start = 1 %}
-                {% else %}
-                {% assign start = curr_page_num | minus:2 %}
-                {% endif %}
-                {% for count in (start..end) %}
-                {% assign page_str = page_str | append:',' | append:count %}
-                {% assign prev_page_count = prev_page_count | plus:1 %}
-                {% endfor %}
-                {% endif %}
-                {% assign page_str = page_str | append:',' | append:curr_page_num %}
-                {% assign last_page_num = paginator.total_pages %}
-                {% assign next_page_count = 0 %}
-                {% if last_page_num > curr_page_num %}
-                {% assign rest_page_count = last_page_num | minus:curr_page_num %}
-                {% assign start = curr_page_num | plus:1 %}
-                {% if rest_page_count > 2 %}
-                {% assign end = curr_page_num | plus:2 %}
-                {% if prev_page_count < 2 %}
-                {% assign not_enough = 2 | minus:prev_page_count %}
-                {% for i in (1..not_enough) %}
-                {% assign try_add_page = end | plus:1 %}
-                {% if try_add_page < last_page_num or try_add_page == last_page_num %}
-                {% assign end = try_add_page %}
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% else %}
-                {% assign end = last_page_num %}
-                {% endif %}
-                {% for count in (start..end) %}
-                {% assign page_str = page_str | append:',' | append:count %}
-                {% assign next_page_count = next_page_count | plus:1 %}
-                {% endfor %}
-                {% endif %}
-                {% if next_page_count < 2 and curr_page_num > 2 %}
-                {% assign not_enough = 2 | minus:next_page_count %}
-                {% for i in (1..not_enough) %}
-                {% assign try_add_page = curr_page_num | minus:3 %}
-                {% if try_add_page > 1 or try_add_page == 1 %}
-                {% assign page_str = page_str | prepend:try_add_page | prepend:',' %}
-                {% assign curr_page_num = curr_page_num | minus:1 %}
-                {% endif %}
-                {% endfor %}
-                {% endif %}
-                {% assign page_str = page_str | replace_first:',','' %}
-                {% assign page_arr = page_str | split:',' %}
-                {% assign curr_page_num = paginator.page | append:'' %}
-                {% for count in page_arr %}
-                {% if count == curr_page_num %}
-                <span class="active">{{ count }}</span>
-                {% elsif count == '1' %}
-                <a href="/">{{ count }}</a>
-                {% else %}
-                <a href="/page{{ count }}/">{{ count }}</a>
-                {% endif %}
-                {% endfor %}
-                </li>
-                <li>
-                  {% if paginator.page == paginator.total_pages %}
-                  <span>&raquo;</span>
-                  {% else %}
-                  <a href="/page{{ paginator.next_page }}">
-                    <span>&raquo;</span>
-                  </a>
-                  {% endif %}
-                </li>
-                <li>
-                  <a href="/page{{paginator.total_pages}}">
-                    <span>Next</span>
-                  </a>
-                </li>
-              </ul>
-  </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Promemetheus's Homepage</title>
+    <!-- ==================Start Css Link===================== -->
+    <!-- fonts link -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/fav.png">
+    <link rel="stylesheet" href="assets/css/plugins.css">
+    <!-- app css -->
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/app.js"></script>
+    <!-- ==================End Css Link===================== -->
 
-  <div class="col-md-3">
-    <div class="post-contents">
-      <i class="fa fa-tags">&nbsp;&nbsp; Tags</i><br />
-      {% for tag in site.tags %}
-      {% assign t = tag | first %}
-      {% assign posts = tag | last %}
-      <a href = "{{ site.baseurl }}/tags#{{t}}-ref"><span class="label label-default">{{t | downcase | replace:" ","-" }} ( {{ posts | size }} )</span></a>
-      {% endfor %}
-    </div>
-    <br />
-    <div class="post-contents">
-      <h3>About Me</h3>
-      <img src="{{ site.baseurl }}/img/me.jpg" style="margin:20px auto 0 auto;">
-      <p style="font-size:18px;">More questions? QQ:2O99239O8, cipher: datasnail</p>
-      <br />
-      <div class="btn-group" role="group">
-  	<button type="button" class="btn btn-default social-network" style="background-color:#3b5998" target="_blank" onclick='window.open("#");'>
-      <i class="fa fa-facebook" style="font-size:20px;color:white;"></i>
-    </button>
-  	<button type="button" class="btn btn-default social-network" style="background-color:#DD4B38" target="_blank" onclick='window.open("#");'>
-      <i class="fa fa-google-plus" style="font-size:20px;color:white;"></i>
-    </button>
-  	<button type="button" class="btn btn-default social-network" style="background-color:#F60" target="_blank" onclick='window.open("#");'>
-      <i class="fa fa-soundcloud" style="font-size:20px;color:white;"></i>
-    </button>
-      </div>
-    </div>
-    </div>
+    <!--[if lt IE 9]>
+<script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="darkTheme">
+
+
+<!--
+ hikma preloder
+ -->
+
+<div class="hikma-preloder">
+    <div class="spinner"></div>
 </div>
+
+
+<!--
+ ======================
+ Hikma minimenu
+ ======================
+ -->
+
+<ul class="mini-menu" id="mneu2">
+    <li data-menuanchor="home" class="active"><a href="#home" data-tippy="Home"><i class="icofont-home"></i></a></li>
+    <li data-menuanchor="about"><a href="#about" data-tippy="about"><i class="icofont-education"></i></a></li>
+    <li data-menuanchor="blog"><a href="#blog" data-tippy="Blog"><i class="icofont-blogger"></i></a></li>
+    <li data-menuanchor="portfolio"><a href="#portfolio" data-tippy="portfolio"><i class="icofont-worker"></i></a></li>
+    <!--<li data-menuanchor="testimonials"><a href="#testimonials" data-tippy="Testimonials"><i class="icofont-quote-left"></i></a></li>-->
+    <li data-menuanchor="contact"><a href="#contact" data-tippy="contact"><i class="icofont-google-map"></i></a></li>
+</ul>
+
+
+
+<!--
+ ======================
+ Hikma Offcanvas Menu
+ ======================
+ -->
+
+<div class="menu-box text-center" id="menuover">
+    <span class="hikmaclose-menu"><i class="icofont-close"></i></span>
+    <div id="particles-js"></div>
+    <div class="profile-presention mt-5 pb-2 text-white">
+        <a href="#!"><img src="assets/images/logo/logo.png" alt=""></a>
+        <div class="profile-thumb rounded-circle mb-3 mt-3" style="background-image: url(assets/images/all-img/man-small.png)"></div>
+        <h5 class="text-white text-uppercase">Promemetheus</h5>
+        <p>I interested in social computing, machine learning and deep learning. I would be very happy if I can help you.</p>
+    </div><!-- end profile presention -->
+    <ul class="main-navigation mt-5" id="menu">
+        <li class="active" data-menuanchor="home"><a href="#home">home</a></li>
+        <li data-menuanchor="about"><a href="#about">about</a></li>
+        <li data-menuanchor="blog"><a href="#blog">Blog</a></li>
+        <li data-menuanchor="portfolio"><a href="#portfolio">Photos</a></li>
+        <!--<li data-menuanchor="testimonials"><a href="#testimonials">Testimonials</a>-->
+        <li data-menuanchor="contact"><a href="#contact">Contact</a></li>
+    </ul><!-- end main navigation -->
+    <ul class="hikma-social">
+        <li><a href="#"><i class="icofont-facebook"></i></a></li>
+        <li><a href="#"><i class="icofont-twitter"></i></a></li>
+        <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+        <li><a href="#"><i class="icofont-instagram"></i></a></li>
+    </ul>
+</div>
+
+
+<!--
+ ======================
+ Hikma Header Start
+ ======================
+ -->
+<header class="site-header">
+    <nav class="navbar  fixed-top">
+        <div class="container-fluid hikma-container">
+            <a href="index.html" class="navbar-brand"><img src="assets/images/logo/logo.png" alt=""></a>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div><!-- end menu icon -->
+        </div>
+    </nav>
+</header>
+
+<!--
+ ======================
+ Hikma All section start
+ ======================
+ -->
+
+<div id="fullpage">
+
+    <div class="section  banner-section animated-row" data-section="home">
+        <div class="hikma-container container-fluid">
+            <div class="row align-items-center">
+                <div class="col-sm-6 text-white mt-5 mt-sm-0">
+                    <h4 class="animate" data-animate="fadeInUp" data-animation-delay="0.24s">Hello, thank you for visiting!</h4>
+                    <h4 class="animate" data-animate="fadeInDown" data-animation-delay="0.29s">My interest is Social computing and <span>machine learning</span></h4>
+                </div>
+                <div class="col-sm-6 text-white text-right">
+                    <div class="biogoraphy-pic">
+                        <img src="assets/images/all-img/mainman.png"  class="js-tilt" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section  about-section animated-row" data-section="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 text-white animate mb-3" data-animate="fadeInDown">
+                    <h3 class="section-title">About Me</h3>
+                    <p>I am Promemetheus, a Ph.D. candidate in Southeast University, majored in Computer Science. My interest is social computing and machine learning. I build this site to encourage and push myself to write some thoughts and paper notes. I would be very happy if some notes I wrote could help you. The following is my education experience.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="card hikma-singleSkill">
+                        <div class="card-body">
+                            <h5 class="card-title">P(update)</h5>
+                            <h6 class="card-subtitle mb-2 text-primary">50%</h6>
+                            <p class="card-text">I'm not good at writting the learning story, so maybe this blog will not be updated very often, but I will try my best.</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end single skill column -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="card hikma-singleSkill">
+                        <div class="card-body">
+                            <h5 class="card-title">P(paper notes)</h5>
+                            <h6 class="card-subtitle mb-2 text-primary">70%</h6>
+                            <p class="card-text">Maybe I'm going to focus on the paper reading, so most likely, I will write notes for papers.</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 95%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end single skill column -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="card hikma-singleSkill">
+                        <div class="card-body">
+                            <h5 class="card-title">P(engineering)</h5>
+                            <h6 class="card-subtitle mb-2 text-primary">30%</h6>
+                            <p class="card-text">Some times I will also record cheat sheet here, in this way, I can find some coding blocks here.</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 90%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end single skill column -->
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="card hikma-singleSkill">
+                        <div class="card-body">
+                            <h5 class="card-title">P(interesting things)</h5>
+                            <h6 class="card-subtitle mb-2 text-primary">85%</h6>
+                            <p class="card-text">Life need interesting things. So, emmm...</p>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end single skill column -->
+                <div class="col-12">
+                    <div class="card single-educationP">
+                        <div class="card-body">
+                            <ul>
+                                <li class="hikmaSingleEducation">
+                                    <div class="media align-items-center">
+                                        <i class="icofont-graduate-alt mr-2"></i>
+                                        <div class="media-body">
+                                            <h5 class="mt-0">2008-2012</h5>
+                                            <span class="d-block text-primary">East China Normal University</span>
+                                            <a href="#" class="link-s">www.ecnu.edu.cn</a>
+                                        </div>
+                                    </div>
+                                </li><!-- end single education -->
+                                <li class="hikmaSingleEducation">
+                                    <div class="media align-items-center">
+                                        <i class="icofont-graduate-alt mr-2"></i>
+                                        <div class="media-body">
+                                            <h5 class="mt-0">2014-2017</h5>
+                                            <span class="d-block text-primary">Southeast University</span>
+                                            <a href="#" class="link-s">www.seu.edu.cn</a>
+                                        </div>
+                                    </div>
+                                </li><!-- end single education -->
+                                <li class="hikmaSingleEducation">
+                                    <div class="media align-items-center">
+                                        <i class="icofont-graduate-alt mr-2"></i>
+                                        <div class="media-body">
+                                            <h5 class="mt-0">2017-now</h5>
+                                            <span class="d-block text-primary">Southeast University</span>
+                                            <a href="#" class="link-s">www.seu.edu.cn</a>
+                                        </div>
+                                    </div>
+                                </li><!-- end single education -->
+                                <li class="hikmaSingleEducation">
+                                    <div class="media align-items-center">
+                                        <i class="icofont-graduate-alt mr-2"></i>
+                                        <div class="media-body">
+                                            <h5 class="mt-0">Future</h5>
+                                            <span class="d-block text-primary">???</span>
+                                            <a href="#" class="link-s">www.???.com</a>
+                                        </div>
+                                    </div>
+                                </li><!-- end single education -->
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- end single skill column -->
+            </div>
+        </div>
+    </div>
+
+    <div class="section blog-section animated-row" data-section="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h3 class="section-title animate" data-animate="fadeInDown">Latest Blog </h3>
+                </div>
+                <div class="col-12">
+                    {% assign curr_p = 0 %}
+                    {% for post in site.posts %}
+                    {% if curr_p < site.icount %}
+                    <article class="text-white single-latestblog align-items-center rounded mb-3">
+                        <div class="blog-thumb" style="background-image: url(assets/images/all-img/blg-1.jpg)"></div>
+                        <div class="single-latestblog-content">
+                            <a href="{{ post.url | prepend: site.baseurl }}"><h5 class="mt-0 text-uppercase">{{ post.title }}</h5></a>
+                            <ul>
+                               <li><small>By <a href="#">{{post.author}}</a></small></li>
+                               <li><a href="#"><small>{{ post.date | date: "%Y-%m-%d" }}</small></a></li>
+                            </ul>
+                            <p>{{ post.scontent }}</p>
+                            <a href="{{ post.url | prepend: site.baseurl }}" class="btn-lnk text-capitalize"><small>read more ...</small></a>
+                        </div>
+                    </article>
+                    {%assign curr_p = curr_p | plus:1 %}
+                    {%endif%}
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section portfolio-section animated-row" data-section="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3 d-flex flex-md-row flex-column justify-content-between text-white">
+                    <h3 class="section-title">Photos</h3>
+                    <ul class="filter-menu">
+                        <li data-filter="*" class="active">All</li>
+                        <li data-filter=".cat-1">Branding</li>
+                        <li data-filter=".cat-2">UI & UX </li>
+                        <li data-filter=".cat-3">Logo</li>
+                        <li data-filter=".cat-4">Photography</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row grid smallgap">
+                <div class="col-md-3 col-sm-6 grid-item cat-1 cat-2">
+                    <div class="singleHikmaPortfolio">
+                        <img src="assets/images/all-img/port1.jpg"  alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port1.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+                <div class="col-md-3 col-sm-6 grid-item cat-3 cat-4">
+                    <div class="singleHikmaPortfolio">
+                        <img src="assets/images/all-img/port2.jpg" alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port2.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+                <div class="col-md-6 col-sm-6 grid-item  cat-1">
+                    <div class="singleHikmaPortfolio ">
+                        <img src="assets/images/all-img/port3.jpg" alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port3.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+                <div class="col-md-3 col-sm-6  grid-item ca-3 cat-4">
+                    <div class="singleHikmaPortfolio ">
+                        <img src="assets/images/all-img/port4.jpg"  alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port4.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+                <div class="col-md-3 col-sm-6 grid-item cat-4">
+                    <div class="singleHikmaPortfolio ">
+                        <img src="assets/images/all-img/port5.jpg" alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port5.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+                <div class="col-md-3 col-sm-6 grid-item cat-2 cat-3 order-0">
+                    <div class="singleHikmaPortfolio ">
+                        <img src="assets/images/all-img/port6.jpg" alt="">
+                        <div class="port-hover">
+                            <a href="assets/images/all-img/port6.jpg" class="img-popup"><i class="icofont-plus"></i></a>
+                            <h4><a href="#">branding project</a></h4>
+                            <p><small>Branding</small> <small>UI & UX</small></p>
+                        </div><!-- end port hover -->
+                    </div>
+                </div><!-- end single portfolio -->
+            </div>
+        </div>
+    </div >
+
+    <div class="section get-intouch animated-row" data-section="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <h3 class="section-title animate" data-animate="fadeInDown">Get In Touch</h3>
+                </div>
+                <div class="col-12 map-bg-img">
+                    <form class="hikma-contact darkinput ">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control mb-3" placeholder="*Full Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" class="form-control mb-3" placeholder="Email">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control mb-3" placeholder="Phone..">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control mb-3" placeholder="Website">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control mb-3" placeholder="Project Type">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control mb-3" placeholder="Location (City/Country)">
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control mb-3" placeholder="write your message"></textarea>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-outline-secondary">SEND</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!--
+ ======================
+ Hikma Footer Start
+ ======================
+ -->
+<footer class="site-footer">
+    <div class="home-page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center copy-text">
+                    <p>Hikma <span>&copy;</span> 2018, All Right <a href="http://www.bootstrapmb.com/">Reserved</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ==================Start Js Link===================== -->
+    <!-- plugin js scripts -->
+    <script src="assets/js/plugins.js"></script>
+    <!-- app js -->
+    <script src="assets/js/app.js"></script>
+<script>
+    setTimeout(function() {
+        particlesJS("particles-js", {
+
+
+            "particles": {
+                "number": {
+                    "value": 160,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#eeeeee"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 1,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 2,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 4,
+                        "size_min": 0.3,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 600
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 250,
+                        "size": 0,
+                        "duration": 2,
+                        "opacity": 0,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 400,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+
+
+            "retina_detect": true
+        });
+    }, 1000);
+</script>
+
+<!-- ==================End Js Link===================== -->
+
+
+
+</body>
+
+</html>
 

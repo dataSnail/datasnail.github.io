@@ -1,40 +1,252 @@
 ---
 layout: default
 ---
-<div class="row">
-    <div class="col-md-12 col-xs-12">
-        <article class="post post-contents" style="margin-bottom:0px;" itemscope itemtype="http://schema.org/BlogPosting">
-            <header class="post-header">
-                <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-                <p class="post-meta">
-                    <i class = 'fa fa-calendar' >&nbsp;&nbsp;</i>
-                    <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y年%m月%d日" }}</time>
-                    {% if page.author %}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                        <span itemprop="name">
-                            <i class = 'fa fa-user'>&nbsp;&nbsp;</i>
-                            {{ page.author }}
-                        </span>
-                    </span>
-                    {% endif %}{% if page.tags %}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                        <span itemprop="name"><i class = 'fa fa-tags'>&nbsp;&nbsp;</i>
-                            {% for tag in page.tags  %}
-                                <span class="post-meta" >{{ tag }}</span>
-                            {% endfor %}
-                        </span>
-                    </span>
-                    {% endif %}
-                </p>
-            </header>
 
-            <div class="post-content" style="margin:15px;" itemprop="articleBody">
-                 {% if page.intro %}<blockquote><p>摘要：{{page.intro}}</p></blockquote><br/>{% endif %}
-                {{ content }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{page.title}}</title>
+    <!-- ==================Start Css Link===================== -->
+    <!-- fonts link -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{{'/assets/images/logo/fav.png' | prepend: site.baseurl}}">
+    <link rel="stylesheet" href="{{'/assets/css/plugins.css'| prepend: site.baseurl }}">
+    <!-- app css -->
+    <link rel="stylesheet" href="{{'/assets/css/app.css'| prepend: site.baseurl }}">
+
+    <!-- ==================End Css Link===================== -->
+
+    <!--[if lt IE 9]>
+    <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="darkTheme">
+
+<!--
+ hikma preloder
+ -->
+
+<div class="hikma-preloder">
+    <div class="spinner"></div>
+</div>
+
+{% include nav-header.html %}
+
+<!-- page breadcupm -->
+<section class="page-banner">
+    <div class="container">
+        <div class="row align-items-center page-bn-height">
+            <div class="col-12 text-white text-center">
+                <h3>BLOG</h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                    </ol>
+                </nav>
             </div>
-        </article>
+        </div>
+    </div>
+</section>
+
+<div class="content-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <article class="single-blg-post">
+                    <a href="#" class="post-thumbnail">
+                        <img src="{{'/assets/images/all-img/post1.jpg' | prepend: site.baseurl}}" alt="">
+                    </a>
+                    <div class="entry-content">
+                        <header class="entry-header">
+                            <h2 class="entry-title">
+                                <a href="#" rel="bookmark">{{page.title}}</a>
+                            </h2>
+                            <div class="entry-meta">
+                                <span class="posted-on">Posted on <a href="#" rel="bookmark"><span class="entry-date"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y-%m-%d" }}</time></span></a></span>
+                                <span class="byline"> by <span class="author vcard"><a class="url fn n" href="#">{{ page.author }}</a></span></span>
+                            </div><!-- .entry-meta -->
+                        </header><!-- .entry header -->
+                        <p>
+                        {{page.content}}
+                        </p>
+
+                        <footer class="entry-footer">
+                        <span class="cat-links">Posted in
+                            <a href="#" rel="category">Markup</a>
+                        </span>
+                            <span class="tags-links">Tagged
+                            <a href="#" rel="tag">alignment</a>,
+                            <a href="#" rel="tag">captions</a>,
+                            <a href="#" rel="tag">content</a>,
+                            <a href="#" rel="tag">css</a>,
+                            <a href="#" rel="tag">image</a>,
+                            <a href="#" rel="tag">markup</a>
+                        </span>
+                        </footer>
+                    </div><!-- .entry content -->
+                </article>
+                <div id="comments" class="comments-area">
+
+                    <h2 class="comments-title">
+                        4 thoughts on “<span>Comments</span>”		</h2><!-- .comments-title -->
+                    <ol class="comment-list">
+                        <li class="comment even thread-even depth-1">
+                            <div id="div-comment-4" class="comment-body">
+                                <footer class="comment-meta">
+                                    <div class="comment-author vcard">
+                                        <img  src="../assets/images/all-img/cmnt1.jpg" class="avatar" alt="comment user">
+                                        <b class="fn"><a href="http://tommcfarlin.com" rel="external nofollow" class="url">Tom McFarlin</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
+
+                                    <div class="comment-metadata">
+                                        <a href="http://localhost/new-ex/2013/01/03/comments/#comment-4">
+                                            <time datetime="2012-09-03T10:18:04+00:00">
+                                                September 3, 2012 at 10:18 am							</time>
+                                        </a>
+                                    </div><!-- .comment-metadata -->
+
+                                </footer><!-- .comment-meta -->
+
+                                <div class="comment-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex harum labore maxime reiciendis temporibus! Aut dicta dolor eius error explicabo ipsa modi natus officia porro, quasi reiciendis </p>
+                                </div><!-- .comment-content -->
+
+                                <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#" aria-label="Reply to Tom McFarlin">Reply</a></div>
+                            </div><!-- .comment-body -->
+                            <ol class="children">
+                                <li class="comment even thread-even depth-1">
+                                    <div  class="comment-body">
+                                        <footer class="comment-meta">
+                                            <div class="comment-author vcard">
+                                                <img  src="../assets/images/all-img/cmnt3.jpg" class="avatar" alt="comment user">
+                                                <b class="fn"><a href="http://tommcfarlin.com" rel="external nofollow" class="url">Mahedi Amin</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
+
+                                            <div class="comment-metadata">
+                                                <a href="http://localhost/new-ex/2013/01/03/comments/#comment-4">
+                                                    <time datetime="2012-09-03T10:18:04+00:00">
+                                                        September 3, 2012 at 10:18 am							</time>
+                                                </a>
+                                            </div><!-- .comment-metadata -->
+
+                                        </footer><!-- .comment-meta -->
+
+                                        <div class="comment-content">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, quibusdam</p>
+                                        </div><!-- .comment-content -->
+
+                                        <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#" aria-label="Reply to Tom McFarlin">Reply</a></div>
+                                    </div><!-- .comment-body -->
+                                </li><!-- #comment-## -->
+                            </ol>
+                        </li><!-- #comment-## -->
+                        <li  class="comment odd alt thread-odd thread-alt depth-1">
+                            <div id="div-comment-3" class="comment-body">
+                                <footer class="comment-meta">
+                                    <div class="comment-author vcard">
+                                        <img alt="" src="../assets/images/all-img/cmnt2.jpg" class="avatar  photo">
+                                        <b class="fn"><a href="http://chrisam.es" rel="external nofollow" class="url">Chris Ames</a></b> <span class="says">says:</span>					                        </div><!-- .comment-author -->
+
+                                    <div class="comment-metadata">
+                                        <a href="http://localhost/new-ex/2013/01/03/comments/#comment-3">
+                                            <time datetime="2013-01-04T10:15:32+00:00">
+                                                January 4, 2013 at 10:15 am							</time>
+                                        </a>
+                                    </div><!-- .comment-metadata -->
+
+                                </footer><!-- .comment-meta -->
+
+                                <div class="comment-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto, atque dicta dolore ipsa labore maiores neque officia quae quas quasi, quisquam quos voluptas! Ab aliquam amet labore necessitatibus.</p>
+                                    <blockquote>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dolorum facilis illum laboriosam laudantium. Accusantium architecto
+                                    </blockquote>
+
+                                </div><!-- .comment-content -->
+
+                                <div class="reply"><a rel="nofollow" class="comment-reply-link" href="#" aria-label="Reply to Chris Ames">Reply</a></div>			</div><!-- .comment-body -->
+                        </li><!-- #comment-## -->
+
+                    </ol><!-- .comment-list -->
+
+                    <div id="respond" class="comment-respond">
+                        <h3 id="reply-title" class="comment-reply-title">Leave a Reply</h3>
+                        <form>
+                            <p class="com">
+                                <label class="text-capitalize">
+                                   Email
+                                </label>
+                                <input type="email" placeholder="Email" class="form-control">
+                            </p>
+                            <p class="com">
+                                <label class="text-capitalize">
+                                    Subject
+                                </label>
+                                <input type="text" placeholder="Subject" class="form-control">
+                            </p>
+                            <p class="com">
+                                <label class="text-capitalize">
+                                    Name
+                                </label>
+                                <input type="text" placeholder="Name" class="form-control">
+                            </p>
+                            <p class="com">
+                                <label class="text-capitalize">
+                                    Message
+                                </label>
+                                <textarea placeholder="your message" class="form-control"></textarea>
+                            </p>
+                            <div class="float-right">
+                                <input type="submit" value="Send">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="clearfix"></div>
+<footer class="site-footer">
+    <div class="main-footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-lg-left text-center">
+                    <a href="#" class="footer-logo">Hikma</a> <span>&copy;</span> 2019, All Right <a href="http://www.bootstrapmb.com/">Reserved</a>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right">
+                    <div class="footer_social_media">
+                        <ul>
+                            <li><a href="#"><i class="icofont-facebook"></i></a></li>
+                            <li><a href="#"><i class="icofont-twitter"></i></a></li>
+                            <li><a href="#"><i class="icofont-github"></i></a></li>
+                            <li><a href="#"><i class="icofont-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<!-- ==================Start Js Link===================== -->
+<!-- plugin js scripts -->
+<script src="{{'/assets/js/plugins.js' | prepend: site.baseurl }}"></script>
+<!-- app js -->
+<script src="{{'/assets/js/app.js' | prepend: site.baseurl }}"></script>
+
+
+<!-- ==================End Js Link===================== -->
+
+
+
+</body>
+
+</html>
 

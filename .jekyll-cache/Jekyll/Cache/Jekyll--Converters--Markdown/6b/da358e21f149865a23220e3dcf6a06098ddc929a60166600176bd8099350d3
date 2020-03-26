@@ -1,0 +1,80 @@
+I"W<p>关键词： 社区划分</p>
+
+<p>社团结构与计算机中的图分割和社会学中的分级聚类有密切关系。
+分级聚类是寻找网络中社团结构的一类传统算法，根据向网络中添加边还是从网络中移除边，该类算法可分为两类：凝聚方法、分裂方法。</p>
+
+<h4 id="一基于模块度"><strong>一、基于模块度</strong></h4>
+<p><strong>无向无权图：</strong>
+模块度（Modularity)是近年常用的一种衡量社团划分质量的标准。基本思想就是把社团划分后的网络与相应的零模型进行比较，来估量实际的网络和随机的网络的差别。
+社团内部边的总和：$Q_{real} = \frac 1 2  * \sum ( a_{ij} * \delta ( C_i,C_j ) ) $<br />
+零模型中社团内部的边的总和的期望值:$Q_{null}=\frac 1 2 * \sum (p_{ij} * \delta ( C_i,C_j ) )$<br /></p>
+
+<p>模块度：该网络的社团内部边数与相应的零模型的社团内部边数之差占整个网络边数M的比例：
+Q=(Q(real)-Q(null))/M</p>
+
+<p>对于有向和有权重的网络，模块度中的边数用边权值代替，点度数用点的强度代替。</p>
+
+<p>基于模块度的社团检测算法：CNM算法，复杂度O(nlog2n),<a href="http://www.cs.unm.edu/~aaron/research/fastmodularity.htm" title="CNM算法"><strong>算法代码</strong></a></p>
+
+<p>由于模块度的局限性：无法识别模块充分小的社团，而且模块度也无法直接比较两个网络的社团划分的优劣。</p>
+
+<h4 id="二派系过滤算法"><strong>二、派系过滤算法</strong></h4>
+<p><strong>基本概念：</strong> <em>k-clique（k-派系）、相邻、彼此连通、k-clique社团</em></p>
+<ol>
+  <li><strong>k-clique(k-团、k-派系):</strong> 包含k个节点的全耦合子图，即k个节点中的任意两个之间都有边相连。</li>
+  <li><strong>相邻的：</strong>如果两个k-clique有k-1个公共节点，那么成两个k-clique是相邻的。</li>
+  <li><strong>彼此连通的：</strong>利用若干<strong>相邻的</strong>K-clique达到另一个k-clique，称两个k-clique是彼此联通的。、</li>
+</ol>
+
+<p>算法：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.初始集合A={v},B={v的邻居};
+2.从集合B中移动一个节点到集合A，同时删除集合B中不在与集合A中所有节点相连的节点；
+3.如果在集合A的大小未达到s之前，结合B已经为空集，或者集合A和B为已有的一个加大的派系中的子集，则停止计算，返回上一步。否则当集
+合A的大小达到s，就得到一个新的派系，记录该派系，然后返回上一步，继续寻找包含节点v的新的派系。
+</code></pre></div></div>
+<p>首先，找到大小为k的派系，然后利用派系，和以上定义的派系的相邻、连通等定义来寻找k-派系社团。</p>
+
+<h4 id="三连边社团算法"><strong>三、连边社团算法</strong></h4>
+
+<p>2010年，Ahn、Bagrow、Lehmann提出检测重叠性和层次性的新思路：一个社团是一组紧密相连的连边的集合，而不是通常定义的紧密连接的点的集合。
+这样在社团划分的时候，划分到一个社团的是边的集合，而不是传统算法里的点的集合。</p>
+
+<p>社团检测评价标准：<br />
+1、<strong>基准图</strong>（空手道网络、l-划分模型(Planted l-partition model)）<br />
+让提出的社团划分算法，在这些基准图上进行，从而从真实、典型的数据样例角度来检测提出算法的优劣。<br />
+2、<strong>元数据</strong><br />
+从其他指标来衡量社团检测算法，1、社团质量2、重叠质量3、社团覆盖4、重叠覆盖<br /></p>
+
+<h4 id="四其他方法"><strong>四、其他方法</strong></h4>
+
+<p>快模型（Block models)
+矩阵分解方法。</p>
+
+<h5 id="联合聚类1">联合聚类<sup>[1]</sup></h5>
+<ol>
+  <li>联合聚类又称为二部聚类(bi-clustering)，是聚类方法的一种，最初用户基因表达(gene expression)、文本分析等领域，可以同时对基因和所处的表达环境或者文本以及单词进行聚类。</li>
+  <li>对于使用矩阵方式表达的训练数据，当行和列同时具有相关性时，应当考虑使用联合聚类，因为无论从哪一个维度进行单独聚类，都会忽略另一维的相关信息。</li>
+  <li>联合聚类的基本原理：通过行聚类和列聚类两个步骤进行循环迭代直至收敛。</li>
+</ol>
+
+<h4 id="五相关软件的试用"><strong>五、相关软件的试用</strong></h4>
+
+<ol>
+  <li>Gephi
+可视化效果较好 fast unfolding
+对于<strong>社区划分</strong>的算法：<strong>Louvain算法</strong>，此种方法基于模块度的，首先把每个节点认为是一个社区，然后通过把节点分配给它的邻居节点，计算分配个各个邻居后的模块度值，取模块度值最大的作为此步的划分，然后把划分好的社团抽象为“节点”,重复以上步骤，直到整个网络的模块度不再发生变化。</li>
+  <li>
+    <p><a href="https://github.com/GraphChi/graphchi-cpp" title="graphChi-github">graphChi</a>
+卡内基梅隆大学的Aapo Kyrola 博士开发的一个项目，GraphLab的一个分支。能单机完成大数据的图计算。</p>
+  </li>
+  <li><a href="http://www.cfinder.org/" title="cfinder官网">CFinder</a>
+寻找和可视化重叠社区的开源软件。</li>
+</ol>
+
+<h4 id="未整理">未整理</h4>
+<p>FN算法： Fast Newman 论文：《Fast algorithm for detection community structure in network》
+快速算法：</p>
+
+<h4 id="六参考文献"><strong>六、参考文献</strong></h4>
+<p>[1] Co-clustering by Block Value Decomposition SIGKDD’05</p>
+:ET

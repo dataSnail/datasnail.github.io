@@ -1,0 +1,75 @@
+I"c,<h3 id="001data-driven-analysis-of-complex-networks-and-their-model-generated-counterparts"><strong>☛001、Data-driven Analysis of Complex Networks and their Model-generated Counterparts</strong></h3>
+<h4 id="1source--authors"><strong>1、Source &amp; Authors</strong></h4>
+<p><strong>arXiv</strong>  2days ago<br />
+Marcell Nagy  和 Roland Molontay均来自匈牙利的布达佩斯科技经济大学，统计学系。</p>
+<h4 id="2main-idea-or-translation"><strong>2、Main idea or Translation</strong></h4>
+<p>复杂网络中，以数据驱动的分析中，有一个重要的问题：<strong>在真实网络中，去发现不同网络的属性之间的关系，并分析在网络领域中这些关系在不同的是如何变化的。</strong>一个相关的值得研究的问题是：在（不同的）网络测量中，网络模型如何很好的capture这些可观测的关系。<br />
+在这篇文章中，我们利用了统计和机器学习方法来回答上述问题。通过研究了400个真实网络和通过5个常用的网络模型生成的2400个生成网络，并用之前调好的参数，使得生成网络尽可能的与真实网络相似。<br />
+我们发现结构测量的相关属性在网络领域中十分不同，而且小样本的图测量指标能有效确定domain。而且网络模型的拟合度和表现最好模型对domain的依赖度很高。利用机器学习的方法，结果就是相对容易的判断一个网络是真实的还是模型生成的。我们也调查了，什么样的结构特征能得到搞得准确率，例如，什么网络特征是模型不能描述出来的。</p>
+<h4 id="3some-thoughs"><strong>3、some thoughs</strong></h4>
+<ol>
+  <li>摘要中的network domain不太理解，我翻译为网络领域，但感觉不合适，这应该读原文。</li>
+</ol>
+
+<h3 id="002causal-embeddings-for-recommendation"><strong>☛002、Causal Embeddings for Recommendation</strong></h3>
+<h4 id="1source--authors-1"><strong>1、Source &amp; Authors</strong></h4>
+<p>2018 ACM RecSys、RecSys最重要的推荐系统国际会议之一、推荐系统公众号推荐的文章<br />
+stephen Bonner 计算机系，英国杜伦大学phd student 后来应该和Flavian Vasile都在巴黎的Criteo ai lab</p>
+<h4 id="2main-idea-or-translation-1"><strong>2、Main idea or Translation</strong></h4>
+<p>现在有很多应用利用推荐技术来modify用户的自然行为，例如增加（用户）购买数量或者增加网站的粘性。这导致了最终的推荐对象和经典的方法之间有了一条鸿沟。经典方法即，通过衡量用户历史行为的一致性而得到的推荐候选对象，或者通过预测user-item矩阵的缺失实体，或者预测下一个最可能的事件。<br />
+为了弥补这个差距，增加期望的结果和有机用户行为的任务，我们优化了推荐策略。我们表明，这等同于在一个完全随机的推荐策略下，学习和预测推荐结果。为了这个目的（to this end），我们提出了一个新的领域适用算法，从包含有偏差的推荐策略结果的对数数据中学习，并预测推荐结果，通过一个随机的序列（random exposure）。我们对比了我们的方法和表现最好的矩阵分解的方法，并采用最新的因果推荐方法，最终表明我们的方法有显著提升。</p>
+<h4 id="3some-thoughs-1"><strong>3、some thoughs</strong></h4>
+<ol>
+  <li>看题目，是推荐中嵌入因果关系。我觉得不管将来技术如何发展，知识图谱、深度学习、嵌入等，在寻求好结果的狂欢之后，还是要寻找好的原因在何处，即重要的因果关系。毕竟有了这些，才能真的把一个事物、事件分析透彻。</li>
+  <li>推荐的好文章，值得一看。</li>
+</ol>
+
+<h3 id="003what-is-twitter-a-social-network-or-a-news-media"><strong>☛003、What is Twitter, a Social Network or a News Media?</strong></h3>
+<h4 id="1source--authors-2"><strong>1、Source &amp; Authors</strong></h4>
+<p>2010 WWW IW3C2<br />
+Kwak Haewoon 发文时韩国科学技术院 最新google scholar查询 应该去了Hamad Bin Khalifa University</p>
+<h4 id="2main-idea-or-translation-2"><strong>2、Main idea or Translation</strong></h4>
+<p>截止到2009年6月，Twitter创建三年以来，（commands，控制，这里翻译为具有吧）具有4千多万用户，而且增长迅速。Twitter用户可以发布关于任何话题的推文，但是要在140个字的限制范围之内，而且可以关注其他用户，接收到他们的推文信息。<strong>本文的目标是研究twitter的拓扑属性和它作为一个新的信息分享中介的力量</strong>。<br />
+我们爬取了整个twitter网站，获得了4170万用户信息。14.7亿社交关系，4262个话题，1060万条推文。在他的粉丝（follower-following）拓扑分析中，<strong>我们发现粉丝的非幂律分布，有较短的有效直径和较低的互惠性，这一切都标志着社交网络（的属性、表现出的现象）相对于人类社会有一个偏离[1]</strong>。<br />
+为了甄别twitter中具有影响力的人，我们用用户的粉丝数量和pagerank值来排序用户，发现两个排序非常相似。通过转发排序用户，不同于之前两个的排序，表示通过用户粉丝做影响力判断和从一个人推文的流行度做影响力判断之间还是存在gap的。我们也分析了热门话题中的推文，并对他们的时序行为和用户参与度做了调查报告（report）。基于活跃时间和推文我们对热门话题做了分类，结果表明，大部分（大于85%）话题是标题新闻或者本质上的持久新闻（persistent news）。仔细观察转发量，会发现，任何被转发的推文，无论最初粉丝有多少，最终都会有，平均都能有1000名转发用户。一旦被转发了，一条推文几乎就会迎来下一个转发高峰，这意味着在第一次转发之后，信息会迅速传播。</p>
+<h4 id="3some-thoughs-2"><strong>3、some thoughs</strong></h4>
+<ol>
+  <li>2010年研究twitter的文章，此时的twitter创建3年左右，值得一看吧。</li>
+  <li>去探究twitter到底是个社交网络还是一个新闻媒体呢，对比现在的新浪微博，上面大面积充斥着各类社会热点、明星八卦，反而社交因素比较少了。是否到了一个新闻社交或者热点事件社交，群嗨年代？</li>
+  <li>这类信息是增加了社交网络的谈资呢，还是抑制了社交的发展呢？</li>
+  <li>文中提到headline news和persistent news，可以去看下具体是什么样的推文。</li>
+</ol>
+
+<h3 id="004confluenceconformity-influence-in-large-social-networks"><strong>☛004、Confluence:Conformity Influence in Large Social Networks</strong></h3>
+<h4 id="1source--authors-3"><strong>1、Source &amp; Authors</strong></h4>
+<p>2013 ACM KDD <br />
+唐杰一座</p>
+<h4 id="2main-idea-or-translation-3"><strong>2、Main idea or Translation</strong></h4>
+<p>一致性是一类社交影响力，使得他人改变观点或者行为以变得合群。利用一些社交网络数据，我们研究了一致性是如何作用与用户在，在改变用户线上行为的时候。我们正式定义了一些主要的一致性，如个体一致性、对等一致性、和群体一致性。提出了Confluence模型，在概率图模型中来形式化一致性的作用。Confluence模型能区分和量化不同类型的一致性。扩展到大型社交网络，我们提出了分布式学习方法，使得Confluence模型能在线性时间有效计算。<br />
+我们在4个数据集上进行实验，Flickr，Cowalla，Weibo和Co-Author，验证了一致性现象的存在。利用一致性信息，Confluence模型能精准的预测用户行为。我们的实验表明，与其他算法相比，Confluence模型能有效提高预测准确率5~10个百分点。</p>
+<h4 id="3some-thoughs-3"><strong>3、some thoughs</strong></h4>
+<ol>
+  <li>这篇文章思路脉络非常清晰，首先提出有Conformity这种现象，然后把这种现象逐个划分量化，然后建立一个基于概率图的模型，预测用户行为，说明现象是有用。</li>
+</ol>
+
+<h3 id="005balancing-information-exposure-in-social-networks"><strong>☛005、Balancing information exposure in social networks</strong></h3>
+<h4 id="1source--authors-4"><strong>1、Source &amp; Authors</strong></h4>
+<p>2017 NIPS<br />
+芬兰阿尔托大学和意大利罗马第二大学的研究人员</p>
+<h4 id="2main-idea-or-translation-4"><strong>2、Main idea or Translation</strong></h4>
+<p>平衡信息暴漏，偏听则暗，兼听则明。<br />
+社交媒体给人们的新闻消费方式带来了一场革命，尽管社交媒体平台无疑带来了很多优势，但是一个有争议的观点是，由于同质性和算法的个性化导致了<strong>回音室效应</strong>和Filter bubble。<br />
+回音室效应（echo chambers）：在一个相对封闭的环境上，我们接受到的信息都是自己喜欢的类型，而这类信息不断重复，让人以为自己接触到的信息就是事实的全部。<br />
+filter bubble：附<a href="https://en.wikipedia.org/wiki/Filter_bubble">Wiki地址</a>，和相关<a href="https://www.ted.com/talks/eli_pariser_beware_online_filter_bubbles">TED演讲</a><br />
+在这篇文章中，我们提出在社交网络中平衡信息暴露（balcancing the information exposure）问题。我们假设，在社交网络中会出现两个对立的阵营（或者观点）。我们的目标就是发现两个节点集合，并应用在相应的竞选活动中。因此，这两个活动的整体信息曝光率是平衡的。我们正式定义这个问题，表征其难度，提出近似算法并给出实验评价结果。<br />
+我们的模型启发自影响最大化的文献，但是完全不同于（影响最大化的）标准模型。首先，平衡信息暴露被建模为对称查分函数（symmetric difference function），即函数既不是单调函数，也不具有子模特性，所以，现有的方法都不适用。第二，尽管之前的论文考虑设置selfish agents，和提供最佳反映策略的边界（移动最后一个player），我们考虑一个具有集中代理的agent，并提供全局目标函数的一个优化边界。</p>
+<h4 id="3some-thoughs-4"><strong>3、some thoughs</strong></h4>
+<ol>
+  <li>2017年NIPS文章，属于高水平论文了。社交媒体确实有这样的现象，用户会有各自兴趣，而推荐给他们的还是他们的兴趣内容，就会造成接触的信息不断重复，就会有回音室效应。</li>
+  <li>这里有个类似导读的文章，可以先一睹为快。<a href="https://baijiahao.baidu.com/s?id=1586205042391403858&amp;wfr=spider&amp;for=pc">链接地址</a>和节选部分：
+    <blockquote>
+      <p>反个性化算法就会把两人算作熟人样本。当积累足够多的熟人样本后，算法会根据所有用户针对某一话题的态度，划分出两个拥有对立态度的群体。接下来，一种叫做「贪婪算法」的算法会从所有用户中挑选出，热衷于发表意见的「意见领袖」。随后，社交媒体就可以向这些意见领袖发送对立双方的观点，通过影响他们来传播不同立场的信息。</p>
+    </blockquote>
+  </li>
+</ol>
+:ET

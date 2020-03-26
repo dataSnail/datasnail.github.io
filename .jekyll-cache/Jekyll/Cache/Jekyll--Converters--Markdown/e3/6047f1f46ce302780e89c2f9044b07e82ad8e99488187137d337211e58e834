@@ -1,0 +1,227 @@
+I"݂<p>R语言，据说统计学习画图利器,数据分析和可视化平台之一，不过近一年貌似已经被python撼动了在统计、机器学习中的地位，贪，学。以前学了没一边记，先写个入门大概。</p>
+
+<h3 id="一print输出"><strong>一、print输出</strong></h3>
+
+<p>学什么语言第一步总是想输出，跟python一样，在R语言中想输出”Hello R!’也是很简单的，只需要一句话。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">print</span><span class="p">(</span><span class="s1">'hello r!'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="二变量及变量赋值"><strong>二、变量及变量赋值</strong></h3>
+
+<p>会了简单的print输出，就迫不及待的尝试下，但是输出也不能太单调，那就要会基本的变量赋值，R的赋值也挺有意思，用&lt;-或者-&gt;这样正向反向的赋值都是可以的，虽然也有用（=）赋值，但是毕竟不是标准语法，被R语言程序员看到还有可能被嘲笑，哈哈。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#字符串</span><span class="w">
+</span><span class="n">myString</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"hello"</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">myString</span><span class="p">)</span><span class="w">
+</span><span class="c1">#布尔型</span><span class="w">
+</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="w">
+</span><span class="c1">#数字</span><span class="w">
+</span><span class="m">23.4</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="c1">#这种操作也可以</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w">
+</span><span class="c1">#向量</span><span class="w">
+</span><span class="n">apple</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span><span class="s1">'green'</span><span class="p">,</span><span class="s1">'yello'</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">apple</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>这里的c()函数，可以把参数组合成向量的形式，在R语言中如果对某个函数不太懂，可以使用help函数或者？。例如我们不太懂c()函数，我们可以使用help(c)或者?c就可以看到c()函数的帮助文档了，还可以使用example(c)来看c函数的例子，这些例子其实也在帮助文档里面，还是多看看帮助文档吧。</p>
+
+<h3 id="三其他输出"><strong>[三、其他输出]</strong></h3>
+<p><strong>文本输出</strong></p>
+
+<p><strong>图形输出</strong></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pdf</span><span class="p">(</span><span class="s2">"filename.pdf"</span><span class="p">)</span><span class="w">
+</span><span class="n">png</span><span class="p">(</span><span class="s2">"xxx.png"</span><span class="p">)</span><span class="w">
+</span><span class="n">jpeg</span><span class="p">(</span><span class="s2">"xxx.jpg"</span><span class="p">)</span><span class="w">
+</span><span class="n">bmp</span><span class="p">(</span><span class="s2">"xxx.bmp"</span><span class="p">)</span><span class="w">
+</span><span class="n">win.metafile</span><span class="p">(</span><span class="s2">"xxx.wmf"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="四r语言其他概念"><strong>[四、R语言其他概念]</strong></h3>
+<p><strong>包</strong>：r语言有一些函数、数据和预编译的代码以一种完善的格式组成的集合。[好官方，因为是我抄R语言实战上的。]</p>
+
+<p><strong>载入包</strong>:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">()</span><span class="w">
+</span><span class="n">.libPaths</span><span class="p">()</span><span class="w"> </span><span class="c1">#显示包的位置</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>安装包</strong>：</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p>还可以用install_github()，但是这样用首先要引用devtools包，就要这样</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span><span class="s2">"B"</span><span class="p">)</span><span class="w"> </span><span class="c1">#其中A表示要从GitHub上安装的软件包的名称，B表示开发该程序包的作者</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>CRAN</strong>
+CRAN，全称Comprehensive R Archive Network，就是获得R包的一个网络，有很多镜像网站。
+<strong>工作空间</strong>
+R语言当前的工作环境，你定义的所有对象都存储在内。可以用getwd()查看当前的目录，用setwd()设定当前的工作目录。</p>
+
+<h3 id="五数据结构"><strong>五、数据结构</strong></h3>
+<p>R语言中有向量、矩阵、数组、数据框、因子、列表等。</p>
+
+<h4 id="1向量"><strong>1.向量</strong></h4>
+<p>向量是存储数值型、字符型或者逻辑行数据的一维数组，可以用函数<strong>c()</strong>来创建向量。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">-7</span><span class="p">)</span><span class="w">
+</span><span class="n">b</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s2">"w"</span><span class="p">,</span><span class="s2">"a"</span><span class="p">,</span><span class="s2">"m"</span><span class="p">,</span><span class="s2">"m"</span><span class="p">)</span><span class="w">
+</span><span class="n">d</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="kc">TRUE</span><span class="p">,</span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="c1">#我们有c函数，所以最好不要用c作为变量名</span><span class="w">
+</span></code></pre></div></div>
+<p>注意同一个向量中无法混杂不同的模式数据，如果有不同的类型，那么会发生类型转换。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="s1">'3'</span><span class="p">)</span><span class="w"> </span><span class="c1">#相当于 a&lt;-c("1","2","3","4","3")</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="2矩阵"><strong>2.矩阵</strong></h4>
+
+<p><strong>2.1、创建矩阵</strong></p>
+
+<p>矩阵是二维的数组，每个元素都有相同的类型（<strong>数值型、字符型或者逻辑型</strong>），通过<strong>matrix()</strong>创建，函数是这么定义的：</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">vetor</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="o">=</span><span class="n">number_of_rows</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="n">number_of_columns</span><span class="p">,</span><span class="w">
+          </span><span class="n">byrow</span><span class="o">=</span><span class="n">logical_value</span><span class="p">,</span><span class="w"> 
+          </span><span class="n">dimnames</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">char_vector_rownames</span><span class="p">,</span><span class="w"> </span><span class="n">char_vector_colnames</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>从定义可以很清楚的看到，矩阵参数有vector包含矩阵所有的元素，<strong>nrow</strong>和<strong>ncol</strong>制定了矩阵行和列的维数，而<strong>dimnames</strong>是一个<strong>list</strong>，用字符型向量表示行名和列名。选项<strong>byrow</strong>则表明矩阵应当按行填充（byrow=TRUE）还是按列填充（byrow=FALSE）,<strong>在默认的情况下是按列填充的，也就是byrow=FALSE！</strong>。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">8</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">11</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="w">
+          </span><span class="n">byrow</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> 
+          </span><span class="n">dimnames</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s1">'r1'</span><span class="p">,</span><span class="s1">'r2'</span><span class="p">,</span><span class="s1">'r3'</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'c1'</span><span class="p">,</span><span class="s1">'c2'</span><span class="p">,</span><span class="s1">'c3'</span><span class="p">,</span><span class="s1">'c4'</span><span class="p">))</span><span class="w">
+</span><span class="c1">#m is :</span><span class="w">
+</span><span class="c1">#   c1 c2 c3 c4</span><span class="w">
+</span><span class="c1">#r1  0  1  2  3</span><span class="w">
+</span><span class="c1">#r2  4  5  6  7</span><span class="w">
+</span><span class="c1">#r3  8  9 10 11</span><span class="w">
+
+</span><span class="c1">#默认按照列填充，并且没有行名和列名</span><span class="w">
+</span><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">8</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="m">11</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="c1"># m is :</span><span class="w">
+</span><span class="c1">#     [,1] [,2] [,3] [,4]</span><span class="w">
+</span><span class="c1">#[1,]    0    3    6    9</span><span class="w">
+</span><span class="c1">#[2,]    1    4    7   10</span><span class="w">
+</span><span class="c1">#[3,]    2    5    8   11</span><span class="w">
+
+</span><span class="c1">#很多情况可以先存储好变量,可以表现出很多形式</span><span class="w">
+</span><span class="n">cells</span><span class="o">&lt;</span><span class="m">-0</span><span class="o">:</span><span class="m">11</span><span class="w"> </span><span class="c1"># same as c(0,1,2,3,4,5,6,7,8,9,10,11)</span><span class="w">
+</span><span class="n">rname</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s1">'r1'</span><span class="p">,</span><span class="s1">'r2'</span><span class="p">,</span><span class="s1">'r3'</span><span class="p">)</span><span class="w">
+</span><span class="n">cname</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s1">'c1'</span><span class="p">,</span><span class="s1">'c2'</span><span class="p">,</span><span class="s1">'c3'</span><span class="p">,</span><span class="s1">'c4'</span><span class="p">)</span><span class="w">
+</span><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="n">dimnames</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">rname</span><span class="p">,</span><span class="n">cname</span><span class="p">))</span><span class="w">
+</span><span class="c1"># m is :</span><span class="w">
+</span><span class="c1">#   c1 c2 c3 c4</span><span class="w">
+</span><span class="c1">#r1  0  3  6  9</span><span class="w">
+</span><span class="c1">#r2  1  4  7 10</span><span class="w">
+</span><span class="c1">#r3  2  5  8 11</span><span class="w">
+</span></code></pre></div></div>
+<p>还可以有以下方法，不指定列数，跟r说你自己算去吧。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span><span class="n">nrow</span><span class="o">=</span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">#虽然r很不开心，那么它也得算 ，总的cells是12个元素，你跟我说了有三行，那么就有12/3=4列，就这样排吧。</span><span class="w">
+</span><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="c1">#同理不开心，自己算</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>2.2、矩阵元素查看和重新赋值</strong></p>
+
+<p>通过上面的例子可以看出，开心的时候可以指定矩阵的行名和列名，如果不高兴的时候就可以不指定这些，这在取矩阵元素的时候稍有区别,我们接着写，ps：<strong>R语言下标都是从1开始，start from 1！！</strong>。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#假设我们在不高兴的时候给m赋值了，那么m很不幸，奶奶不疼舅舅不爱，就没有行名和列名</span><span class="w">
+</span><span class="n">m_no_name</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">11</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="c1">#     [,1] [,2] [,3] [,4]</span><span class="w">
+</span><span class="c1">#[1,]    0    3    6    9</span><span class="w">
+</span><span class="c1">#[2,]    1    4    7   10</span><span class="w">
+</span><span class="c1">#[3,]    2    5    8   11</span><span class="w">
+</span><span class="c1">#取第一行</span><span class="w">
+</span><span class="c1">#m_no_name[0,] #这是不对的，不要自以为是程序员就从0开始数就准没错，R语言下标都是从1开始。</span><span class="w">
+</span><span class="n">m_no_name</span><span class="p">[</span><span class="m">1</span><span class="p">,]</span><span class="w">
+</span><span class="c1">#取第三列</span><span class="w">
+</span><span class="n">m_no_name</span><span class="p">[,</span><span class="m">3</span><span class="p">]</span><span class="w">
+</span><span class="c1">#去第二行，第三列的元素</span><span class="w">
+</span><span class="n">m_no_name</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="c1">#好像跟数学里没什么区别，哈哈哈</span><span class="w">
+</span><span class="c1">#查看矩阵对角线上的元素，不管矩阵是不是方阵都能操作，等会稍微说下一些跟矩阵有关的函数。</span><span class="w">
+</span><span class="n">diag</span><span class="p">(</span><span class="n">m_no_name</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>如果有了名字，例如如下矩阵，此时我们不仅可以继续使用下标的访问方式继续访问 <del>，而且还可以直呼其名。</del>，并不可以。。。</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">11</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="c1">#可以直接修改</span><span class="w">
+</span><span class="n">m</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="o">=</span><span class="m">100</span><span class="w">
+</span><span class="c1">#也可以直接修改行或者列</span><span class="w">
+</span><span class="n">m</span><span class="p">[</span><span class="m">1</span><span class="p">,]</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>2.3、矩阵行名、列名</strong></p>
+
+<p>行名列名还可以修改</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r2name</span><span class="w"> </span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s1">'rr1'</span><span class="p">,</span><span class="s1">'rr2'</span><span class="p">,</span><span class="s1">'rr3'</span><span class="p">)</span><span class="w">
+</span><span class="n">row.names</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">&lt;-</span><span class="n">r2name</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>2.4、 一些跟矩阵有关的函数</strong>【还有很多矩阵相关操作，等后来开一篇新的写】</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#输出对角线元素，也可以生成单位矩阵</span><span class="w">
+</span><span class="n">diag</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w">
+</span><span class="n">diag</span><span class="p">(</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="c1">#生成4*4的单位矩阵</span><span class="w">
+</span><span class="n">apply</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">MARGIN</span><span class="p">,</span><span class="n">FUN</span><span class="p">)</span><span class="w"> </span><span class="c1">#对矩阵X的行或者列（MARGIN=1表示对行操作，MARGIN=2表示对列操作），FUN具体要操作的函数</span><span class="w">
+</span><span class="n">t</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="c1">#矩阵转置</span><span class="w">
+</span><span class="n">rowSums</span><span class="p">()</span><span class="w"> </span><span class="c1">#各行求和</span><span class="w">
+</span><span class="n">colSums</span><span class="p">()</span><span class="w"> </span><span class="c1">#各列求和</span><span class="w">
+</span><span class="n">rowMeans</span><span class="p">()</span><span class="w"> </span><span class="c1">#各行平均值</span><span class="w">
+</span><span class="n">colMeans</span><span class="p">()</span><span class="w"> </span><span class="c1">#各列平均值</span><span class="w">
+</span><span class="n">det</span><span class="p">()</span><span class="c1">#行列式值</span><span class="w">
+</span></code></pre></div></div>
+<p>注意：矩阵也只能包含一种数据类型，并且维数都是2，如果大于2了，推荐使用数组，多种格式的数据推荐使用数据框。</p>
+
+<h4 id="3数组"><strong>3.数组</strong></h4>
+
+<p>数组维度可以大于2，比矩阵灵活度高。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="n">vetor</span><span class="p">,</span><span class="n">dimensions</span><span class="p">,</span><span class="n">dimnames</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>vetor和dimnames跟矩阵一样，dimensions是给定的各个维度下标的最大值，举个栗子。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">11</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">))</span><span class="w"> </span><span class="c1">#a就是一个3*4的二维数组</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="m">11</span><span class="p">,</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">))</span><span class="w"> </span><span class="c1">#a就是一个 2*2*3的三维数组，也就是三个2*2的二维数组，可以这么说吧。。。</span><span class="w">
+</span></code></pre></div></div>
+<p>数组的一般操作和矩阵相同。</p>
+
+<h4 id="4数据框"><strong>4.数据框</strong></h4>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mydata</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">col1</span><span class="p">,</span><span class="n">col2</span><span class="p">,</span><span class="n">col3</span><span class="p">,</span><span class="n">...</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>举个栗子：</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patientID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="m">34</span><span class="p">,</span><span class="m">28</span><span class="p">,</span><span class="m">52</span><span class="p">)</span><span class="w">
+</span><span class="n">diabetes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"t1"</span><span class="p">,</span><span class="s2">"t1"</span><span class="p">,</span><span class="s2">"t2"</span><span class="p">,</span><span class="s2">"t1"</span><span class="p">)</span><span class="w">
+</span><span class="n">status</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"poor"</span><span class="p">,</span><span class="s2">"improved"</span><span class="p">,</span><span class="s2">"excellent"</span><span class="p">,</span><span class="s2">"poor"</span><span class="p">)</span><span class="w">
+</span><span class="n">patientdata</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">patientID</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">diabetes</span><span class="p">,</span><span class="n">status</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#  patientID age diabetes    status</span><span class="w">
+</span><span class="c1">#1         1  25       t1      poor</span><span class="w">
+</span><span class="c1">#2         2  34       t1  improved</span><span class="w">
+</span><span class="c1">#3         3  28       t2 excellent</span><span class="w">
+</span><span class="c1">#4         4  52       t1      poor</span><span class="w">
+</span></code></pre></div></div>
+<p>选数据，自己拼拼吧，看看就看出规律来了。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patientdata</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1">#第一列和第二列元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[</span><span class="m">1</span><span class="p">,]</span><span class="w"> </span><span class="c1">#第一行元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1">#第二列元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1">#第二列元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">]</span><span class="w"> </span><span class="c1">#第一到二行，第三列元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="c1">#第一行、第二列的元素</span><span class="w">
+</span><span class="n">patientdata</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s2">"age"</span><span class="p">,</span><span class="s2">"status"</span><span class="p">)]</span><span class="w"> </span><span class="c1">#"age"和"status"列的元素向量</span><span class="w">
+</span><span class="n">patientdata</span><span class="o">$</span><span class="n">age</span><span class="w"> </span><span class="c1">#patientdata中变量age，即age列元素</span><span class="w">
+</span></code></pre></div></div>
+<p>上面我们看到<code class="highlighter-rouge">$</code> 符号，是用来取给定数据框中某个特定变量的。在取数据框中的变量时，如果不想每次都写 <code class="highlighter-rouge">$</code>,则可以使用这几个函数attach()、detach()、with()。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">attach</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="c1">#加了这一句之后就不用使用mtcars$mpg了，可以直接使用mpg变量</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">mpg</span><span class="p">)</span><span class="w">
+</span><span class="n">detach</span><span class="p">(</span><span class="n">mtcars</span><span class="p">)</span><span class="w"> </span><span class="c1">#相当于解除attach()的效果，从这往下又回到解放前了，还得使用$</span><span class="w">
+</span></code></pre></div></div>
+<p>with函数的栗子：</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">with</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="c1">#在这里畅游~~~</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">mpg</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span><span class="n">disp</span><span class="p">)</span><span class="w"> </span><span class="c1">#会出现一个图</span><span class="w">
+</span><span class="c1">#......</span><span class="w">
+</span><span class="p">})</span><span class="w">
+</span></code></pre></div></div>
+<p>如果你需要创建在with()结构以外存在的对象，使用特殊赋值符«-替代标准赋值符（&lt;-）即可，它可将对象保存到with()之外的全局环境中。</p>
+
+<h4 id="5因子"><strong>5.因子</strong></h4>
+
+<blockquote>
+  <p>类别（名义型）变量和有序类别（有序型）变量在R中称为因子（factor）。</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//TODO 10.2
+</code></pre></div></div>
+
+<h4 id="6列表"><strong>6.列表</strong></h4>
+<blockquote>
+  <p>列表（list）是R的数据类型中最为复杂的一种。一般来说，列表就是一些对象（或成分，component）的有序集合。列表允许你整合若干（可能无关的）对象到单个对象名下。例如，某个列表中可能是若干向量、矩阵、数据框，甚至其他列表的组合。</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//TODO 10.2
+</code></pre></div></div>
+:ET

@@ -1,0 +1,23 @@
+I"�<p>在读社区层次的影响力分析[1]一文中，文中使用了贝叶斯信息准则作为模型选择的标准之一。</p>
+
+<p>贝叶斯信息准则（bayesian information criterion, BIC）：主观贝叶斯派归纳理论的重要组成部分。</p>
+
+<p>$BIC=ln(n)*k-2ln(L)$</p>
+
+<p>赤池信息量准则（Akaike information criterion, AIC）衡量统计模型拟合优良性的一种标准。</p>
+
+<p>$AIC=2k-2ln(L)$</p>
+
+<p>K是参数的数量，L是似然函数。</p>
+
+<p>参考：
+[1]. Mehmood Y, Barbieri N, Bonchi F, et al. Csi: Community-level social influence analysis[C]//Joint European Conference on Machine Learning and Knowledge Discovery in Databases. Springer, Berlin, Heidelberg, 2013: 48-63.</p>
+
+<p>[2]. https://en.wikipedia.org/wiki/Akaike_information_criterion</p>
+
+<p>[3]. https://en.wikipedia.org/wiki/Bayesian_information_criterion</p>
+
+<p>[4]. http://blog.csdn.net/CHIERYU/article/details/51746554</p>
+
+<p>[5]. https://cosx.org/2015/08/some-basic-ideas-and-methods-of-model-selection/</p>
+:ET

@@ -1,0 +1,132 @@
+I"�5<p>世间的一切对象都可化为节点；世间一切关系都可化为节点间的一条线；从而组成了如梦幻泡影的图。将来的环球必定是图的世界。</p>
+
+<h3 id="一图的表示">一、图的表示</h3>
+<p>图有有向图和无向图，表示方法一般有邻接表、邻接矩阵等方法，无向图和有向图都可以用这两种方法表示。</p>
+
+<p class="center"><img src="/postimg/algorithm_graph/graphs.png" alt="" width="500" /></p>
+
+<p class="center">图1. 图的例子<sup>[1]</sup></p>
+
+<h4 id="1邻接表">1、邻接表</h4>
+<p>在邻接表中，对于每个顶点u，使用一个链表把所有与u相邻的点点串起来，并标记这个集合为adj(u)。举个栗子如下：</p>
+
+<p class="center"><img src="/postimg/algorithm_graph/adj.png" alt="" width="500" /></p>
+
+<p class="center">图2. 邻接表表示图的例子<sup>[1]</sup></p>
+
+<p>在真正操作图进行实验的时候，一般也都使用邻接矩阵表示，例如要存储图1中的有向图，可以直接用一个csv或者txt文件，存储内容如下：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5,14
+1,3,2,5,4
+2,3,1,5,3
+3,2,2,4
+4,3,1,5,3
+5,3,4,1,2
+</code></pre></div></div>
+<p>上述文件就是第一行存储了总共的节点数量、边的数量；接下来的每一行就是此顶点的id和邻居的id，并且第2位数字存储了该节点总共有多少邻居节点；为了进一步的操作简单，可以把原有的节点id映射为从0到n，没有边的节点用0补充，此时行号和id相等了，访问起来更加迅速。这样存储的好处是需要较少的内存就可以完成，而且操作简单。</p>
+<h4 id="2邻接矩阵">2、邻接矩阵</h4>
+<p>邻接矩阵顾名思义就是用一个n*n的矩阵，存储各节点之间的关系，空间复杂度$O(n^2)$，这样存储在一些矩阵运算的时候较为方便，例如转置。图1中两图的邻接矩阵如下：</p>
+
+<p class="center"><img src="/postimg/algorithm_graph/matrix.png" alt="" width="500" /></p>
+
+<p class="center">图3. 邻接矩阵表示图的例子<sup>[1]</sup></p>
+
+<h3 id="二图周游算法">二、图周游算法</h3>
+
+<h4 id="1广度优先遍历">1、广度优先遍历</h4>
+<p>图的广度遍历顾名思义就是访问图中节点的时候，优先在广度上进行遍历；也就是访问到某节点A时，优先访问完A的所有邻居节点<strong>[节点的访问顺序并没有做要求，在具体的问题中此处可以定义访问顺序]</strong>，再继续访问邻居的邻居，直接看代码：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#过程中主要是做三件事：颜色、距离、父节点
+</span><span class="n">BFS</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">),</span><span class="n">s</span><span class="p">)</span>
+	<span class="c1">#初始化
+</span>    <span class="k">for</span> <span class="n">each</span> <span class="n">vertex</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">V</span><span class="o">-</span><span class="p">{</span><span class="n">s</span><span class="p">}</span>
+        <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">White</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&lt;-</span><span class="err">∞</span>
+        <span class="n">pai</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&lt;-</span><span class="bp">None</span>
+    <span class="n">endfor</span>
+	<span class="c1">#处理开始节点
+</span>	<span class="n">color</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">Gray</span>
+	<span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="mi">0</span>
+	<span class="n">pai</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="bp">None</span>
+	
+	<span class="c1">#初始化队列
+</span>	<span class="n">Q</span><span class="o">&lt;-</span><span class="n">Queue</span><span class="p">()</span>
+	<span class="n">Enqueue</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+	
+	<span class="c1">#开始广度访问图
+</span>	<span class="k">while</span> <span class="ow">not</span> <span class="n">Q</span><span class="o">.</span><span class="n">empyt</span><span class="p">():</span>
+		<span class="n">u</span><span class="o">&lt;-</span><span class="n">Dequeue</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">each</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Adj</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+			<span class="k">if</span> <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">White</span> <span class="c1">#检查颜色是否为白色，即没有被访问过
+</span>				<span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">Gray</span> <span class="c1">#颜色，变颜色为灰色
+</span>				<span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span> <span class="c1">#距离
+</span>				<span class="n">pai</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">u</span>  <span class="c1">#父节点
+</span>			<span class="n">endif</span>
+		<span class="n">endfor</span>
+	<span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">Black</span>
+	<span class="n">endwhile</span>
+	<span class="n">End</span>	
+</code></pre></div></div>
+
+<p><strong>应用：</strong> <br />
+无向图二着色问题，无奇回路&lt;=&gt;可以二着色&lt;=&gt;可以分为二部图</p>
+<h4 id="2深度优先遍历">2、深度优先遍历</h4>
+<p>深度优先搜索是从某一顶点开始访问，然后访问他的邻居，与BFS不同的是，当深度优先搜索从某个顶点u访问他的邻居时，只选择其中的一个还未被访问的邻居v，然后暂时弃u的其他邻居于不顾，而从新的儿子节点v去访问v的邻居。当v出发的访问全部完成后，DFS回到u，然后再访问u的第二个邻居，以此类推。这里有个动画就好了，可是我不会画。<br />
+深度优先遍历，迭代方法的伪代码：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DFS</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">E</span><span class="p">))</span>
+	<span class="c1">#初始化访问控制的颜色，父节点
+</span>	<span class="k">for</span> <span class="n">each</span> <span class="n">vetex</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">V</span>
+		<span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">White</span>
+		<span class="n">pai</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span>
+	<span class="n">endfor</span>
+
+	<span class="c1">#最开始，时间为0
+</span>	<span class="n">time</span> <span class="o">&lt;-</span> <span class="mi">0</span>
+	
+	<span class="c1">#对于每个节点进行一次深度优先遍历，防止图节点间不连通
+</span>	<span class="k">for</span> <span class="n">each</span> <span class="n">vetex</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">V</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">color</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="n">While</span><span class="p">:</span>
+			<span class="n">then</span> <span class="n">DFS</span><span class="o">-</span><span class="n">visit</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+		<span class="n">endif</span>
+	<span class="n">endfor</span>
+	<span class="n">End</span>
+<span class="c1">#对节点s，进行深度优先遍历
+</span><span class="n">DFS</span><span class="o">-</span><span class="n">Visit</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+
+	<span class="n">color</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">Gray</span>
+	<span class="n">time</span> <span class="o">=</span> <span class="n">time</span> <span class="o">+</span> <span class="mi">1</span>
+	<span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">time</span>
+	<span class="c1">#如果访问到节点s的邻居节点，那么对其邻居节点迭代进行深度优先遍历
+</span>	<span class="k">for</span> <span class="n">each</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Adj</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+		<span class="k">if</span> <span class="n">color</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">White</span>
+			<span class="n">pai</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">s</span>
+			<span class="n">DFS</span><span class="o">-</span><span class="n">Visit</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+		<span class="n">endif</span>
+	<span class="n">endfor</span>
+	<span class="n">color</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">Black</span>
+	<span class="n">f</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">time</span><span class="o">&lt;-</span><span class="n">time</span><span class="o">+</span><span class="mi">1</span>
+	<span class="n">End</span>
+</code></pre></div></div>
+<h4 id="21-区间套定理"><strong>2.1 区间套定理：</strong></h4>
+
+<h4 id="22-白路径定理"><strong>2.2 白路径定理：</strong></h4>
+
+<h4 id="23-拓扑排序"><strong>2.3 拓扑排序：</strong></h4>
+
+<h4 id="24-无回路有向图中最长路径问题"><strong>2.4 无回路有向图中最长路径问题：</strong></h4>
+<p>一些应用问题需要找到图中的最短或者最长的<strong>简单路径</strong>(不含回路的路径），图往往是加权的。但是<span style="color:red"><strong>对于任意图，找一条最长路径是NPC问题，即使这个图是不加权的图</strong></span>。然而只有这个图是无回路的图时，不论是有向图还是无向图，加权还是不加权图，都可以在线性时间$O(|V|+|E|)=O(n+m)$。细心的我可能发现了，<strong>无回路的图就是棵树或者森林啊</strong>，两个顶点之间要么不连通，要不然就只有唯一的一条路径。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<h4 id="25-强连通分支"><strong><span id="stronglyconnectedcomponent">2.5 强连通分支：</span></strong></h4>
+<p>定义1： 如果一个有向图中任意一顶点都有一条通向其他任一顶点的路径，那么这个<span style="color:red"><strong>有向图</strong></span>称为<strong>强连通图</strong>（strongly connected graph）<br />
+定义2： <span style="color:red"><strong>有向图</strong></span>G，其<strong>隐含的无向图</strong>$G’$是指把G中的每条边的方向都去掉后所得到的无向图。<br />
+定义3： 如果一个<span style="color:red"><strong>有向图</strong></span>G所隐含的无向图$G’$是个连通图，那么有向图G称为<strong>弱连通图</strong>（weakly connected graph）<br />
+定义4： 如果一个<span style="color:red"><strong>有向图</strong></span>的子图是个强连通图，则成为<strong>强连通子图</strong>（strongly connected subgraph）<br />
+定义5： 如果一个<span style="color:red"><strong>有向图</strong></span>的强连通子图已最大，即不能在加入其他任何一个顶点而仍然强连通，那么这个子图称为<strong>强连通分支</strong>（strongly connected component）<br />
+<strong>这里强连通分支包含于强连通子图内。</strong><br />
+定义6： <strong>有向图的强连通分支问题</strong>就是把一个有向图的顶点划分为不相交的若干个强连通分支。</p>
+
+<h3 id="三参考文献">三、参考文献</h3>
+
+<p>[1] 沈孝钧. 计算机算法基础 : Essentials of computer algorithms[M]. 机械工业出版社, 2014.</p>
+:ET

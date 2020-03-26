@@ -1,4 +1,4 @@
-gems: [jekyll-paginate]
+﻿gems: [jekyll-paginate]
 encoding: UTF-8
 title: 梦习米谈
 name: 梦习米谈的不努力记录
@@ -10,4 +10,5 @@ paginate: 10
 paginate_path: "page:num"
 markdown: kramdown
 banner: 在抽象的意义下，一切科学都是数学。
+icount: 2
 highlighter: rouge

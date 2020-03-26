@@ -1,0 +1,95 @@
+I"�<p>课本：《Python核心编程》（第二版）一书，按照自己思路，系列大体如下：</p>
+
+<ol>
+  <li>python的小Cookie</li>
+  <li>python的类型和普遍的操作</li>
+  <li>python逻辑语句稍作记录</li>
+  <li>python操作文件</li>
+  <li>python函数</li>
+  <li>python的类</li>
+  <li>python多线程</li>
+</ol>
+
+<hr />
+
+<p>在基础部分挑一些随便记录一下，回回温度。
+首先，<strong>print</strong>一下。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">"hello python!"</span>
+</code></pre></div></div>
+
+<p>学过python都知道，python不靠“{}”和“；”，只靠缩进来分隔代码组，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">i</span>
+<span class="c1">#result
+</span><span class="s">"""
+0
+1
+...
+9
+"""</span>
+</code></pre></div></div>
+<p>但是并不是python中不存在“；”，同一行写多个语句时，就可以使用“；”，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">"abcd"</span><span class="p">;</span><span class="k">print</span> <span class="s">"1234"</span><span class="p">;</span><span class="k">print</span> <span class="s">"!!!!"</span>
+<span class="c1">#result
+</span><span class="s">"""
+abcd
+1234
+!!!!
+"""</span>
+</code></pre></div></div>
+<p>等同于语句：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">"abcd"</span>
+<span class="k">print</span> <span class="s">"1234"</span>
+<span class="k">print</span> <span class="s">"!!!!"</span>
+</code></pre></div></div>
+<p>python中的逻辑操作和其他（java、c++）不一样，python中使用<code class="highlighter-rouge">not、and、 or</code> 代替<code class="highlighter-rouge">！、 &amp;&amp;、 ||</code>。</p>
+
+<p>细心的网友发现再上面表示字符串时用了<strong>双引号</strong>（“”），众所周知，python中也有<strong>单引号</strong>（‘’），据我所知，python中的单引号和双引号并没有区别，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">'apostrophe or Double quotes'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">"apostrophe or Double quotes"</span>
+<span class="k">print</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span> <span class="c1">#True
+</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s">'apostrophe or</span><span class="se">\
+</span><span class="s"> Double quotes'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">"apostrophe or</span><span class="se">\
+</span><span class="s"> Double quotes"</span>
+<span class="k">print</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span> <span class="c1">#True
+</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s">'apostrophe or</span><span class="se">\n</span><span class="s"> Double quotes'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">"apostrophe or</span><span class="se">\n</span><span class="s"> Double quotes"</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s">'''apostrophe or
+ Double quotes'''</span>
+<span class="n">d</span> <span class="o">=</span> <span class="s">"""apostrophe or
+ Double quotes"""</span>
+<span class="k">print</span> <span class="n">a</span><span class="o">==</span><span class="n">b</span> <span class="c1">#True
+</span><span class="k">print</span> <span class="n">c</span><span class="o">==</span><span class="n">d</span> <span class="c1">#True
+</span><span class="k">print</span> <span class="n">b</span><span class="o">==</span><span class="n">c</span> <span class="c1">#REALLY True
+</span></code></pre></div></div>
+<p>由于python中的这种特性，使得很多表示都变得简单了，还是很好玩的，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">"It's me!"</span> <span class="c1">#It's me!
+</span><span class="k">print</span> <span class="s">'I love "python"!'</span> <span class="c1">#I love "python"!
+</span></code></pre></div></div>
+<p>就不用像其他语言一样，这样写了，虽然也是可以的：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">'It</span><span class="se">\'</span><span class="s">s me!'</span> <span class="c1">#It's me!
+</span><span class="k">print</span> <span class="s">"I love </span><span class="se">\"</span><span class="s">python</span><span class="se">\"</span><span class="s">!"</span> <span class="c1">#I love "python"!
+</span></code></pre></div></div>
+
+<p>人生苦短，我用python，哈哈。
+python的<strong>多重赋值</strong>：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="o">=</span><span class="n">z</span><span class="o">=</span><span class="mi">1</span> <span class="c1">#x=1;y=1;z=1
+</span></code></pre></div></div>
+<p>python的<strong>多元赋值</strong>，书里建议第二种带小括号的写法，增加可读性：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s">"string"</span> <span class="c1">#x=1;y=2;z="string"
+</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s">"string"</span><span class="p">)</span> <span class="c1">#x=1;y=2;z="string"
+</span></code></pre></div></div>
+<p>这种特性，又使得python增加了一个“还有这种操作”的技巧，就是交换两个变量的值的时候，没学过python的是这样写的：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">x</span><span class="o">=</span><span class="n">y</span>
+<span class="n">y</span><span class="o">=</span><span class="n">x</span>
+</code></pre></div></div>
+<p>学过python就可以这么写了：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span><span class="n">x</span>
+</code></pre></div></div>
+<p>还是蛮有趣的。</p>
+
+:ET

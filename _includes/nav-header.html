@@ -1,28 +1,22 @@
-  <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
-    <div class="container">
-    <div class="navbar-header">
-      <a href="{{ '/' | prepend: site.baseurl }}" class="navbar-brand"><i class = 'fa fa-database' style='margin-top: 10px;'>&nbsp;</i><b>{{site.title}}</b></a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <nav class="collapse navbar-collapse " id="navbar-collapse">
-      <!--
-      <ul class="nav navbar-nav">
-        <li><a href="{{ site.baseurl }}/index.html">首页</a></li>
-      </ul>
-      -->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ '/' | prepend: site.baseurl }}">Index</a></li>
-        <li><a href="{{ '/categories/' | site.baseurl }}">Categories</a></li>
-        <li><a href="{{ '/tag/' | site.baseurl }}">tags</a></li>
-        <li><a href="{{ site.baseurl }}/aboutme.html">About</a></li>
-      </ul>
-    </nav>
-  </div>
-  </header>
 <!--
-<header class="site-header" style = "min-height: 250px">
-  <div class="container" style="text-align:center;margin:80px auto 0 auto">
-  <span class="site-title" href="{{ site.baseurl }}/" style="width:100%;"><span style = "font-family : Broadway;">Hello Snail...</span></a>
-  </div>
+ ======================
+ Hikma Header Start
+ ======================
+ -->
+<header class="site-header sticky-header">
+    <nav class="navbar">
+        <div class="container-fluid hikma-container">
+            <a href="/" class="navbar-brand"><img src="{{'/assets/images/logo/logo.png'|preppend: site.baseurl}}" alt=""></a>
+            <div class="ml-auto d-flex ">
+                <a href="/blog-full.html" class="btn btn-primary text-uppercase btn-sm d-none d-md-block">Blog full list</a>
+                <div class="mobile-menu">
+                    <div class="menu-click">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
--->

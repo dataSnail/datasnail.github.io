@@ -1,0 +1,212 @@
+I"{l<p>这个系列初衷，就是想重新学下多线程。由于上次写了一个爬虫，想做一个UI，出现了一个问题“点击按钮，爬虫开始爬取数据，而前台还能进行其他操作，这就需要一个线程负责爬取工作，一个线程负责UI的绘制，互相不影响才能顺利工作”。</p>
+<h4 id="假如世界没有多线程"><strong>假如世界没有多线程</strong></h4>
+<p>在没有线程时，我们运行的程序都是从上往下顺序执行的，执行时间也是依次推迟的，如果前面的程序需要很长的时间，那么后面的程序将继续等待戈多。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">loop0</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[loop-0 start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-0 end at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+
+<span class="k">def</span> <span class="nf">loop1</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[loop-1 start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-1 end at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[Main start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">loop0</span><span class="p">()</span>
+    <span class="n">loop1</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s">"[All DONE at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+<span class="s">'''result
+[Main start at  Thu Aug 24 16:12:30 2017 ]
+[loop-0 start at  Thu Aug 24 16:12:30 2017 ]
+[loop-0 end at  Thu Aug 24 16:12:33 2017 ]
+[loop-1 start at  Thu Aug 24 16:12:33 2017 ]
+[loop-1 end at  Thu Aug 24 16:12:35 2017 ]
+[All DONE at  Thu Aug 24 16:12:35 2017 ]
+'''</span>
+</code></pre></div></div>
+<p>由时间的先后顺序可以看到，loop1必须在loop0块执行完成后才得以执行，而main函数的print也是严格按照这个顺序执行的。
+就像刚开始描述的那个问题一样，有时候，我们不愿意等这么久才执行别的程序，所以我们必须用到多线程。</p>
+<h4 id="开启多线程之旅"><strong>开启多线程之旅</strong></h4>
+<p>python中提供thread、threading和Queue等多个模块。而对比threading模块，书中不建议使用thread，首先threading模块更高级，对线程的支持更加完善；其次，thread模块同步原语只有一个，而threading则显得相对丰富；最后，thread对于进程什么时候结束完全没有控制，当主线程结束时，所有的线程都会被强制结束掉，没有警告也没有正常的清除工作，而threading模块能够保证重要的子线程退出后进程才退出。（<strong>什么是重要的子线程？</strong>）
+首先，按照书上的思路，也简单记下thread模块相关内容：
+thread模块通过start_new_thread(function,args kwargs=None)函数产生一个新的线程，在新线程中用制定的参数和可选的参数kwargs来调用这个函数，例如：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span><span class="n">ctime</span>
+
+<span class="k">def</span> <span class="nf">loop0</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[loop-0 start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-0 end at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+
+<span class="k">def</span> <span class="nf">loop1</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[loop-1 start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-1 end at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[Main start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop0</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop1</span><span class="p">,</span> <span class="p">())</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="c1">#important
+</span>    <span class="k">print</span> <span class="s">"[All DONE at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="s">'''result
+[Main start at  Thu Aug 24 16:32:41 2017 ]
+[loop-0 start at  Thu Aug 24 16:32:41 2017 ]
+[loop-1 start at  Thu Aug 24 16:32:41 2017 ]
+[loop-0 end at [loop-1 end at   Thu Aug 24 16:32:44 2017Thu Aug 24 16:32:44 2017  ]]
+
+[All DONE at  Thu Aug 24 16:32:47 2017 ]
+'''</span>
+</code></pre></div></div>
+<p>这里故意选了一个错乱的输出，多线程中，我们能控制一个线程的输出，可是不能控制多个线程输出出来的杂乱内容（也是可以控制的，只是这里没有）。而且可以看到在main函数里面，有一句sleep(6)，为了不让主线程停止，如果我们把这句删掉会得到以下输出：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Main</span> <span class="n">start</span> <span class="n">at</span>  <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">59</span> <span class="mi">2017</span> <span class="p">]</span>
+<span class="p">[</span><span class="n">All</span> <span class="n">DONE</span> <span class="n">at</span> <span class="p">[</span><span class="n">loop</span><span class="o">-</span><span class="mi">0</span> <span class="n">start</span> <span class="n">at</span>   <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">59</span> <span class="mi">2017</span><span class="p">[</span><span class="n">loop</span><span class="o">-</span><span class="mi">1</span> <span class="n">start</span> <span class="n">at</span> <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">59</span> <span class="mi">2017</span>   <span class="p">]</span><span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">59</span> <span class="mi">2017</span><span class="p">]</span>
+ 
+<span class="p">]</span><span class="n">Unhandled</span> <span class="n">exception</span> <span class="ow">in</span> <span class="n">thread</span> <span class="n">started</span> <span class="n">by</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">loop0</span> <span class="n">at</span> <span class="mh">0x000000000269AC88</span><span class="o">&gt;</span><span class="n">close</span> <span class="n">failed</span> <span class="ow">in</span> <span class="nb">file</span> <span class="nb">object</span> <span class="n">destructor</span><span class="p">:</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">excepthook</span> <span class="ow">is</span> <span class="n">missing</span>
+<span class="n">lost</span> <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span>
+</code></pre></div></div>
+<p>可以看到，主进程很快结束了，而且不管子线程的死活，所以子线程继续运行时就出现错误了，也就是上面说的thread的一个缺陷。如果，我们把sleep的参数，也就是休眠的秒数改成2（我觉的小于等于3可能都会出问题），得到的输出，也有惊喜：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">Main</span> <span class="n">start</span> <span class="n">at</span>  <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">39</span> <span class="mi">2017</span> <span class="p">]</span>
+<span class="p">[</span><span class="n">loop</span><span class="o">-</span><span class="mi">0</span> <span class="n">start</span> <span class="n">at</span>  <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">39</span> <span class="mi">2017</span> <span class="p">]</span>
+<span class="p">[</span><span class="n">loop</span><span class="o">-</span><span class="mi">1</span> <span class="n">start</span> <span class="n">at</span>  <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">39</span> <span class="mi">2017</span> <span class="p">]</span>
+<span class="p">[</span><span class="n">All</span> <span class="n">DONE</span> <span class="n">at</span>  <span class="n">Thu</span> <span class="n">Aug</span> <span class="mi">24</span> <span class="mi">16</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">41</span> <span class="mi">2017</span> <span class="p">]</span>
+</code></pre></div></div>
+<p>可以看出输出是残缺的。所以这里用了sleep函数做了线程的同步，使得主线程不至于过早结束而损害子线程，但是这样程序的总运行时间也增加了，还大大的损害了多线程的好处。当然也有其他的同步线程的方法，例如使用thread提供的锁机制：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">thread</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span><span class="n">ctime</span>
+
+<span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">nloop</span><span class="p">,</span><span class="n">nsec</span><span class="p">,</span><span class="n">lock</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s start at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="n">nsec</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s end at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[Main start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">locks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nloops</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loops</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>
+        <span class="n">lock</span> <span class="o">=</span> <span class="n">thread</span><span class="o">.</span><span class="n">allocate_lock</span><span class="p">()</span>
+        <span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="n">locks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start_new_thread</span><span class="p">(</span><span class="n">loop</span><span class="p">,(</span><span class="n">i</span><span class="p">,</span><span class="n">loops</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">locks</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">locks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">locked</span><span class="p">():</span><span class="k">pass</span>
+
+    <span class="k">print</span> <span class="s">"[All DONE at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="s">'''result
+[Main start at  Thu Aug 24 16:48:53 2017 ]
+[loop-0 start at [loop-1 start at   Thu Aug 24 16:48:53 2017Thu Aug 24 16:48:53 2017  ]
+]
+[loop-1 end at  Thu Aug 24 16:48:55 2017 ]
+[loop-0 end at  Thu Aug 24 16:48:57 2017 ]
+[All DONE at  Thu Aug 24 16:48:57 2017 ]
+'''</span>
+</code></pre></div></div>
+<p>这里用两个循环分别获得锁和开始线程，是为了让所有的线程同时开始，当然也可以直接在一个循环中获得锁，然后开始即可。main函数的最后一个循环，是在主线程中一直检查每个子线程的锁是否解开，如果所有的都解开了，执行主线程的内容并结束。</p>
+<h4 id="学习threading"><strong>学习threading</strong></h4>
+<p>好了，可以开始看看threading模块了，这个模块不但提供了Thread类，还提供了很多好用的同步机制，而且Thread类里就有很多thread模块中没有的函数。另外，threading模块支持守护线程。
+使用Thread类，有三种方法创建线程：</p>
+<ul>
+  <li>创建Thread实例，传递一个函数；</li>
+  <li>创建Thread实例，传递一个可调用的类对象；</li>
+  <li>从Thread派生一个子类，创建一个这个子类的实例。</li>
+</ul>
+
+<p>快快快，使用threading模块改写下上面的栗子:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span><span class="n">ctime</span>
+
+<span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">nloop</span><span class="p">,</span><span class="n">nsec</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s start at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="n">nsec</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s end at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+<span class="c1">#     lock.release()
+</span>    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[Main start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nloops</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loops</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#create threads
+</span>        <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">loop</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">loops</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#start threads
+</span>        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#wait for all
+</span>        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1">#threads to finish
+</span>    <span class="k">print</span> <span class="s">"[All DONE at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="s">'''result
+[Main start at  Thu Aug 24 17:10:19 2017 ]
+[loop-0 start at  Thu Aug 24 17:10:19 2017 ]
+[loop-1 start at  Thu Aug 24 17:10:19 2017 ]
+[loop-1 end at  Thu Aug 24 17:10:21 2017 ]
+[loop-0 end at  Thu Aug 24 17:10:23 2017 ]
+[All DONE at  Thu Aug 24 17:10:23 2017 ]
+'''</span>
+</code></pre></div></div>
+<p>这里使用了第一种方法创建线程，创建thread实例，传递一个函数。可以看到我们不需要在函数中显式的加锁，也不用管理锁（分配锁、获得锁、释放锁、检查锁等），并且用join函数，使得程序挂起，直到线程结束。
+接下来，我们用第三种方法创建线程，从Thread派生出一个子类，并创建这个子类的实例。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span><span class="p">,</span><span class="n">ctime</span>
+
+<span class="n">loops</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">ThreadFunc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s">''</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+    
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="n">nloop</span><span class="p">,</span><span class="n">nsec</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s start at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="n">nsec</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"[loop-</span><span class="si">%</span><span class="s">s end at "</span><span class="o">%</span><span class="n">nloop</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span> <span class="s">"[Main start at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nloops</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">loops</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#create all threads
+</span>        <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">ThreadFunc</span><span class="p">(</span><span class="n">loop</span><span class="p">,(</span><span class="n">i</span><span class="p">,</span><span class="n">loops</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">loop</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+        <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#start threads
+</span>        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nloops</span><span class="p">:</span>      <span class="c1">#wait for all
+</span>        <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">()</span> <span class="c1">#threads to finish
+</span>    <span class="k">print</span> <span class="s">"[All DONE at "</span><span class="p">,</span> <span class="n">ctime</span><span class="p">(),</span><span class="s">']'</span>
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+<p>不写了。。。</p>
+
+:ET
