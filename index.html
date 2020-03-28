@@ -255,7 +255,7 @@ layout: default
                                <li><small>By <a href="#">{{post.author}}</a></small></li>
                                <li><a href="#"><small>{{ post.date | date: "%Y-%m-%d" }}</small></a></li>
                             </ul>
-                            <p>{{ post.scontent }}</p>
+                            <p>{{ post.intro }}</p>
                             <a href="{{ post.url | prepend: site.baseurl }}" class="btn-lnk text-capitalize"><small>read more ...</small></a>
                         </div>
                     </article>

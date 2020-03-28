@@ -1,4 +1,6 @@
 ﻿gems: [jekyll-paginate]
+paginate: 10
+paginate_path: "page:num"
 encoding: UTF-8
 title: 梦习米谈
 name: 梦习米谈的不努力记录
@@ -6,8 +8,6 @@ motto: Talk is cheap, show me the code!
 email: datasnail@163.com
 github: datasnail.github.com
 description: Focus on social computing, algorithms and machine learning.
-paginate: 10
-paginate_path: "page:num"
 markdown: kramdown
 banner: 在抽象的意义下，一切科学都是数学。
 icount: 2

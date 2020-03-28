@@ -60,14 +60,15 @@ layout: default
         <div class="row">
 
             <div class="col-lg-12">
+                {% for post in paginator.posts %}
                 <article class="single-blg-post">
-                    <a href="#" class="post-thumbnail">
+                    <!--<a href="#" class="post-thumbnail">
                         <img src="assets/images/all-img/post1.jpg" alt="">
-                    </a>
+                    </a>-->
                     <div class="entry-content">
                         <header class="entry-header">
                             <h2 class="entry-title">
-                                <a href="#" rel="bookmark">I like the body. I like to design everything to do with the body.</a>
+                                <a href="#" rel="bookmark">{{ post.title }}</a>
                                 <span class="edit-link">
                                     <a class="post-edit-link badge badge-secondary" href="#">Edit</a>
                                 </span>
@@ -96,6 +97,107 @@ layout: default
                         </footer>
                     </div><!-- .entry content -->
                 </article>
+                {%endfor%}
+
+                <ul class="pagination">
+                <li>
+                  <a href="/">
+                    <span>Previous</span>
+                  </a>
+                </li>
+                <li>
+                  {% if paginator.page == 1 %}
+                  <span>&laquo;</span>
+                  {% else %}
+                  {% if paginator.previous_page == 1 %}
+                  <a href="/">
+                    {% else %}
+                    <a href="/page{{ paginator.previous_page }}">
+                      {% endif %}
+                      <span>&laquo;</span>
+                    </a>
+                    {% endif %}
+                </li>
+                <li>
+                {% assign page_str = '' %}
+                {% assign curr_page_num = paginator.page %}
+                {% assign prev_page_count = 0 %}
+                {% if curr_page_num > 1 %}
+                {% assign end = curr_page_num | minus:1 %}
+                {% if curr_page_num < 3 or curr_page_num == 3 %}
+                {% assign start = 1 %}
+                {% else %}
+                {% assign start = curr_page_num | minus:2 %}
+                {% endif %}
+                {% for count in (start..end) %}
+                {% assign page_str = page_str | append:',' | append:count %}
+                {% assign prev_page_count = prev_page_count | plus:1 %}
+                {% endfor %}
+                {% endif %}
+                {% assign page_str = page_str | append:',' | append:curr_page_num %}
+                {% assign last_page_num = paginator.total_pages %}
+                {% assign next_page_count = 0 %}
+                {% if last_page_num > curr_page_num %}
+                {% assign rest_page_count = last_page_num | minus:curr_page_num %}
+                {% assign start = curr_page_num | plus:1 %}
+                {% if rest_page_count > 2 %}
+                {% assign end = curr_page_num | plus:2 %}
+                {% if prev_page_count < 2 %}
+                {% assign not_enough = 2 | minus:prev_page_count %}
+                {% for i in (1..not_enough) %}
+                {% assign try_add_page = end | plus:1 %}
+                {% if try_add_page < last_page_num or try_add_page == last_page_num %}
+                {% assign end = try_add_page %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% else %}
+                {% assign end = last_page_num %}
+                {% endif %}
+                {% for count in (start..end) %}
+                {% assign page_str = page_str | append:',' | append:count %}
+                {% assign next_page_count = next_page_count | plus:1 %}
+                {% endfor %}
+                {% endif %}
+                {% if next_page_count < 2 and curr_page_num > 2 %}
+                {% assign not_enough = 2 | minus:next_page_count %}
+                {% for i in (1..not_enough) %}
+                {% assign try_add_page = curr_page_num | minus:3 %}
+                {% if try_add_page > 1 or try_add_page == 1 %}
+                {% assign page_str = page_str | prepend:try_add_page | prepend:',' %}
+                {% assign curr_page_num = curr_page_num | minus:1 %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                {% assign page_str = page_str | replace_first:',','' %}
+                {% assign page_arr = page_str | split:',' %}
+                {% assign curr_page_num = paginator.page | append:'' %}
+                {% for count in page_arr %}
+                {% if count == curr_page_num %}
+                <span class="active">{{ count }}</span>
+                {% elsif count == '1' %}
+                <a href="/">{{ count }}</a>
+                {% else %}
+                <a href="/page{{ count }}/">{{ count }}</a>
+                {% endif %}
+                {% endfor %}
+                </li>
+                <li>
+                  {% if paginator.page == paginator.total_pages %}
+                  <span>&raquo;</span>
+                  {% else %}
+                  <a href="/page{{ paginator.next_page }}">
+                    <span>&raquo;</span>
+                  </a>
+                  {% endif %}
+                </li>
+                <li>
+                  <a href="/page{{paginator.total_pages}}">
+                    <span>Next</span>
+                  </a>
+                </li>
+              </ul>
+
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center custom-paganation-1">
                         <li class="page-item"><a class="page-link" href="#"><i class="icofont-rounded-double-left"></i></a></li>
@@ -109,6 +211,8 @@ layout: default
         </div>
     </div>
 </div>
+
+
 
 <footer class="site-footer">
     <div class="main-footer">

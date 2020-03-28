@@ -1,0 +1,20 @@
+I"}<h3 id="1-adaptive-implicit-friends-identification-over-heterogeneous--network-for-social-recommendation-cikm2018">1. Adaptive Implicit Friends Identification over Heterogeneous  Network for Social Recommendation (CIKM’2018)</h3>
+
+<p><strong>现有研究存在的问题</strong>：显式的社交关系已经被广泛地应用在传统的社交推荐中，来缓解数据的稀疏性。但是显式的社交关系可能会不可靠（有噪音），所以直接使用可能会使得性能降低。<strong>所以发现用户间可靠的关系，在社交推荐系统中起着至关重要的作用。</strong></p>
+
+<p>显式的社交关系在真实世界中可能并不是总是可靠的：</p>
+
+<ol>
+  <li>社交关系在有些时候是不容易获得的，而且通常非常的稀疏；</li>
+  <li>社交关系容易携带很多噪音，因为有spammers或者bots；</li>
+  <li>在不同的社交环境下，社交关系可能有不同的解释；（两个人有朋友关系，他们可能在电影方面兴趣相投，但是在买衣服方面可能会完全相反）</li>
+</ol>
+
+<p>所以综合以上因素，可以得出结论，社交关系并不是那么可靠的，</p>
+
+<p><strong>总体解决方案</strong>：本文提出适应性的识别隐式的好友，从而发现更加可靠的用户关系。特别地，那些具有相同兴趣，但是可能在社交关系的拓扑结构上彼此相聚很远的朋友。具体在方法上，首先，把整个系统建模为异质信息网络（HIN）；然后利用嵌入表示学习，发现相似用户；最后，对每个用户适应性地选择不同数量的相似用户，作为该用户的隐式好友。以便缓解不可靠的社交关系，从而提高推荐系统的有效性。</p>
+
+<h3 id="2-learning-to-recommend-with-multiple-cascading-behaviors-tkde2019">2. Learning to Recommend with Multiple Cascading Behaviors (TKDE’2019)</h3>
+
+<p>。</p>
+:ET
