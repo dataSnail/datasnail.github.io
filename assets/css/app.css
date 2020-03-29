@@ -4432,7 +4432,7 @@ ul.hikma-social li a:hover
     display:         flex;
             flex-direction: row;
 
-    height: 250px; 
+    height: 200px; 
 
     background-color: #36353b;
 
@@ -4454,7 +4454,7 @@ ul.hikma-social li a:hover
 .single-latestblog .blog-thumb
 {
     max-width: 30%;
-    height: 250px; 
+    height: 200px; 
 
     background-repeat: no-repeat;
     background-position: center center;

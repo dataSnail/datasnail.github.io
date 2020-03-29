@@ -10,5 +10,5 @@ github: datasnail.github.com
 description: Focus on social computing, algorithms and machine learning.
 markdown: kramdown
 banner: 在抽象的意义下，一切科学都是数学。
-icount: 2
+icount: 3
 highlighter: rouge
