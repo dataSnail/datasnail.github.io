@@ -248,7 +248,7 @@ layout: default
                     {% for post in site.posts %}
                     {% if curr_p < site.icount %}
                     <article class="text-white single-latestblog align-items-center rounded mb-3">
-                        <div class="blog-thumb" style="background-image: url(assets/images/all-img/blg-1.jpg)"></div>
+                        <div class="blog-thumb" style="background-image: url(assets/images/all-img/blg-{{curr_p}}.jpg)"></div>
                         <div class="single-latestblog-content">
                             <a href="{{ post.url | prepend: site.baseurl }}"><h5 class="mt-0 text-uppercase">{{ post.title }}</h5></a>
                             <ul>
@@ -356,22 +356,10 @@ layout: default
                     <form class="hikma-contact darkinput ">
                         <div class="form-row">
                             <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="*Full Name">
-                            </div>
-                            <div class="col-md-4">
                                 <input type="email" class="form-control mb-3" placeholder="Email">
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="Phone..">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="Website">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="Project Type">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="Location (City/Country)">
+                                <input type="text" class="form-control mb-3" placeholder="Name">
                             </div>
                             <div class="col-md-12">
                                 <textarea class="form-control mb-3" placeholder="write your message"></textarea>
