@@ -1,530 +1,350 @@
----
-title: 梦习米谈
-layout: default
----
-<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Qing Meng's Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Promemetheus's Homepage</title>
-    <!-- ==================Start Css Link===================== -->
-    <!-- fonts link -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo/fav.png">
-    <link rel="stylesheet" href="assets/css/plugins.css">
-    <!-- app css -->
-    <link rel="stylesheet" href="assets/css/app.css">
-    <script src="assets/js/app.js"></script>
-    <!-- ==================End Css Link===================== -->
-
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Rambla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/et-lineicons.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
-<script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--引用百度地图API-->
+    <style type="text/css">
+        html,body{margin:0;padding:0;}
+        .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+        .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+
 </head>
 
-<body class="darkTheme">
+<body>
+    <div id="lonon-page"> <a href="#" class="js-lonon-nav-toggle lonon-nav-toggle"><i></i></a>
+        <!-- Sidebar Section -->
+        <aside id="lonon-aside">
+            <!-- Logo -->
+            <h1 id="lonon-logo">
+                <img src="images/profile.jpg" alt=""><br />
+                <a href="index.html">Qing Meng<span>Ph.D. Candidate</span></a>
+            </h1>
+            <!-- Menu -->
+            <nav id="lonon-main-menu">
+                <ul>
+                    <li class="lonon-active"><a href="index.html">Home</a></li>
+<!--                    <li><a href="resume.html">Resume</a></li>-->
+<!--                    <li><a href="portfolio.html">Portfolio</a></li>-->
+                    <li><a href="services.html">Services</a></li>
+<!--                    <li><a href="blog.html">Blog</a></li>-->
+<!--                    <li><a href="contact.html">Contact</a></li>-->
+                </ul>
+            </nav>
+            <!-- Sidebar Footer -->
+            <div class="lonon-footer">
+                <ul>
+                    <li><a href="#"><i class="ti-facebook font-14px gray-icon"></i></a></li>
+                    <li><a href="#"><i class="ti-twitter-alt font-14px gray-icon"></i></a></li>
+                    <li><a href="#"><i class="ti-instagram font-14px gray-icon"></i></a></li>
+                    <li><a href="#"><i class="ti-dribbble font-14px gray-icon"></i></a></li>
+                </ul>
+                <p><small>&copy; 2019 Lonon. by <a href="http://www.bootstrapmb.com/" title="bootstrapmb">DuruThemes</a></small></p>
+            </div>
+        </aside>
+        <!-- Main Section -->
+        <div id="lonon-main">
+            <!-- About Me -->
+            <div class="lonon-about">
+                <div class="container-fluid">
+                    <div class="row">
+<!--                        <div class="col-md-5"> <img src="images/resume.jpg" class="img-fluid mb-15 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft" alt=""> </div>-->
+                        <div class="col-md-12 animate-box fadeInLeft animated" data-animate-effect="fadeInLeft"> <span class="heading-meta style-1">Resume</span>
+                            <h3 class="lonon-about-heading">Meng Qing (孟青)</h3>
+                            <p>Now I am a Ph.D. candidate at School of Computer Science and Engineering, Southeast University. My research interest is group influence, social recommendation and graph neural networks.</p>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="divider1"></div>-->
 
+            <!-- Timeline Experience -->
+<!--            <div class="lonon-timeline">-->
+<!--                <div class="container-fluid">-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Education</h2> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                            <div class="timeline lonon-timeline-second-style clearfix">
 
-<!--
- hikma preloder
- -->
+                                <div class="lonon-timeline-item clearfix">
+                                    <div class="left-part">
+                                        <h5 class="item-period">2021.5</h5> <span class="item-company">Singapore</span> </div>
+                                    <div class="divider"></div>
+                                    <div class="right-part">
+                                        <h4 class="item-title">Singapore University of Technology and Design</h4>
+                                        <p>Working in <a href="https://www.socialai.studio/" target="_blank">Social AI studio</a> as a visiting research student. During the visiting, I am fortunate to be advised by Professor <a href="https://info.roylee.sg/home" target="_blank">Roy Ka-Wei LEE.</a></p>
+                                    </div>
+                                </div>
 
-<div class="hikma-preloder">
-    <div class="spinner"></div>
-</div>
+                                <div class="lonon-timeline-item clearfix">
+                                    <div class="left-part">
+                                        <h5 class="item-period">2017.9</h5> <span class="item-company">Nanjing</span> </div>
+                                    <div class="divider"></div>
+                                    <div class="right-part">
+                                        <h4 class="item-title">Southeast University</h4>
+                                        <p>Ph.D candidate, I am fortunate to be advised by Professor <a href="https://cse.seu.edu.cn/2019/0102/c23024a257041/page.htm" target="_blank">Bo Liu.</a></p>
+                                    </div>
+                                </div>
+                                <div class="lonon-timeline-item clearfix">
+                                    <div class="left-part">
+                                        <h5 class="item-period">2014.6</h5> <span class="item-company">Nanjing</span> </div>
+                                    <div class="divider"></div>
+                                    <div class="right-part">
+                                        <h4 class="item-title">Southeast University</h4>
+                                        <p>I began my research journey. suporised by professor <a href="https://cse.seu.edu.cn/2019/0102/c23024a257041/page.htm" target="_blank">Bo Liu.</a></p>
+                                    </div>
+                                </div>
+                                <div class="lonon-timeline-item clearfix">
+                                    <div class="left-part">
+                                        <h5 class="item-period">2008.6</h5> <span class="item-company">Shanghai</span> </div>
+                                    <div class="divider"></div>
+                                    <div class="right-part">
+                                        <h4 class="item-title">East China Normal University</h4>
+                                        <p>I got my bachelor's degree at <a href="http://www.sei.ecnu.edu.cn/">Software Engineering Institute.</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
 
+            <!-- Skills -->
+<!--            <div class="lonon-skills">-->
+<!--                <div class="container-fluid">-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Publications</h2>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align:justify; text-justify:inter-ideograph;">
+                        <ol>
+                            <li><b>孟青</b>，刘波，张恒远，孙相国，曹玖新，李嘉伟. 在线社交网络中群体影响力的建模与分析. 计算机学报, 2021, 44(6): 1064-1079.</li>
+                            <li>Xiangguo Sun, Hongzhi Yin, Bo Liu, Hongxu Chen, Wang Han, <b>Qing Meng</b>, Jiuxin Cao. Multi-level Hyperedge Distillation for Social Linking Prediction on Sparsely Observed Networks. The Web Conference 2021</li>
+                            <li>Liu, Bo, <b>Qing Meng</b>, Hengyuan Zhang et al. VGMF: Visual contents and geographical influence enhanced point‐of‐interest recommendation in location‐based social network. Transactions on Emerging Telecommunications Technologies (2020): e3889.</li>
+                            <li>Xiangguo Sun, Bo Liu, <b>Qing Meng</b>, Jiuxin Cao, Junzhou Luo, Hongzhi Yin. Group-level personality detection based on text generated networks</li>
+                            <li><b>Qing Meng</b>, Junzhou Luo, Bo Liu et al. Quantifying Group Influence on Individuals in Online Social Networks. 2019 IEEE Symposium on Computers and Communications (ISCC). IEEE, 2019.</li>
+                            <li>刘波，李洋，<b>孟青</b>，汤小虎，曹玖新. 社交媒体内容可信性分析与评价, 计算机研究与发展 56 (9), 1939</li>
+                        </ol>
 
-<!--
- ======================
- Hikma minimenu
- ======================
- -->
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="divider1"></div>-->
 
-<ul class="mini-menu" id="mneu2">
-    <li data-menuanchor="home" class="active"><a href="#home" data-tippy="Home"><i class="icofont-home"></i></a></li>
-    <li data-menuanchor="about"><a href="#about" data-tippy="about"><i class="icofont-education"></i></a></li>
-    <li data-menuanchor="blog"><a href="#blog" data-tippy="Blog"><i class="icofont-blogger"></i></a></li>
-    <li data-menuanchor="portfolio"><a href="#portfolio" data-tippy="portfolio"><i class="icofont-worker"></i></a></li>
-    <!--<li data-menuanchor="testimonials"><a href="#testimonials" data-tippy="Testimonials"><i class="icofont-quote-left"></i></a></li>-->
-    <li data-menuanchor="contact"><a href="#contact" data-tippy="contact"><i class="icofont-google-map"></i></a></li>
-</ul>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Awards</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ol>
+                            <li>SEU Education Foundation Scholarship/ 中电莱斯奖学金(博士）2021.4 </li>
+                            <li>SEU Education Foundation Scholarship/ 深交所奖学金 2019.11</li>
+                            <li>Academic Scholarship of Southeast University/ 学业奖学金 2019.10</li>
+                            <li>SEU Education Foundation Scholarship/ 国睿奖学金 2018.11</li>
+                            <li>Academic Scholarship of Southeast University/ 学业奖学金 2018.10</li>
+                            <li>Second prize of the 14th Post-graduate Mathematical Contest in Modeling (Team Leader)/ 研究生数学建模竞赛二等奖（队长）2017.11</li>
+                            <li>Academic Scholarship of Southeast University/ 学业奖学金 2016.10</li>
+                            <li>Academic Scholarship of Southeast University/ 学业奖学金 2015.10</li>
+                        </ol>
 
+                    </div>
 
+            <!-- Contact -->
+<!--            <div class="lonon-contact">-->
+<!--                <div class="container-fluid">-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="lonon-heading animate-box" data-animate-effect="fadeInLeft">Contact Me</h2> </div>
+                    </div>
 
-<!--
- ======================
- Hikma Offcanvas Menu
- ======================
- -->
+                    <div class="row">
+                        <!-- Contact Info -->
+                        <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInLeft">
+<!--                            <h3 class="lonon-about-heading">Contact Info</h3>-->
+<!--                            <p>Qualamy nisl sodales sit amet sapien id, placerat sodales orciter.-->
+<!--                                <br />Vivamus nec magna rhoncus felis, faucibus printy.</p>-->
+<!--                            <p><b>Phone:</b> +1 650-123-0000</p>-->
+<!--                            <p><b>Email:</b> dev@lonon.com</p>-->
+<!--                            <p><b>Address:</b> Camino Real, Palo Alto, CA 94306 US.</p>-->
+                              <div style="width:400px;height:300px;border:#ccc solid 1px;" id="dituContent"></div>
 
-<div class="menu-box text-center" id="menuover">
-    <span class="hikmaclose-menu"><i class="icofont-close"></i></span>
-    <div id="particles-js"></div>
-    <div class="profile-presention mt-5 pb-2 text-white">
-        <a href="#!"><img src="assets/images/logo/logo.png" alt=""></a>
-        <div class="profile-thumb rounded-circle mb-3 mt-3" style="background-image: url(assets/images/all-img/man-small.png)"></div>
-        <h5 class="text-white text-uppercase">Promemetheus</h5>
-        <p>I interested in social computing, machine learning and deep learning. I would be very happy if I can help you.</p>
-    </div><!-- end profile presention -->
-    <ul class="main-navigation mt-5" id="menu">
-        <li class="active" data-menuanchor="home"><a href="#home">home</a></li>
-        <li data-menuanchor="about"><a href="#about">about</a></li>
-        <li data-menuanchor="blog"><a href="#blog">Blog</a></li>
-        <li data-menuanchor="portfolio"><a href="#portfolio">Photos</a></li>
-        <!--<li data-menuanchor="testimonials"><a href="#testimonials">Testimonials</a>-->
-        <li data-menuanchor="contact"><a href="#contact">Contact</a></li>
-    </ul><!-- end main navigation -->
-    <ul class="hikma-social">
-        <li><a href="#"><i class="icofont-facebook"></i></a></li>
-        <li><a href="#"><i class="icofont-twitter"></i></a></li>
-        <li><a href="#"><i class="icofont-linkedin"></i></a></li>
-        <li><a href="#"><i class="icofont-instagram"></i></a></li>
-    </ul>
-</div>
-
-
-<!--
- ======================
- Hikma Header Start
- ======================
- -->
-<header class="site-header">
-    <nav class="navbar  fixed-top">
-        <div class="container-fluid hikma-container">
-            <a href="index.html" class="navbar-brand"><img src="assets/images/logo/logo.png" alt=""></a>
-            <div class="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div><!-- end menu icon -->
-        </div>
-    </nav>
-</header>
-
-<!--
- ======================
- Hikma All section start
- ======================
- -->
-
-<div id="fullpage">
-
-    <div class="section  banner-section animated-row" data-section="home">
-        <div class="hikma-container container-fluid">
-            <div class="row align-items-center">
-                <div class="col-sm-6 text-white mt-5 mt-sm-0">
-                    <h4 class="animate" data-animate="fadeInUp" data-animation-delay="0.24s">Hello, thank you for visiting!</h4>
-                    <h4 class="animate" data-animate="fadeInDown" data-animation-delay="0.29s">My interest is Social computing and <span>machine learning</span></h4>
-                </div>
-                <div class="col-sm-6 text-white text-right">
-                    <div class="biogoraphy-pic">
-                        <img src="assets/images/all-img/mainman.png"  class="js-tilt" alt="">
+                        </div>
+                        <!-- Contact Form -->
+                        <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+                            <h3 class="lonon-about-heading">How Can I Help You?</h3>
+                            <p>We would like to hear from you</p>
+                            <form method="post" class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Name" required> </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email"> </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-contact" value="Say Hello!"> </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="section  about-section animated-row" data-section="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 text-white animate mb-3" data-animate="fadeInDown">
-                    <h3 class="section-title">About Me</h3>
-                    <p>I am Promemetheus, a Ph.D. candidate in Southeast University, majored in Computer Science. My interest is social computing and machine learning. I build this site to encourage and push myself to write some thoughts and paper notes. I would be very happy if some notes I wrote could help you. The following is my education experience.</p>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="card hikma-singleSkill">
-                        <div class="card-body">
-                            <h5 class="card-title">P(update)</h5>
-                            <h6 class="card-subtitle mb-2 text-primary">50%</h6>
-                            <p class="card-text">I'm not good at writting the learning story, so maybe this blog will not be updated very often, but I will try my best.</p>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+            <div class="divider1"></div>
+
+            <!-- Footer -->
+            <div id="lonon-footer2">
+                <div class="lonon-narrow-content">
+                    <div class="row">
+                        <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
+                            <p class="lonon-lead">&copy; 2021 Lonon. All rights reserved</p>
                         </div>
-                    </div>
-                </div><!-- end single skill column -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="card hikma-singleSkill">
-                        <div class="card-body">
-                            <h5 class="card-title">P(paper notes)</h5>
-                            <h6 class="card-subtitle mb-2 text-primary">70%</h6>
-                            <p class="card-text">Maybe I'm going to focus on the paper reading, so most likely, I will write notes for papers.</p>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 95%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end single skill column -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="card hikma-singleSkill">
-                        <div class="card-body">
-                            <h5 class="card-title">P(engineering)</h5>
-                            <h6 class="card-subtitle mb-2 text-primary">30%</h6>
-                            <p class="card-text">Some times I will also record cheat sheet here, in this way, I can find some coding blocks here.</p>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 90%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end single skill column -->
-                <div class="col-lg-3 col-md-6 text-center">
-                    <div class="card hikma-singleSkill">
-                        <div class="card-body">
-                            <h5 class="card-title">P(interesting things)</h5>
-                            <h6 class="card-subtitle mb-2 text-primary">85%</h6>
-                            <p class="card-text">Life need interesting things. So, emmm...</p>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary animate" data-animate="slideInLeft" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- end single skill column -->
-                <div class="col-12">
-                    <div class="card single-educationP">
-                        <div class="card-body">
-                            <ul>
-                                <li class="hikmaSingleEducation">
-                                    <div class="media align-items-center">
-                                        <i class="icofont-graduate-alt mr-2"></i>
-                                        <div class="media-body">
-                                            <h5 class="mt-0">2008-2012</h5>
-                                            <span class="d-block text-primary">East China Normal University</span>
-                                            <a href="#" class="link-s">www.ecnu.edu.cn</a>
-                                        </div>
-                                    </div>
-                                </li><!-- end single education -->
-                                <li class="hikmaSingleEducation">
-                                    <div class="media align-items-center">
-                                        <i class="icofont-graduate-alt mr-2"></i>
-                                        <div class="media-body">
-                                            <h5 class="mt-0">2014-2017</h5>
-                                            <span class="d-block text-primary">Southeast University</span>
-                                            <a href="#" class="link-s">www.seu.edu.cn</a>
-                                        </div>
-                                    </div>
-                                </li><!-- end single education -->
-                                <li class="hikmaSingleEducation">
-                                    <div class="media align-items-center">
-                                        <i class="icofont-graduate-alt mr-2"></i>
-                                        <div class="media-body">
-                                            <h5 class="mt-0">2017-now</h5>
-                                            <span class="d-block text-primary">Southeast University</span>
-                                            <a href="#" class="link-s">www.seu.edu.cn</a>
-                                        </div>
-                                    </div>
-                                </li><!-- end single education -->
-                                <li class="hikmaSingleEducation">
-                                    <div class="media align-items-center">
-                                        <i class="icofont-graduate-alt mr-2"></i>
-                                        <div class="media-body">
-                                            <h5 class="mt-0">Future</h5>
-                                            <span class="d-block text-primary">???</span>
-                                            <a href="#" class="link-s">www.???.com</a>
-                                        </div>
-                                    </div>
-                                </li><!-- end single education -->
+                        <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
+                            <h2 class="text-center">Promemetheus</h2> </div>
+                        <div class="col-md-4 animate-box" data-animate-effect="fadeInLeft">
+                            <ul class="social-network">
+                                <li><a href="#"><i class="ti-facebook font-14px black-icon"></i></a></li>
+                                <li><a href="#"><i class="ti-twitter-alt font-14px black-icon"></i></a></li>
+                                <li><a href="#"><i class="ti-instagram font-14px black-icon"></i></a></li>
+                                <li><a href="#"><i class="ti-linkedin font-14px black-icon"></i></a></li>
                             </ul>
                         </div>
                     </div>
-                </div><!-- end single skill column -->
-            </div>
-        </div>
-    </div>
-
-    <div class="section blog-section animated-row" data-section="blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <h3 class="section-title animate" data-animate="fadeInDown">Latest Blog </h3>
-                </div>
-                <div class="col-12">
-                    {% assign curr_p = 0 %}
-                    {% for post in site.posts %}
-                    {% if curr_p < site.icount %}
-                    <article class="text-white single-latestblog align-items-center rounded mb-3">
-                        <div class="blog-thumb" style="background-image: url(assets/images/all-img/blg-{{curr_p}}.jpg)"></div>
-                        <div class="single-latestblog-content">
-                            <a href="{{ post.url | prepend: site.baseurl }}"><h5 class="mt-0 text-uppercase">{{ post.title }}</h5></a>
-                            <ul>
-                               <li><small>By <a href="#">{{post.author}}</a></small></li>
-                               <li><a href="#"><small>{{ post.date | date: "%Y-%m-%d" }}</small></a></li>
-                            </ul>
-                            <p>{{ post.intro }}</p>
-                            <a href="{{ post.url | prepend: site.baseurl }}" class="btn-lnk text-capitalize"><small>read more ...</small></a>
-                        </div>
-                    </article>
-                    {%assign curr_p = curr_p | plus:1 %}
-                    {%endif%}
-                    {%endfor%}
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Js -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/sticky-kit.min.js"></script>
+        <script src="js/main.js"></script>
+        <script type="text/javascript">
+            //创建和初始化地图函数：
+            function initMap(){
+                createMap();//创建地图
+                setMapEvent();//设置地图事件
+                addMapControl();//向地图添加控件
+                addMarker();//向地图中添加marker
+            }
 
-    <div class="section portfolio-section animated-row" data-section="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-3 d-flex flex-md-row flex-column justify-content-between text-white">
-                    <h3 class="section-title">Photos</h3>
-                    <ul class="filter-menu">
-                        <li data-filter="*" class="active">All</li>
-                        <li data-filter=".cat-1">Branding</li>
-                        <li data-filter=".cat-2">UI & UX </li>
-                        <li data-filter=".cat-3">Logo</li>
-                        <li data-filter=".cat-4">Photography</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row grid smallgap">
-                <div class="col-md-3 col-sm-6 grid-item cat-1 cat-2">
-                    <div class="singleHikmaPortfolio">
-                        <img src="assets/images/all-img/port1.jpg"  alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port1.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-                <div class="col-md-3 col-sm-6 grid-item cat-3 cat-4">
-                    <div class="singleHikmaPortfolio">
-                        <img src="assets/images/all-img/port2.jpg" alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port2.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-                <div class="col-md-6 col-sm-6 grid-item  cat-1">
-                    <div class="singleHikmaPortfolio ">
-                        <img src="assets/images/all-img/port3.jpg" alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port3.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-                <div class="col-md-3 col-sm-6  grid-item ca-3 cat-4">
-                    <div class="singleHikmaPortfolio ">
-                        <img src="assets/images/all-img/port4.jpg"  alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port4.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-                <div class="col-md-3 col-sm-6 grid-item cat-4">
-                    <div class="singleHikmaPortfolio ">
-                        <img src="assets/images/all-img/port5.jpg" alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port5.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-                <div class="col-md-3 col-sm-6 grid-item cat-2 cat-3 order-0">
-                    <div class="singleHikmaPortfolio ">
-                        <img src="assets/images/all-img/port6.jpg" alt="">
-                        <div class="port-hover">
-                            <a href="assets/images/all-img/port6.jpg" class="img-popup"><i class="icofont-plus"></i></a>
-                            <h4><a href="#">branding project</a></h4>
-                            <p><small>Branding</small> <small>UI & UX</small></p>
-                        </div><!-- end port hover -->
-                    </div>
-                </div><!-- end single portfolio -->
-            </div>
-        </div>
-    </div >
+            //创建地图函数：
+            function createMap(){
+                var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+                var point = new BMap.Point(118.828699,31.891475);//定义一个中心点坐标
+                map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
+                window.map = map;//将map变量存储在全局
+            }
 
-    <div class="section get-intouch animated-row" data-section="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <h3 class="section-title animate" data-animate="fadeInDown">Get In Touch</h3>
-                </div>
-                <div class="col-12 map-bg-img">
-                    <form class="hikma-contact darkinput ">
-                        <div class="form-row">
-                            <div class="col-md-4">
-                                <input type="email" class="form-control mb-3" placeholder="Email">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control mb-3" placeholder="Name">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea class="form-control mb-3" placeholder="write your message"></textarea>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-outline-secondary">SEND</button>
-                        </div>
-                    </form>
+            //地图事件设置函数：
+            function setMapEvent(){
+                map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+                map.disableScrollWheelZoom();//禁用地图滚轮放大缩小，默认禁用(可不写)
+                map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+                map.disableKeyboard();//禁用键盘上下左右键移动地图，默认禁用(可不写)
+            }
 
-                </div>
-            </div>
-        </div>
-    </div>
+            //地图控件添加函数：
+            function addMapControl(){
+                //向地图中添加缩放控件
+            var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,type:BMAP_NAVIGATION_CONTROL_ZOOM});
+            map.addControl(ctrl_nav);
+                        //向地图中添加比例尺控件
+            var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+            map.addControl(ctrl_sca);
+            }
 
+            //标注点数组
+            var markerArr = [{title:"计算机科学与工程学院",content:"",point:"118.824962|31.890004",isOpen:0,icon:{w:23,h:25,l:23,t:21,x:9,lb:12}}
+                 ];
+            //创建marker
+            function addMarker(){
+                for(var i=0;i<markerArr.length;i++){
+                    var json = markerArr[i];
+                    var p0 = json.point.split("|")[0];
+                    var p1 = json.point.split("|")[1];
+                    var point = new BMap.Point(p0,p1);
+                    var iconImg = createIcon(json.icon);
+                    var marker = new BMap.Marker(point,{icon:iconImg});
+                    var iw = createInfoWindow(i);
+                    var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+                    marker.setLabel(label);
+                    map.addOverlay(marker);
+                    label.setStyle({
+                                borderColor:"#808080",
+                                color:"#333",
+                                cursor:"pointer"
+                    });
 
-
-</div>
-<!--
- ======================
- Hikma Footer Start
- ======================
- -->
-<footer class="site-footer">
-    <div class="home-page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center copy-text">
-                    <p>Hikma <span>&copy;</span> 2018, All Right <a href="http://www.bootstrapmb.com/">Reserved</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-<!-- ==================Start Js Link===================== -->
-    <!-- plugin js scripts -->
-    <script src="assets/js/plugins.js"></script>
-    <!-- app js -->
-    <script src="assets/js/app.js"></script>
-<script>
-    setTimeout(function() {
-        particlesJS("particles-js", {
-
-
-            "particles": {
-                "number": {
-                    "value": 160,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#eeeeee"
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 1,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 2,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 4,
-                        "size_min": 0.3,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": false,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 600
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "bubble"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "repulse"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
+                    (function(){
+                        var index = i;
+                        var _iw = createInfoWindow(i);
+                        var _marker = marker;
+                        _marker.addEventListener("click",function(){
+                            this.openInfoWindow(_iw);
+                        });
+                        _iw.addEventListener("open",function(){
+                            _marker.getLabel().hide();
+                        })
+                        _iw.addEventListener("close",function(){
+                            _marker.getLabel().show();
+                        })
+                        label.addEventListener("click",function(){
+                            _marker.openInfoWindow(_iw);
+                        })
+                        if(!!json.isOpen){
+                            label.hide();
+                            _marker.openInfoWindow(_iw);
                         }
-                    },
-                    "bubble": {
-                        "distance": 250,
-                        "size": 0,
-                        "duration": 2,
-                        "opacity": 0,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 400,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
+                    })()
                 }
-            },
+            }
+            //创建InfoWindow
+            function createInfoWindow(i){
+                var json = markerArr[i];
+                var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+                return iw;
+            }
+            //创建一个Icon
+            function createIcon(json){
+                var icon = new BMap.Icon("http://api.map.baidu.com/lbsapi/creatmap/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+                return icon;
+            }
 
-
-            "retina_detect": true
-        });
-    }, 1000);
-</script>
-
-<!-- ==================End Js Link===================== -->
-
-
-
+            initMap();//创建和初始化地图
+        </script>
+    </div>
 </body>
 
 </html>
-
