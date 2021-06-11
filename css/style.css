@@ -35,7 +35,7 @@ body {
     font-size: 15px;
     line-height: 1.5em;
     font-weight: 400;
-    color: #000000;
+    color: #000;
     background: #f2f2f2;
 }
 
@@ -65,7 +65,7 @@ p {
     font-size: 15px;
     line-height: 1.5em;
     margin: 0 0 20px;
-    color: #999;
+    color: #000;
 }
 
 
@@ -79,7 +79,7 @@ ul {
 /* links */
 
 a {
-    color: #101010;
+    color: #226893;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
