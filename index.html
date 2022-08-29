@@ -17,7 +17,15 @@
     <!--[if lt IE 9]>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?24c1702de771e9827b3c842fdafa151d";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
     <!--引用百度地图API-->
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=TtpcTSPL42KtUrbG0rWq19sWGsBo9Fwt"></script>
 </head>
@@ -265,15 +273,6 @@
                 enableTilt: false
             });
 
-        </script>
-        <script>
-            var _hmt = _hmt || [];
-            (function() {
-              var hm = document.createElement("script");
-              hm.src = "https://hm.baidu.com/hm.js?24c1702de771e9827b3c842fdafa151d";
-              var s = document.getElementsByTagName("script")[0];
-              s.parentNode.insertBefore(hm, s);
-            })();
         </script>
     </div>
 </body>
